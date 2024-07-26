@@ -11,48 +11,40 @@ import (
 // BufferBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubufferbindinglayout
 type BufferBindingLayout struct {
-	Type             GPUBufferBindingType
+	Type             BufferBindingType
 	HasDynamicOffset bool
-	MinBindingSize   GPUSize64
+	MinBindingSize   Size64
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
 func (g BufferBindingLayout) ToJS() any {
 	result := make(map[string]any)
-	if g.Type.Specified {
-		result["type"] = g.Type.Value.ToJS()
-	}
-	if g.HasDynamicOffset.Specified {
-		result["hasDynamicOffset"] = g.HasDynamicOffset.Value
-	}
-	if g.MinBindingSize.Specified {
-		result["minBindingSize"] = g.MinBindingSize.Value.ToJS()
-	}
+	result["type"] = g.Type.String()
+	result["hasDynamicOffset"] = g.HasDynamicOffset
+	result["minBindingSize"] = g.MinBindingSize
 	return result
 }
 
 // SamplerBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpusamplerbindinglayout
 type SamplerBindingLayout struct {
-	Type GPUSamplerBindingType
+	Type SamplerBindingType
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
 func (g SamplerBindingLayout) ToJS() any {
 	result := make(map[string]any)
-	if g.Type.Specified {
-		result["type"] = g.Type.Value.ToJS()
-	}
+	result["type"] = g.Type.String()
 	return result
 }
 
 // TextureBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gputexturebindinglayout
 type TextureBindingLayout struct {
-	SampleType    GPUTextureSampleType
-	ViewDimension GPUTextureViewDimension
+	SampleType    TextureSampleType
+	ViewDimension TextureViewDimension
 	Multisampled  bool
 }
 
@@ -60,37 +52,27 @@ type TextureBindingLayout struct {
 // to JavaScript.
 func (g TextureBindingLayout) ToJS() any {
 	result := make(map[string]any)
-	if g.SampleType.Specified {
-		result["sampleType"] = g.SampleType.Value.ToJS()
-	}
-	if g.ViewDimension.Specified {
-		result["viewDimension"] = g.ViewDimension.Value.ToJS()
-	}
-	if g.Multisampled.Specified {
-		result["multisampled"] = g.Multisampled.Value
-	}
+	result["sampleType"] = g.SampleType.String()
+	result["viewDimension"] = g.ViewDimension.String()
+	result["multisampled"] = g.Multisampled
 	return result
 }
 
 // StorageTextureBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpustoragetexturebindinglayout
 type StorageTextureBindingLayout struct {
-	Access        GPUStorageTextureAccess
-	Format        GPUTextureFormat
-	ViewDimension GPUTextureViewDimension
+	Access        StorageTextureAccess
+	Format        TextureFormat
+	ViewDimension TextureViewDimension
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
 func (g StorageTextureBindingLayout) ToJS() any {
 	result := make(map[string]any)
-	if g.Access.Specified {
-		result["access"] = g.Access.Value.ToJS()
-	}
-	result["format"] = g.Format.ToJS()
-	if g.ViewDimension.Specified {
-		result["viewDimension"] = g.ViewDimension.Value.ToJS()
-	}
+	result["access"] = g.Access.String()
+	result["format"] = g.Format.String()
+	result["viewDimension"] = g.ViewDimension.String()
 	return result
 }
 
@@ -109,12 +91,12 @@ func (g ExternalTextureBindingLayout) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubindgrouplayoutentry
 type BindGroupLayoutEntry struct {
 	Binding         Index32
-	Visibility      GPUShaderStageFlags
-	Buffer          GPUBufferBindingLayout
-	Sampler         GPUSamplerBindingLayout
-	Texture         GPUTextureBindingLayout
-	StorageTexture  GPUStorageTextureBindingLayout
-	ExternalTexture GPUExternalTextureBindingLayout
+	Visibility      ShaderStage
+	Buffer          BufferBindingLayout
+	Sampler         SamplerBindingLayout
+	Texture         TextureBindingLayout
+	StorageTexture  StorageTextureBindingLayout
+	ExternalTexture ExternalTextureBindingLayout
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -122,22 +104,12 @@ type BindGroupLayoutEntry struct {
 func (g BindGroupLayoutEntry) ToJS() any {
 	result := make(map[string]any)
 	result["binding"] = g.Binding.ToJS()
-	result["visibility"] = g.Visibility.ToJS()
-	if g.Buffer.Specified {
-		result["buffer"] = g.Buffer.Value.ToJS()
-	}
-	if g.Sampler.Specified {
-		result["sampler"] = g.Sampler.Value.ToJS()
-	}
-	if g.Texture.Specified {
-		result["texture"] = g.Texture.Value.ToJS()
-	}
-	if g.StorageTexture.Specified {
-		result["storageTexture"] = g.StorageTexture.Value.ToJS()
-	}
-	if g.ExternalTexture.Specified {
-		result["externalTexture"] = g.ExternalTexture.Value.ToJS()
-	}
+	result["visibility"] = g.Visibility.String()
+	result["buffer"] = g.Buffer.ToJS()
+	result["sampler"] = g.Sampler.ToJS()
+	result["texture"] = g.Texture.ToJS()
+	result["storageTexture"] = g.StorageTexture.ToJS()
+	result["externalTexture"] = g.ExternalTexture.ToJS()
 	return result
 }
 
@@ -173,8 +145,8 @@ func (g BindGroupLayout) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubufferbinding
 type BufferBinding struct {
 	Buffer Buffer
-	Offset GPUSize64
-	Size   GPUSize64
+	Offset Size64
+	Size   Size64
 }
 
 var _ BindingResource = BufferBinding{}
@@ -184,12 +156,8 @@ var _ BindingResource = BufferBinding{}
 func (g BufferBinding) ToJS() any {
 	result := make(map[string]any)
 	result["buffer"] = g.Buffer.ToJS()
-	if g.Offset.Specified {
-		result["offset"] = g.Offset.Value.ToJS()
-	}
-	if g.Size.Specified {
-		result["size"] = g.Size.Value.ToJS()
-	}
+	result["offset"] = g.Offset.ToJS()
+	result["size"] = g.Size.ToJS()
 	return result
 }
 
