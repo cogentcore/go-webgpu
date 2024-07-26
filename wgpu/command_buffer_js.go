@@ -1,4 +1,6 @@
-package wasmgpu
+//go:build js
+
+package wgpu
 
 import "syscall/js"
 

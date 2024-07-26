@@ -1,6 +1,6 @@
 //go:build js
 
-package wasmgpu
+package wgpu
 
 import (
 	"runtime"

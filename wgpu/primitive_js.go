@@ -1,4 +1,6 @@
-package wasmgpu
+//go:build js
+
+package wgpu
 
 // GPUBufferDynamicOffset as described:
 // https://gpuweb.github.io/gpuweb/#typedefdef-gpubufferdynamicoffset

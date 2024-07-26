@@ -1,4 +1,6 @@
-package wasmgpu
+//go:build js
+
+package wgpu
 
 // GPULoadOp as described:
 // https://gpuweb.github.io/gpuweb/#enumdef-gpuloadop
