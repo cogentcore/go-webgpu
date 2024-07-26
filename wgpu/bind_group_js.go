@@ -9,9 +9,9 @@ import (
 	"github.com/mokiat/gog/opt"
 )
 
-// GPUBufferBindingLayout as described:
+// BufferBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubufferbindinglayout
-type GPUBufferBindingLayout struct {
+type BufferBindingLayout struct {
 	Type             opt.T[GPUBufferBindingType]
 	HasDynamicOffset opt.T[bool]
 	MinBindingSize   opt.T[GPUSize64]
@@ -19,7 +19,7 @@ type GPUBufferBindingLayout struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBufferBindingLayout) ToJS() any {
+func (g BufferBindingLayout) ToJS() any {
 	result := make(map[string]any)
 	if g.Type.Specified {
 		result["type"] = g.Type.Value.ToJS()
@@ -33,15 +33,15 @@ func (g GPUBufferBindingLayout) ToJS() any {
 	return result
 }
 
-// GPUSamplerBindingLayout as described:
+// SamplerBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpusamplerbindinglayout
-type GPUSamplerBindingLayout struct {
+type SamplerBindingLayout struct {
 	Type opt.T[GPUSamplerBindingType]
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUSamplerBindingLayout) ToJS() any {
+func (g SamplerBindingLayout) ToJS() any {
 	result := make(map[string]any)
 	if g.Type.Specified {
 		result["type"] = g.Type.Value.ToJS()
@@ -49,9 +49,9 @@ func (g GPUSamplerBindingLayout) ToJS() any {
 	return result
 }
 
-// GPUTextureBindingLayout as described:
+// TextureBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gputexturebindinglayout
-type GPUTextureBindingLayout struct {
+type TextureBindingLayout struct {
 	SampleType    opt.T[GPUTextureSampleType]
 	ViewDimension opt.T[GPUTextureViewDimension]
 	Multisampled  opt.T[bool]
@@ -59,7 +59,7 @@ type GPUTextureBindingLayout struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUTextureBindingLayout) ToJS() any {
+func (g TextureBindingLayout) ToJS() any {
 	result := make(map[string]any)
 	if g.SampleType.Specified {
 		result["sampleType"] = g.SampleType.Value.ToJS()
@@ -73,9 +73,9 @@ func (g GPUTextureBindingLayout) ToJS() any {
 	return result
 }
 
-// GPUStorageTextureBindingLayout as described:
+// StorageTextureBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpustoragetexturebindinglayout
-type GPUStorageTextureBindingLayout struct {
+type StorageTextureBindingLayout struct {
 	Access        opt.T[GPUStorageTextureAccess]
 	Format        GPUTextureFormat
 	ViewDimension opt.T[GPUTextureViewDimension]
@@ -83,7 +83,7 @@ type GPUStorageTextureBindingLayout struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUStorageTextureBindingLayout) ToJS() any {
+func (g StorageTextureBindingLayout) ToJS() any {
 	result := make(map[string]any)
 	if g.Access.Specified {
 		result["access"] = g.Access.Value.ToJS()
@@ -95,21 +95,21 @@ func (g GPUStorageTextureBindingLayout) ToJS() any {
 	return result
 }
 
-// GPUExternalTextureBindingLayout as described:
-type GPUExternalTextureBindingLayout struct {
+// ExternalTextureBindingLayout as described:
+type ExternalTextureBindingLayout struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUExternalTextureBindingLayout) ToJS() any {
+func (g ExternalTextureBindingLayout) ToJS() any {
 	return g.jsValue
 }
 
-// GPUBindGroupLayoutEntry as described:
+// BindGroupLayoutEntry as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubindgrouplayoutentry
-type GPUBindGroupLayoutEntry struct {
-	Binding         GPUIndex32
+type BindGroupLayoutEntry struct {
+	Binding         Index32
 	Visibility      GPUShaderStageFlags
 	Buffer          opt.T[GPUBufferBindingLayout]
 	Sampler         opt.T[GPUSamplerBindingLayout]
@@ -120,7 +120,7 @@ type GPUBindGroupLayoutEntry struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBindGroupLayoutEntry) ToJS() any {
+func (g BindGroupLayoutEntry) ToJS() any {
 	result := make(map[string]any)
 	result["binding"] = g.Binding.ToJS()
 	result["visibility"] = g.Visibility.ToJS()
@@ -142,47 +142,47 @@ func (g GPUBindGroupLayoutEntry) ToJS() any {
 	return result
 }
 
-// GPUBindGroupLayoutDescriptor as described:
+// BindGroupLayoutDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubindgrouplayoutdescriptor
-type GPUBindGroupLayoutDescriptor struct {
-	Entries []GPUBindGroupLayoutEntry
+type BindGroupLayoutDescriptor struct {
+	Entries []BindGroupLayoutEntry
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBindGroupLayoutDescriptor) ToJS() any {
+func (g BindGroupLayoutDescriptor) ToJS() any {
 	return map[string]any{
-		"entries": gog.Map(g.Entries, func(entry GPUBindGroupLayoutEntry) any {
+		"entries": gog.Map(g.Entries, func(entry BindGroupLayoutEntry) any {
 			return entry.ToJS()
 		}),
 	}
 }
 
-// GPUBindGroupLayout as described:
+// BindGroupLayout as described:
 // https://gpuweb.github.io/gpuweb/#gpubindgrouplayout
-type GPUBindGroupLayout struct {
+type BindGroupLayout struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBindGroupLayout) ToJS() any {
+func (g BindGroupLayout) ToJS() any {
 	return g.jsValue
 }
 
-// GPUBufferBinding as described:
+// BufferBinding as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubufferbinding
-type GPUBufferBinding struct {
-	Buffer GPUBuffer
+type BufferBinding struct {
+	Buffer Buffer
 	Offset opt.T[GPUSize64]
 	Size   opt.T[GPUSize64]
 }
 
-var _ GPUBindingResource = GPUBufferBinding{}
+var _ BindingResource = BufferBinding{}
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBufferBinding) ToJS() any {
+func (g BufferBinding) ToJS() any {
 	result := make(map[string]any)
 	result["buffer"] = g.Buffer.ToJS()
 	if g.Offset.Specified {
@@ -194,57 +194,57 @@ func (g GPUBufferBinding) ToJS() any {
 	return result
 }
 
-func (g GPUBufferBinding) _isGPUBindingResource() {}
+func (g BufferBinding) _isBindingResource() {}
 
-// GPUBindingResource as described:
+// BindingResource as described:
 // https://gpuweb.github.io/gpuweb/#typedefdef-gpubindingresource
-type GPUBindingResource interface {
-	_isGPUBindingResource()
+type BindingResource interface {
+	_isBindingResource()
 	ToJS() any
 }
 
-// GPUBindGroupEntry as described:
+// BindGroupEntry as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubindgroupentry
-type GPUBindGroupEntry struct {
-	Binding  GPUIndex32
-	Resource GPUBindingResource
+type BindGroupEntry struct {
+	Binding  Index32
+	Resource BindingResource
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBindGroupEntry) ToJS() any {
+func (g BindGroupEntry) ToJS() any {
 	return map[string]any{
 		"binding":  g.Binding.ToJS(),
 		"resource": g.Resource.ToJS(),
 	}
 }
 
-// GPUBindGroupDescriptor as described:
+// BindGroupDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubindgroupdescriptor
-type GPUBindGroupDescriptor struct {
-	Layout  GPUBindGroupLayout
-	Entries []GPUBindGroupEntry
+type BindGroupDescriptor struct {
+	Layout  BindGroupLayout
+	Entries []BindGroupEntry
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBindGroupDescriptor) ToJS() any {
+func (g BindGroupDescriptor) ToJS() any {
 	return map[string]any{
 		"layout": g.Layout.ToJS(),
-		"entries": gog.Map(g.Entries, func(entry GPUBindGroupEntry) any {
+		"entries": gog.Map(g.Entries, func(entry BindGroupEntry) any {
 			return entry.ToJS()
 		}),
 	}
 }
 
-// GPUBindGroup as described:
+// BindGroup as described:
 // https://gpuweb.github.io/gpuweb/#gpubindgroup
-type GPUBindGroup struct {
+type BindGroup struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBindGroup) ToJS() any {
+func (g BindGroup) ToJS() any {
 	return g.jsValue
 }

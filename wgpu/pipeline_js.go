@@ -9,97 +9,97 @@ import (
 	"github.com/mokiat/gog/opt"
 )
 
-// GPUPipelineLayoutDescriptor as described:
+// PipelineLayoutDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpupipelinelayoutdescriptor
-type GPUPipelineLayoutDescriptor struct {
-	BindGroupLayouts []GPUBindGroupLayout
+type PipelineLayoutDescriptor struct {
+	BindGroupLayouts []BindGroupLayout
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUPipelineLayoutDescriptor) ToJS() any {
+func (g PipelineLayoutDescriptor) ToJS() any {
 	return map[string]any{
-		"bindGroupLayouts": gog.Map(g.BindGroupLayouts, func(layout GPUBindGroupLayout) any {
+		"bindGroupLayouts": gog.Map(g.BindGroupLayouts, func(layout BindGroupLayout) any {
 			return layout.ToJS()
 		}),
 	}
 }
 
-// GPUPipelineLayout as described:
+// PipelineLayout as described:
 // https://gpuweb.github.io/gpuweb/#gpupipelinelayout
-type GPUPipelineLayout struct {
+type PipelineLayout struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUPipelineLayout) ToJS() any {
+func (g PipelineLayout) ToJS() any {
 	return g.jsValue
 }
 
-// GPUVertexAttribute as described:
+// VertexAttribute as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuvertexattribute
-type GPUVertexAttribute struct {
-	Format         GPUVertexFormat
-	Offset         GPUSize64
-	ShaderLocation GPUIndex32
+type VertexAttribute struct {
+	Format         VertexFormat
+	Offset         Size64
+	ShaderLocation Index32
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUVertexAttribute) ToJS() any {
+func (g VertexAttribute) ToJS() any {
 	return map[string]any{
-		"format":         g.Format.ToJS(),
+		"format":         g.Format.String(),
 		"offset":         g.Offset.ToJS(),
 		"shaderLocation": g.ShaderLocation.ToJS(),
 	}
 }
 
-// GPUVertexBufferLayout as described:
+// VertexBufferLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuvertexbufferlayout
-type GPUVertexBufferLayout struct {
-	ArrayStride GPUSize64
+type VertexBufferLayout struct {
+	ArrayStride Size64
 	StepMode    opt.T[GPUVertexStepMode]
-	Attributes  []GPUVertexAttribute
+	Attributes  []VertexAttribute
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUVertexBufferLayout) ToJS() any {
+func (g VertexBufferLayout) ToJS() any {
 	result := make(map[string]any)
 	result["arrayStride"] = g.ArrayStride.ToJS()
 	if g.StepMode.Specified {
 		result["stepMode"] = g.StepMode.Value.ToJS()
 	}
-	result["attributes"] = gog.Map(g.Attributes, func(attrib GPUVertexAttribute) any {
+	result["attributes"] = gog.Map(g.Attributes, func(attrib VertexAttribute) any {
 		return attrib.ToJS()
 	})
 	return result
 }
 
-// GPUVertexState as described:
+// VertexState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuvertexstate
-type GPUVertexState struct {
-	Module     GPUShaderModule
+type VertexState struct {
+	Module     ShaderModule
 	EntryPoint string
-	Buffers    []GPUVertexBufferLayout
+	Buffers    []VertexBufferLayout
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUVertexState) ToJS() any {
+func (g VertexState) ToJS() any {
 	return map[string]any{
 		"module":     g.Module.ToJS(),
 		"entryPoint": g.EntryPoint,
-		"buffers": gog.Map(g.Buffers, func(layout GPUVertexBufferLayout) any {
+		"buffers": gog.Map(g.Buffers, func(layout VertexBufferLayout) any {
 			return layout.ToJS()
 		}),
 	}
 }
 
-// GPUPrimitiveState as described:
+// PrimitiveState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuprimitivestate
-type GPUPrimitiveState struct {
+type PrimitiveState struct {
 	Topology         opt.T[GPUPrimitiveTopology]
 	StripIndexFormat opt.T[GPUIndexFormat]
 	FrontFace        opt.T[GPUFrontFace]
@@ -108,7 +108,7 @@ type GPUPrimitiveState struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUPrimitiveState) ToJS() any {
+func (g PrimitiveState) ToJS() any {
 	result := make(map[string]any)
 	if g.Topology.Specified {
 		result["topology"] = g.Topology.Value.ToJS()
@@ -125,9 +125,9 @@ func (g GPUPrimitiveState) ToJS() any {
 	return result
 }
 
-// GPUStencilFaceState as described:
+// StencilFaceState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpustencilfacestate
-type GPUStencilFaceState struct {
+type StencilFaceState struct {
 	Compare     opt.T[GPUCompareFunction]
 	FailOp      opt.T[GPUStencilOperation]
 	DepthFailOp opt.T[GPUStencilOperation]
@@ -136,7 +136,7 @@ type GPUStencilFaceState struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUStencilFaceState) ToJS() any {
+func (g StencilFaceState) ToJS() any {
 	result := make(map[string]any)
 	if g.Compare.Specified {
 		result["compare"] = g.Compare.Value.ToJS()
@@ -153,12 +153,12 @@ func (g GPUStencilFaceState) ToJS() any {
 	return result
 }
 
-// GPUDepthStencilState as described:
+// DepthStencilState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpudepthstencilstate
-type GPUDepthStencilState struct {
-	Format              GPUTextureFormat
+type DepthStencilState struct {
+	Format              TextureFormat
 	DepthWriteEnabled   bool
-	DepthCompare        GPUCompareFunction
+	DepthCompare        CompareFunction
 	StencilFront        opt.T[GPUStencilFaceState]
 	StencilBack         opt.T[GPUStencilFaceState]
 	StencilReadMask     opt.T[GPUStencilValue]
@@ -170,11 +170,11 @@ type GPUDepthStencilState struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUDepthStencilState) ToJS() any {
+func (g DepthStencilState) ToJS() any {
 	result := make(map[string]any)
-	result["format"] = g.Format.ToJS()
+	result["format"] = g.Format.String()
 	result["depthWriteEnabled"] = g.DepthWriteEnabled
-	result["depthCompare"] = g.DepthCompare.ToJS()
+	result["depthCompare"] = g.DepthCompare.String()
 	if g.StencilFront.Specified {
 		result["stencilFront"] = g.StencilFront.Value.ToJS()
 	}
@@ -199,9 +199,9 @@ func (g GPUDepthStencilState) ToJS() any {
 	return result
 }
 
-// GPUMultisampleState as described:
+// MultisampleState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpumultisamplestate
-type GPUMultisampleState struct {
+type MultisampleState struct {
 	Count                  opt.T[GPUSize32]
 	Mask                   opt.T[GPUSampleMask]
 	AlphaToCoverageEnabled opt.T[bool]
@@ -209,7 +209,7 @@ type GPUMultisampleState struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUMultisampleState) ToJS() any {
+func (g MultisampleState) ToJS() any {
 	result := make(map[string]any)
 	if g.Count.Specified {
 		result["count"] = g.Count.Value.ToJS()
@@ -223,9 +223,9 @@ func (g GPUMultisampleState) ToJS() any {
 	return result
 }
 
-// GPUBlendComponent as described:
+// BlendComponent as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpublendcomponent
-type GPUBlendComponent struct {
+type BlendComponent struct {
 	Operation opt.T[GPUBlendOperation]
 	SrcFactor opt.T[GPUBlendFactor]
 	DstFactor opt.T[GPUBlendFactor]
@@ -233,7 +233,7 @@ type GPUBlendComponent struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBlendComponent) ToJS() any {
+func (g BlendComponent) ToJS() any {
 	result := make(map[string]any)
 	if g.Operation.Specified {
 		result["operation"] = g.Operation.Value.ToJS()
@@ -247,35 +247,35 @@ func (g GPUBlendComponent) ToJS() any {
 	return result
 }
 
-// GPUBlendState as described:
+// BlendState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpublendstate
-type GPUBlendState struct {
-	Color GPUBlendComponent
-	Alpha GPUBlendComponent
+type BlendState struct {
+	Color BlendComponent
+	Alpha BlendComponent
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBlendState) ToJS() any {
+func (g BlendState) ToJS() any {
 	return map[string]any{
 		"color": g.Color.ToJS(),
 		"alpha": g.Alpha.ToJS(),
 	}
 }
 
-// GPUColorTargetState as described:
+// ColorTargetState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpucolortargetstate
-type GPUColorTargetState struct {
-	Format    GPUTextureFormat
+type ColorTargetState struct {
+	Format    TextureFormat
 	Blend     opt.T[GPUBlendState]
 	WriteMask opt.T[GPUColorWriteFlags]
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUColorTargetState) ToJS() any {
+func (g ColorTargetState) ToJS() any {
 	result := make(map[string]any)
-	result["format"] = g.Format.ToJS()
+	result["format"] = g.Format.String()
 	if g.Blend.Specified {
 		result["blend"] = g.Blend.Value.ToJS()
 	}
@@ -285,31 +285,31 @@ func (g GPUColorTargetState) ToJS() any {
 	return result
 }
 
-// GPUFragmentState as described:
+// FragmentState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpufragmentstate
-type GPUFragmentState struct {
-	Module     GPUShaderModule
+type FragmentState struct {
+	Module     ShaderModule
 	EntryPoint string
-	Targets    []GPUColorTargetState
+	Targets    []ColorTargetState
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUFragmentState) ToJS() any {
+func (g FragmentState) ToJS() any {
 	return map[string]any{
 		"module":     g.Module.ToJS(),
 		"entryPoint": g.EntryPoint,
-		"targets": gog.Map(g.Targets, func(target GPUColorTargetState) any {
+		"targets": gog.Map(g.Targets, func(target ColorTargetState) any {
 			return target.ToJS()
 		}),
 	}
 }
 
-// GPURenderPipelineDescriptor as described:
+// RenderPipelineDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpipelinedescriptor
-type GPURenderPipelineDescriptor struct {
+type RenderPipelineDescriptor struct {
 	Layout       opt.T[GPUPipelineLayout]
-	Vertex       GPUVertexState
+	Vertex       VertexState
 	Primitive    opt.T[GPUPrimitiveState]
 	DepthStencil opt.T[GPUDepthStencilState]
 	Multisample  opt.T[GPUMultisampleState]
@@ -318,7 +318,7 @@ type GPURenderPipelineDescriptor struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPURenderPipelineDescriptor) ToJS() any {
+func (g RenderPipelineDescriptor) ToJS() any {
 	result := make(map[string]any)
 	if g.Layout.Specified {
 		result["layout"] = g.Layout.Value.ToJS()
@@ -341,23 +341,23 @@ func (g GPURenderPipelineDescriptor) ToJS() any {
 	return result
 }
 
-// GPURenderPipeline as described:
+// RenderPipeline as described:
 // https://gpuweb.github.io/gpuweb/#gpurenderpipeline
-type GPURenderPipeline struct {
+type RenderPipeline struct {
 	jsValue js.Value
 }
 
 // GetBindGroupLayout as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpupipelinebase-getbindgrouplayout
-func (g GPURenderPipeline) GetBindGroupLayout(index uint32) GPUBindGroupLayout {
+func (g RenderPipeline) GetBindGroupLayout(index uint32) BindGroupLayout {
 	jsLayout := g.jsValue.Call("getBindGroupLayout", index)
-	return GPUBindGroupLayout{
+	return BindGroupLayout{
 		jsValue: jsLayout,
 	}
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPURenderPipeline) ToJS() any {
+func (g RenderPipeline) ToJS() any {
 	return g.jsValue
 }

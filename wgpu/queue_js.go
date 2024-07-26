@@ -8,22 +8,22 @@ import (
 	"github.com/mokiat/gog"
 )
 
-// GPUQueue as described:
+// Queue as described:
 // https://gpuweb.github.io/gpuweb/#gpuqueue
-type GPUQueue struct {
+type Queue struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUQueue) ToJS() any {
+func (g Queue) ToJS() any {
 	return g.jsValue
 }
 
 // Submit as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpuqueue-submit
-func (g GPUQueue) Submit(commandBuffers []GPUCommandBuffer) {
-	jsSequence := gog.Map(commandBuffers, func(buffer GPUCommandBuffer) any {
+func (g Queue) Submit(commandBuffers []CommandBuffer) {
+	jsSequence := gog.Map(commandBuffers, func(buffer CommandBuffer) any {
 		return buffer.ToJS()
 	})
 	g.jsValue.Call("submit", jsSequence)
@@ -31,7 +31,7 @@ func (g GPUQueue) Submit(commandBuffers []GPUCommandBuffer) {
 
 // WriteBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpuqueue-writebuffer
-func (g GPUQueue) WriteBuffer(buffer GPUBuffer, offset uint64, data []byte) {
+func (g Queue) WriteBuffer(buffer Buffer, offset uint64, data []byte) {
 	dataSize := stageBufferData(data)
 	g.jsValue.Call("writeBuffer", buffer.jsValue, offset, uint8Array, uint64(0), dataSize)
 }

@@ -9,23 +9,23 @@ import (
 	"github.com/mokiat/gog/opt"
 )
 
-// GPURenderPassColorAttachment as described:
+// RenderPassColorAttachment as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpasscolorattachment
-type GPURenderPassColorAttachment struct {
-	View          GPUTextureView
+type RenderPassColorAttachment struct {
+	View          TextureView
 	ResolveTarget opt.T[GPUTextureView]
 	ClearValue    opt.T[GPUColor]
-	LoadOp        GPULoadOp
-	StoreOp       GPUStoreOp
+	LoadOp        LoadOp
+	StoreOp       StoreOp
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPURenderPassColorAttachment) ToJS() any {
+func (g RenderPassColorAttachment) ToJS() any {
 	result := make(map[string]any)
 	result["view"] = g.View.jsValue
-	result["loadOp"] = g.LoadOp.ToJS()
-	result["storeOp"] = g.StoreOp.ToJS()
+	result["loadOp"] = g.LoadOp.String()
+	result["storeOp"] = g.StoreOp.String()
 	if g.ClearValue.Specified {
 		result["clearValue"] = g.ClearValue.Value.ToJS()
 	}
@@ -35,43 +35,43 @@ func (g GPURenderPassColorAttachment) ToJS() any {
 	return result
 }
 
-// GPURenderPassDescriptor as described:
+// RenderPassDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpassdescriptor
-type GPURenderPassDescriptor struct {
-	ColorAttachments []GPURenderPassColorAttachment
+type RenderPassDescriptor struct {
+	ColorAttachments []RenderPassColorAttachment
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPURenderPassDescriptor) ToJS() any {
+func (g RenderPassDescriptor) ToJS() any {
 	result := make(map[string]any)
-	result["colorAttachments"] = gog.Map(g.ColorAttachments, func(attachment GPURenderPassColorAttachment) any {
+	result["colorAttachments"] = gog.Map(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {
 		return attachment.ToJS()
 	})
 	return result
 }
 
-// GPURenderPassEncoder as described:
+// RenderPassEncoder as described:
 // https://gpuweb.github.io/gpuweb/#gpurenderpassencoder
-type GPURenderPassEncoder struct {
+type RenderPassEncoder struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPURenderPassEncoder) ToJS() any {
+func (g RenderPassEncoder) ToJS() any {
 	return g.jsValue
 }
 
 // SetPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-setpipeline
-func (g GPURenderPassEncoder) SetPipeline(pipeline GPURenderPipeline) {
+func (g RenderPassEncoder) SetPipeline(pipeline RenderPipeline) {
 	g.jsValue.Call("setPipeline", pipeline.ToJS())
 }
 
 // SetVertexBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-setvertexbuffer
-func (g GPURenderPassEncoder) SetVertexBuffer(slot GPUIndex32, vertexBuffer GPUBuffer, offset, size opt.T[GPUSize64]) {
+func (g RenderPassEncoder) SetVertexBuffer(slot Index32, vertexBuffer Buffer, offset, size opt.T[GPUSize64]) {
 	params := make([]any, 4)
 	params[0] = slot.ToJS()
 	params[1] = vertexBuffer.ToJS()
@@ -90,11 +90,11 @@ func (g GPURenderPassEncoder) SetVertexBuffer(slot GPUIndex32, vertexBuffer GPUB
 
 // SetBindGroup as described:
 // https://gpuweb.github.io/gpuweb/#gpubindingcommandsmixin-setbindgroup
-func (g GPURenderPassEncoder) SetBindGroup(index GPUIndex32, bindGroup GPUBindGroup, dynamicOffsets []GPUBufferDynamicOffset) {
+func (g RenderPassEncoder) SetBindGroup(index Index32, bindGroup BindGroup, dynamicOffsets []BufferDynamicOffset) {
 	params := make([]any, 3)
 	params[0] = index.ToJS()
 	params[1] = bindGroup.ToJS()
-	params[2] = gog.Map(dynamicOffsets, func(offset GPUBufferDynamicOffset) any {
+	params[2] = gog.Map(dynamicOffsets, func(offset BufferDynamicOffset) any {
 		return offset.ToJS()
 	})
 	g.jsValue.Call("setBindGroup", params...)
@@ -102,7 +102,7 @@ func (g GPURenderPassEncoder) SetBindGroup(index GPUIndex32, bindGroup GPUBindGr
 
 // Draw as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-draw
-func (g GPURenderPassEncoder) Draw(vertexCount GPUSize32, instanceCount, firstVertex, firstInstance opt.T[GPUSize32]) {
+func (g RenderPassEncoder) Draw(vertexCount Size32, instanceCount, firstVertex, firstInstance opt.T[GPUSize32]) {
 	params := make([]any, 4)
 	params[0] = vertexCount.ToJS()
 	if instanceCount.Specified {
@@ -125,6 +125,6 @@ func (g GPURenderPassEncoder) Draw(vertexCount GPUSize32, instanceCount, firstVe
 
 // End as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurenderpassencoder-end
-func (g GPURenderPassEncoder) End() {
+func (g RenderPassEncoder) End() {
 	g.jsValue.Call("end")
 }

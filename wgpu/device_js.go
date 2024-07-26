@@ -6,101 +6,101 @@ import "syscall/js"
 
 // NewDevice creates a new GPUDevice that uses the specified JavaScript
 // reference of the device.
-func NewDevice(jsValue js.Value) GPUDevice {
-	return GPUDevice{
+func NewDevice(jsValue js.Value) Device {
+	return Device{
 		jsValue: jsValue,
 	}
 }
 
-// GPUDevice as described:
+// Device as described:
 // https://gpuweb.github.io/gpuweb/#gpudevice
-type GPUDevice struct {
+type Device struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUDevice) ToJS() any {
+func (g Device) ToJS() any {
 	return g.jsValue
 }
 
 // Queue as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-queue
-func (g GPUDevice) Queue() GPUQueue {
+func (g Device) Queue() Queue {
 	jsQueue := g.jsValue.Get("queue")
-	return GPUQueue{
+	return Queue{
 		jsValue: jsQueue,
 	}
 }
 
 // CreateCommandEncoder as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createcommandencoder
-func (g GPUDevice) CreateCommandEncoder() GPUCommandEncoder {
+func (g Device) CreateCommandEncoder() CommandEncoder {
 	jsEncoder := g.jsValue.Call("createCommandEncoder")
-	return GPUCommandEncoder{
+	return CommandEncoder{
 		jsValue: jsEncoder,
 	}
 }
 
 // CreateBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbuffer
-func (g GPUDevice) CreateBuffer(descriptor GPUBufferDescriptor) GPUBuffer {
+func (g Device) CreateBuffer(descriptor BufferDescriptor) Buffer {
 	jsBuffer := g.jsValue.Call("createBuffer", descriptor.ToJS())
-	return GPUBuffer{
+	return Buffer{
 		jsValue: jsBuffer,
 	}
 }
 
 // CreateShaderModule as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createshadermodule
-func (g GPUDevice) CreateShaderModule(desc GPUShaderModuleDescriptor) GPUShaderModule {
+func (g Device) CreateShaderModule(desc ShaderModuleDescriptor) ShaderModule {
 	jsShader := g.jsValue.Call("createShaderModule", desc.ToJS())
-	return GPUShaderModule{
+	return ShaderModule{
 		jsValue: jsShader,
 	}
 }
 
 // CreateRenderPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createrenderpipeline
-func (g GPUDevice) CreateRenderPipeline(descriptor GPURenderPipelineDescriptor) GPURenderPipeline {
+func (g Device) CreateRenderPipeline(descriptor RenderPipelineDescriptor) RenderPipeline {
 	jsPipeline := g.jsValue.Call("createRenderPipeline", descriptor.ToJS())
-	return GPURenderPipeline{
+	return RenderPipeline{
 		jsValue: jsPipeline,
 	}
 }
 
 // CreateBindGroup as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbindgroup
-func (g GPUDevice) CreateBindGroup(descriptor GPUBindGroupDescriptor) GPUBindGroup {
+func (g Device) CreateBindGroup(descriptor BindGroupDescriptor) BindGroup {
 	jsBindGroup := g.jsValue.Call("createBindGroup", descriptor.ToJS())
-	return GPUBindGroup{
+	return BindGroup{
 		jsValue: jsBindGroup,
 	}
 }
 
 // CreateBindGroupLayout as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbindgrouplayout
-func (g GPUDevice) CreateBindGroupLayout(descriptor GPUBindGroupLayoutDescriptor) GPUBindGroupLayout {
+func (g Device) CreateBindGroupLayout(descriptor BindGroupLayoutDescriptor) BindGroupLayout {
 	jsLayout := g.jsValue.Call("createBindGroupLayout", descriptor.ToJS())
-	return GPUBindGroupLayout{
+	return BindGroupLayout{
 		jsValue: jsLayout,
 	}
 }
 
 // CreatePipelineLayout as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createpipelinelayout
-func (g GPUDevice) CreatePipelineLayout(descriptor GPUPipelineLayoutDescriptor) GPUPipelineLayout {
+func (g Device) CreatePipelineLayout(descriptor PipelineLayoutDescriptor) PipelineLayout {
 	jsLayout := g.jsValue.Call("createPipelineLayout", descriptor.ToJS())
-	return GPUPipelineLayout{
+	return PipelineLayout{
 		jsValue: jsLayout,
 	}
 }
 
 // CreateComputePipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createcomputepipeline
-func (g GPUDevice) CreateComputePipeline(descriptor GPUComputePipelineDescriptor) GPUComputePipeline {
+func (g Device) CreateComputePipeline(descriptor ComputePipelineDescriptor) ComputePipeline {
 	jsPipeline := g.jsValue.Call("createComputePipeline", descriptor.ToJS())
-	return GPUComputePipeline{
+	return ComputePipeline{
 		jsValue: jsPipeline,
 	}
 }

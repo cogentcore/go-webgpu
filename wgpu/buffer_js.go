@@ -4,36 +4,36 @@ package wgpu
 
 import "syscall/js"
 
-// GPUBufferDescriptor as described:
+// BufferDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#gpubufferdescriptor
-type GPUBufferDescriptor struct {
-	Size  GPUSize64
+type BufferDescriptor struct {
+	Size  Size64
 	Usage GPUBufferUsageFlags
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBufferDescriptor) ToJS() any {
+func (g BufferDescriptor) ToJS() any {
 	return map[string]any{
 		"size":  g.Size.ToJS(),
 		"usage": g.Usage.ToJS(),
 	}
 }
 
-// GPUBuffer as described:
+// Buffer as described:
 // https://gpuweb.github.io/gpuweb/#gpubuffer
-type GPUBuffer struct {
+type Buffer struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUBuffer) ToJS() any {
+func (g Buffer) ToJS() any {
 	return g.jsValue
 }
 
 // Destroy as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpubuffer-destroy
-func (g GPUBuffer) Destroy() {
+func (g Buffer) Destroy() {
 	g.jsValue.Call("destroy")
 }

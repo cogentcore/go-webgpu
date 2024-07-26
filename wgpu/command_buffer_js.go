@@ -4,14 +4,14 @@ package wgpu
 
 import "syscall/js"
 
-// GPUCommandBuffer as described:
+// CommandBuffer as described:
 // https://gpuweb.github.io/gpuweb/#gpucommandbuffer
-type GPUCommandBuffer struct {
+type CommandBuffer struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUCommandBuffer) ToJS() any {
+func (g CommandBuffer) ToJS() any {
 	return g.jsValue
 }

@@ -4,44 +4,44 @@ package wgpu
 
 import "syscall/js"
 
-// GPUProgrammableStage as described:
+// ProgrammableStage as described:
 // https://gpuweb.github.io/gpuweb/#gpuprogrammablestage
-type GPUProgrammableStage struct {
-	Module     GPUShaderModule
+type ProgrammableStage struct {
+	Module     ShaderModule
 	EntryPoint string
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUProgrammableStage) ToJS() any {
+func (g ProgrammableStage) ToJS() any {
 	return map[string]any{
 		"module":     g.Module.ToJS(),
 		"entryPoint": g.EntryPoint,
 	}
 }
 
-// GPUShaderModuleDescriptor as described:
+// ShaderModuleDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpushadermoduledescriptor
-type GPUShaderModuleDescriptor struct {
+type ShaderModuleDescriptor struct {
 	Code string
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUShaderModuleDescriptor) ToJS() any {
+func (g ShaderModuleDescriptor) ToJS() any {
 	return map[string]any{
 		"code": g.Code,
 	}
 }
 
-// GPUShaderModule as described:
+// ShaderModule as described:
 // https://gpuweb.github.io/gpuweb/#gpushadermodule
-type GPUShaderModule struct {
+type ShaderModule struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUShaderModule) ToJS() any {
+func (g ShaderModule) ToJS() any {
 	return g.jsValue
 }

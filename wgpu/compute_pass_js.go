@@ -8,41 +8,41 @@ import (
 	"github.com/mokiat/gog"
 )
 
-// GPUComputePassDescriptor as described:
+// ComputePassDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpucomputepassdescriptor
-type GPUComputePassDescriptor struct{}
+type ComputePassDescriptor struct{}
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUComputePassDescriptor) ToJS() any {
+func (g ComputePassDescriptor) ToJS() any {
 	return map[string]any{}
 }
 
-// GPUComputePassEncoder as described:
+// ComputePassEncoder as described:
 // https://gpuweb.github.io/gpuweb/#gpucomputepassencoder
-type GPUComputePassEncoder struct {
+type ComputePassEncoder struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUComputePassEncoder) ToJS() any {
+func (g ComputePassEncoder) ToJS() any {
 	return g.jsValue
 }
 
 // SetPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucomputepassencoder-setpipeline
-func (g GPUComputePassEncoder) SetPipeline(pipeline GPUComputePipeline) {
+func (g ComputePassEncoder) SetPipeline(pipeline ComputePipeline) {
 	g.jsValue.Call("setPipeline", pipeline.ToJS())
 }
 
 // SetBindGroup as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpubindingcommandsmixin-setbindgroup
-func (g GPUComputePassEncoder) SetBindGroup(index GPUIndex32, bindGroup GPUBindGroup, dynamicOffsets []GPUBufferDynamicOffset) {
+func (g ComputePassEncoder) SetBindGroup(index Index32, bindGroup BindGroup, dynamicOffsets []BufferDynamicOffset) {
 	params := make([]any, 3)
 	params[0] = index.ToJS()
 	params[1] = bindGroup.ToJS()
-	params[2] = gog.Map(dynamicOffsets, func(offset GPUBufferDynamicOffset) any {
+	params[2] = gog.Map(dynamicOffsets, func(offset BufferDynamicOffset) any {
 		return offset.ToJS()
 	})
 	g.jsValue.Call("setBindGroup", params...)
@@ -50,7 +50,7 @@ func (g GPUComputePassEncoder) SetBindGroup(index GPUIndex32, bindGroup GPUBindG
 
 // DispatchWorkgroups as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucomputepassencoder-dispatchworkgroups
-func (g GPUComputePassEncoder) DispatchWorkgroups(workgroupCountX, workgroupCountY, workgroupCountZ GPUSize32) {
+func (g ComputePassEncoder) DispatchWorkgroups(workgroupCountX, workgroupCountY, workgroupCountZ Size32) {
 	params := make([]any, 3)
 	params[0] = workgroupCountX.ToJS()
 	if workgroupCountY > 0 {
@@ -68,6 +68,6 @@ func (g GPUComputePassEncoder) DispatchWorkgroups(workgroupCountX, workgroupCoun
 
 // End as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucomputepassencoder-end
-func (g GPUComputePassEncoder) End() {
+func (g ComputePassEncoder) End() {
 	g.jsValue.Call("end")
 }

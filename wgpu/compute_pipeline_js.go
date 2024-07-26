@@ -8,16 +8,16 @@ import (
 	"github.com/mokiat/gog/opt"
 )
 
-// GPUComputePipelineDescriptor as described:
+// ComputePipelineDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpucomputepipelinedescriptor
-type GPUComputePipelineDescriptor struct {
+type ComputePipelineDescriptor struct {
 	Layout  opt.T[GPUPipelineLayout]
-	Compute GPUProgrammableStage
+	Compute ProgrammableStage
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUComputePipelineDescriptor) ToJS() any {
+func (g ComputePipelineDescriptor) ToJS() any {
 	result := make(map[string]any)
 	if g.Layout.Specified {
 		result["layout"] = g.Layout.Value.ToJS()
@@ -28,14 +28,14 @@ func (g GPUComputePipelineDescriptor) ToJS() any {
 	return result
 }
 
-// GPUComputePipeline as described:
+// ComputePipeline as described:
 // https://gpuweb.github.io/gpuweb/#gpucomputepipeline
-type GPUComputePipeline struct {
+type ComputePipeline struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUComputePipeline) ToJS() any {
+func (g ComputePipeline) ToJS() any {
 	return g.jsValue
 }

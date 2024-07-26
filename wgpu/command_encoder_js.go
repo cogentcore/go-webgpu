@@ -8,30 +8,30 @@ import (
 	"github.com/mokiat/gog/opt"
 )
 
-// GPUCommandEncoder as described:
+// CommandEncoder as described:
 // https://gpuweb.github.io/gpuweb/#gpucommandencoder
-type GPUCommandEncoder struct {
+type CommandEncoder struct {
 	jsValue js.Value
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g GPUCommandEncoder) ToJS() any {
+func (g CommandEncoder) ToJS() any {
 	return g.jsValue
 }
 
 // BeginRenderPass as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-beginrenderpass
-func (g GPUCommandEncoder) BeginRenderPass(descriptor GPURenderPassDescriptor) GPURenderPassEncoder {
+func (g CommandEncoder) BeginRenderPass(descriptor RenderPassDescriptor) RenderPassEncoder {
 	jsRenderPass := g.jsValue.Call("beginRenderPass", descriptor.ToJS())
-	return GPURenderPassEncoder{
+	return RenderPassEncoder{
 		jsValue: jsRenderPass,
 	}
 }
 
 // BeginComputePass as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-begincomputepass
-func (g GPUCommandEncoder) BeginComputePass(descriptor opt.T[GPUComputePassDescriptor]) GPUComputePassEncoder {
+func (g CommandEncoder) BeginComputePass(descriptor opt.T[GPUComputePassDescriptor]) ComputePassEncoder {
 	params := make([]any, 1)
 	if descriptor.Specified {
 		params[0] = descriptor.Value.ToJS()
@@ -39,16 +39,16 @@ func (g GPUCommandEncoder) BeginComputePass(descriptor opt.T[GPUComputePassDescr
 		params[0] = js.Undefined()
 	}
 	jsComputePass := g.jsValue.Call("beginComputePass", params...)
-	return GPUComputePassEncoder{
+	return ComputePassEncoder{
 		jsValue: jsComputePass,
 	}
 }
 
 // Finish as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-finish
-func (g GPUCommandEncoder) Finish() GPUCommandBuffer {
+func (g CommandEncoder) Finish() CommandBuffer {
 	jsBuffer := g.jsValue.Call("finish")
-	return GPUCommandBuffer{
+	return CommandBuffer{
 		jsValue: jsBuffer,
 	}
 }
