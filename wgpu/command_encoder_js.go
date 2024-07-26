@@ -4,8 +4,6 @@ package wgpu
 
 import (
 	"syscall/js"
-
-	"github.com/mokiat/gog/opt"
 )
 
 // CommandEncoder as described:
@@ -31,7 +29,7 @@ func (g CommandEncoder) BeginRenderPass(descriptor RenderPassDescriptor) RenderP
 
 // BeginComputePass as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-begincomputepass
-func (g CommandEncoder) BeginComputePass(descriptor opt.T[GPUComputePassDescriptor]) ComputePassEncoder {
+func (g CommandEncoder) BeginComputePass(descriptor GPUComputePassDescriptor) ComputePassEncoder {
 	params := make([]any, 1)
 	if descriptor.Specified {
 		params[0] = descriptor.Value.ToJS()

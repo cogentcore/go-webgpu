@@ -6,7 +6,6 @@ import (
 	"syscall/js"
 
 	"github.com/mokiat/gog"
-	"github.com/mokiat/gog/opt"
 )
 
 // PipelineLayoutDescriptor as described:
@@ -59,7 +58,7 @@ func (g VertexAttribute) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuvertexbufferlayout
 type VertexBufferLayout struct {
 	ArrayStride Size64
-	StepMode    opt.T[GPUVertexStepMode]
+	StepMode    GPUVertexStepMode
 	Attributes  []VertexAttribute
 }
 
@@ -100,10 +99,10 @@ func (g VertexState) ToJS() any {
 // PrimitiveState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuprimitivestate
 type PrimitiveState struct {
-	Topology         opt.T[GPUPrimitiveTopology]
-	StripIndexFormat opt.T[GPUIndexFormat]
-	FrontFace        opt.T[GPUFrontFace]
-	CullMode         opt.T[GPUCullMode]
+	Topology         GPUPrimitiveTopology
+	StripIndexFormat GPUIndexFormat
+	FrontFace        GPUFrontFace
+	CullMode         GPUCullMode
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -128,10 +127,10 @@ func (g PrimitiveState) ToJS() any {
 // StencilFaceState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpustencilfacestate
 type StencilFaceState struct {
-	Compare     opt.T[GPUCompareFunction]
-	FailOp      opt.T[GPUStencilOperation]
-	DepthFailOp opt.T[GPUStencilOperation]
-	PassOp      opt.T[GPUStencilOperation]
+	Compare     GPUCompareFunction
+	FailOp      GPUStencilOperation
+	DepthFailOp GPUStencilOperation
+	PassOp      GPUStencilOperation
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -159,13 +158,13 @@ type DepthStencilState struct {
 	Format              TextureFormat
 	DepthWriteEnabled   bool
 	DepthCompare        CompareFunction
-	StencilFront        opt.T[GPUStencilFaceState]
-	StencilBack         opt.T[GPUStencilFaceState]
-	StencilReadMask     opt.T[GPUStencilValue]
-	StencilWriteMask    opt.T[GPUStencilValue]
-	DepthBias           opt.T[GPUDepthBias]
-	DepthBiasSlopeScale opt.T[float32]
-	DepthBiasClamp      opt.T[float32]
+	StencilFront        GPUStencilFaceState
+	StencilBack         GPUStencilFaceState
+	StencilReadMask     GPUStencilValue
+	StencilWriteMask    GPUStencilValue
+	DepthBias           GPUDepthBias
+	DepthBiasSlopeScale float32
+	DepthBiasClamp      float32
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -202,9 +201,9 @@ func (g DepthStencilState) ToJS() any {
 // MultisampleState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpumultisamplestate
 type MultisampleState struct {
-	Count                  opt.T[GPUSize32]
-	Mask                   opt.T[GPUSampleMask]
-	AlphaToCoverageEnabled opt.T[bool]
+	Count                  GPUSize32
+	Mask                   GPUSampleMask
+	AlphaToCoverageEnabled bool
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -226,9 +225,9 @@ func (g MultisampleState) ToJS() any {
 // BlendComponent as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpublendcomponent
 type BlendComponent struct {
-	Operation opt.T[GPUBlendOperation]
-	SrcFactor opt.T[GPUBlendFactor]
-	DstFactor opt.T[GPUBlendFactor]
+	Operation GPUBlendOperation
+	SrcFactor GPUBlendFactor
+	DstFactor GPUBlendFactor
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -267,8 +266,8 @@ func (g BlendState) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dictdef-gpucolortargetstate
 type ColorTargetState struct {
 	Format    TextureFormat
-	Blend     opt.T[GPUBlendState]
-	WriteMask opt.T[GPUColorWriteFlags]
+	Blend     GPUBlendState
+	WriteMask GPUColorWriteFlags
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -308,12 +307,12 @@ func (g FragmentState) ToJS() any {
 // RenderPipelineDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpipelinedescriptor
 type RenderPipelineDescriptor struct {
-	Layout       opt.T[GPUPipelineLayout]
+	Layout       GPUPipelineLayout
 	Vertex       VertexState
-	Primitive    opt.T[GPUPrimitiveState]
-	DepthStencil opt.T[GPUDepthStencilState]
-	Multisample  opt.T[GPUMultisampleState]
-	Fragment     opt.T[GPUFragmentState]
+	Primitive    GPUPrimitiveState
+	DepthStencil GPUDepthStencilState
+	Multisample  GPUMultisampleState
+	Fragment     GPUFragmentState
 }
 
 // ToJS converts this type to one that can be passed as an argument

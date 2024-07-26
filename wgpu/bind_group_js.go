@@ -6,15 +6,14 @@ import (
 	"syscall/js"
 
 	"github.com/mokiat/gog"
-	"github.com/mokiat/gog/opt"
 )
 
 // BufferBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubufferbindinglayout
 type BufferBindingLayout struct {
-	Type             opt.T[GPUBufferBindingType]
-	HasDynamicOffset opt.T[bool]
-	MinBindingSize   opt.T[GPUSize64]
+	Type             GPUBufferBindingType
+	HasDynamicOffset bool
+	MinBindingSize   GPUSize64
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -36,7 +35,7 @@ func (g BufferBindingLayout) ToJS() any {
 // SamplerBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpusamplerbindinglayout
 type SamplerBindingLayout struct {
-	Type opt.T[GPUSamplerBindingType]
+	Type GPUSamplerBindingType
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -52,9 +51,9 @@ func (g SamplerBindingLayout) ToJS() any {
 // TextureBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gputexturebindinglayout
 type TextureBindingLayout struct {
-	SampleType    opt.T[GPUTextureSampleType]
-	ViewDimension opt.T[GPUTextureViewDimension]
-	Multisampled  opt.T[bool]
+	SampleType    GPUTextureSampleType
+	ViewDimension GPUTextureViewDimension
+	Multisampled  bool
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -76,9 +75,9 @@ func (g TextureBindingLayout) ToJS() any {
 // StorageTextureBindingLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpustoragetexturebindinglayout
 type StorageTextureBindingLayout struct {
-	Access        opt.T[GPUStorageTextureAccess]
+	Access        GPUStorageTextureAccess
 	Format        GPUTextureFormat
-	ViewDimension opt.T[GPUTextureViewDimension]
+	ViewDimension GPUTextureViewDimension
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -111,11 +110,11 @@ func (g ExternalTextureBindingLayout) ToJS() any {
 type BindGroupLayoutEntry struct {
 	Binding         Index32
 	Visibility      GPUShaderStageFlags
-	Buffer          opt.T[GPUBufferBindingLayout]
-	Sampler         opt.T[GPUSamplerBindingLayout]
-	Texture         opt.T[GPUTextureBindingLayout]
-	StorageTexture  opt.T[GPUStorageTextureBindingLayout]
-	ExternalTexture opt.T[GPUExternalTextureBindingLayout]
+	Buffer          GPUBufferBindingLayout
+	Sampler         GPUSamplerBindingLayout
+	Texture         GPUTextureBindingLayout
+	StorageTexture  GPUStorageTextureBindingLayout
+	ExternalTexture GPUExternalTextureBindingLayout
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -174,8 +173,8 @@ func (g BindGroupLayout) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubufferbinding
 type BufferBinding struct {
 	Buffer Buffer
-	Offset opt.T[GPUSize64]
-	Size   opt.T[GPUSize64]
+	Offset GPUSize64
+	Size   GPUSize64
 }
 
 var _ BindingResource = BufferBinding{}

@@ -4,14 +4,12 @@ package wgpu
 
 import (
 	"syscall/js"
-
-	"github.com/mokiat/gog/opt"
 )
 
 // ComputePipelineDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpucomputepipelinedescriptor
 type ComputePipelineDescriptor struct {
-	Layout  opt.T[GPUPipelineLayout]
+	Layout  GPUPipelineLayout
 	Compute ProgrammableStage
 }
 

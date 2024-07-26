@@ -6,15 +6,14 @@ import (
 	"syscall/js"
 
 	"github.com/mokiat/gog"
-	"github.com/mokiat/gog/opt"
 )
 
 // RenderPassColorAttachment as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpasscolorattachment
 type RenderPassColorAttachment struct {
 	View          TextureView
-	ResolveTarget opt.T[GPUTextureView]
-	ClearValue    opt.T[GPUColor]
+	ResolveTarget GPUTextureView
+	ClearValue    GPUColor
 	LoadOp        LoadOp
 	StoreOp       StoreOp
 }
@@ -71,7 +70,7 @@ func (g RenderPassEncoder) SetPipeline(pipeline RenderPipeline) {
 
 // SetVertexBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-setvertexbuffer
-func (g RenderPassEncoder) SetVertexBuffer(slot Index32, vertexBuffer Buffer, offset, size opt.T[GPUSize64]) {
+func (g RenderPassEncoder) SetVertexBuffer(slot Index32, vertexBuffer Buffer, offset, size GPUSize64) {
 	params := make([]any, 4)
 	params[0] = slot.ToJS()
 	params[1] = vertexBuffer.ToJS()
@@ -102,7 +101,7 @@ func (g RenderPassEncoder) SetBindGroup(index Index32, bindGroup BindGroup, dyna
 
 // Draw as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-draw
-func (g RenderPassEncoder) Draw(vertexCount Size32, instanceCount, firstVertex, firstInstance opt.T[GPUSize32]) {
+func (g RenderPassEncoder) Draw(vertexCount Size32, instanceCount, firstVertex, firstInstance GPUSize32) {
 	params := make([]any, 4)
 	params[0] = vertexCount.ToJS()
 	if instanceCount.Specified {
