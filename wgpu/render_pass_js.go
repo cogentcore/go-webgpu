@@ -4,8 +4,6 @@ package wgpu
 
 import (
 	"syscall/js"
-
-	"github.com/mokiat/gog"
 )
 
 // RenderPassColorAttachment as described:
@@ -44,7 +42,7 @@ type RenderPassDescriptor struct {
 // to JavaScript.
 func (g RenderPassDescriptor) ToJS() any {
 	result := make(map[string]any)
-	result["colorAttachments"] = gog.Map(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {
+	result["colorAttachments"] = mapSlice(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {
 		return attachment.ToJS()
 	})
 	return result
@@ -93,7 +91,7 @@ func (g RenderPassEncoder) SetBindGroup(index Index32, bindGroup BindGroup, dyna
 	params := make([]any, 3)
 	params[0] = index.ToJS()
 	params[1] = bindGroup.ToJS()
-	params[2] = gog.Map(dynamicOffsets, func(offset BufferDynamicOffset) any {
+	params[2] = mapSlice(dynamicOffsets, func(offset BufferDynamicOffset) any {
 		return offset.ToJS()
 	})
 	g.jsValue.Call("setBindGroup", params...)

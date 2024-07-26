@@ -4,8 +4,6 @@ package wgpu
 
 import (
 	"syscall/js"
-
-	"github.com/mokiat/gog"
 )
 
 // PipelineLayoutDescriptor as described:
@@ -18,7 +16,7 @@ type PipelineLayoutDescriptor struct {
 // to JavaScript.
 func (g PipelineLayoutDescriptor) ToJS() any {
 	return map[string]any{
-		"bindGroupLayouts": gog.Map(g.BindGroupLayouts, func(layout BindGroupLayout) any {
+		"bindGroupLayouts": mapSlice(g.BindGroupLayouts, func(layout BindGroupLayout) any {
 			return layout.ToJS()
 		}),
 	}
@@ -70,7 +68,7 @@ func (g VertexBufferLayout) ToJS() any {
 	if g.StepMode.Specified {
 		result["stepMode"] = g.StepMode.Value.ToJS()
 	}
-	result["attributes"] = gog.Map(g.Attributes, func(attrib VertexAttribute) any {
+	result["attributes"] = mapSlice(g.Attributes, func(attrib VertexAttribute) any {
 		return attrib.ToJS()
 	})
 	return result
@@ -90,7 +88,7 @@ func (g VertexState) ToJS() any {
 	return map[string]any{
 		"module":     g.Module.ToJS(),
 		"entryPoint": g.EntryPoint,
-		"buffers": gog.Map(g.Buffers, func(layout VertexBufferLayout) any {
+		"buffers": mapSlice(g.Buffers, func(layout VertexBufferLayout) any {
 			return layout.ToJS()
 		}),
 	}
@@ -298,7 +296,7 @@ func (g FragmentState) ToJS() any {
 	return map[string]any{
 		"module":     g.Module.ToJS(),
 		"entryPoint": g.EntryPoint,
-		"targets": gog.Map(g.Targets, func(target ColorTargetState) any {
+		"targets": mapSlice(g.Targets, func(target ColorTargetState) any {
 			return target.ToJS()
 		}),
 	}

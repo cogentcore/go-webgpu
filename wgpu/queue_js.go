@@ -4,8 +4,6 @@ package wgpu
 
 import (
 	"syscall/js"
-
-	"github.com/mokiat/gog"
 )
 
 // Queue as described:
@@ -23,7 +21,7 @@ func (g Queue) ToJS() any {
 // Submit as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpuqueue-submit
 func (g Queue) Submit(commandBuffers []CommandBuffer) {
-	jsSequence := gog.Map(commandBuffers, func(buffer CommandBuffer) any {
+	jsSequence := mapSlice(commandBuffers, func(buffer CommandBuffer) any {
 		return buffer.ToJS()
 	})
 	g.jsValue.Call("submit", jsSequence)

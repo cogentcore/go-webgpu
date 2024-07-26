@@ -4,8 +4,6 @@ package wgpu
 
 import (
 	"syscall/js"
-
-	"github.com/mokiat/gog"
 )
 
 // ComputePassDescriptor as described:
@@ -42,7 +40,7 @@ func (g ComputePassEncoder) SetBindGroup(index Index32, bindGroup BindGroup, dyn
 	params := make([]any, 3)
 	params[0] = index.ToJS()
 	params[1] = bindGroup.ToJS()
-	params[2] = gog.Map(dynamicOffsets, func(offset BufferDynamicOffset) any {
+	params[2] = mapSlice(dynamicOffsets, func(offset BufferDynamicOffset) any {
 		return offset.ToJS()
 	})
 	g.jsValue.Call("setBindGroup", params...)

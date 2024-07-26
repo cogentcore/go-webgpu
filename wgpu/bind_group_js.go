@@ -4,8 +4,6 @@ package wgpu
 
 import (
 	"syscall/js"
-
-	"github.com/mokiat/gog"
 )
 
 // BufferBindingLayout as described:
@@ -123,7 +121,7 @@ type BindGroupLayoutDescriptor struct {
 // to JavaScript.
 func (g BindGroupLayoutDescriptor) ToJS() any {
 	return map[string]any{
-		"entries": gog.Map(g.Entries, func(entry BindGroupLayoutEntry) any {
+		"entries": mapSlice(g.Entries, func(entry BindGroupLayoutEntry) any {
 			return entry.ToJS()
 		}),
 	}
@@ -198,7 +196,7 @@ type BindGroupDescriptor struct {
 func (g BindGroupDescriptor) ToJS() any {
 	return map[string]any{
 		"layout": g.Layout.ToJS(),
-		"entries": gog.Map(g.Entries, func(entry BindGroupEntry) any {
+		"entries": mapSlice(g.Entries, func(entry BindGroupEntry) any {
 			return entry.ToJS()
 		}),
 	}
