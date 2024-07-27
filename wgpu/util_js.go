@@ -27,14 +27,6 @@ func await(promise js.Value) js.Value {
 	return <-result
 }
 
-func (g Color) ToJS() any {
-	return []any{g.R, g.G, g.B, g.A}
-}
-
-func (g *Extent3D) ToJS() any {
-	return []any{g.Width, g.Height, g.DepthOrArrayLayers}
-}
-
 // no-ops
 func SetLogLevel(level LogLevel) {}
 func GetVersion() Version        { return 0 }

@@ -46,18 +46,4 @@ func (g Texture) CreateView(descriptor *TextureViewDescriptor) (*TextureView, er
 	}, nil
 }
 
-func (g *TextureViewDescriptor) ToJS() js.Value {
-	return js.ValueOf(map[string]any{
-		"label":           g.Label,
-		"format":          g.Format.String(),
-		"dimension":       g.Dimension.String(),
-		"baseMipLevel":    g.BaseMipLevel,
-		"mipLevelCount":   g.MipLevelCount,
-		"baseArrayLayer":  g.BaseArrayLayer,
-		"arrayLayerCount": g.ArrayLayerCount,
-		"aspect":          g.Aspect.String(),
-	})
-
-}
-
 func (g Texture) Release() {} // no-op

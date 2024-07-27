@@ -32,11 +32,4 @@ func (g Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, erro
 	return &Adapter{jsValue: adapter}, nil
 }
 
-func (g *RequestAdapterOptions) ToJS() js.Value {
-	result := make(map[string]any)
-	result["powerPreference"] = g.PowerPreference.String()
-	result["forceFallbackAdapter"] = g.ForceFallbackAdapter
-	return js.ValueOf(result)
-}
-
 func (g Instance) Release() {} // no-op

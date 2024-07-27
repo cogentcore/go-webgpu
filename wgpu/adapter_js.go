@@ -21,14 +21,6 @@ func (g Adapter) RequestDevice(descriptor *DeviceDescriptor) (*Device, error) {
 	return &Device{jsValue: device}, nil
 }
 
-func (g *DeviceDescriptor) ToJS() js.Value {
-	result := make(map[string]any)
-	result["label"] = g.Label
-	result["requiredFeatures"] = mapSlice(g.RequiredFeatures, func(f FeatureName) any { return f })
-	// result["requiredLimits"] = // TODO(kai): convert requiredLimits to JS
-	return js.ValueOf(result)
-}
-
 func (g Adapter) Release() {} // no-op
 
 type Surface struct{} // no-op

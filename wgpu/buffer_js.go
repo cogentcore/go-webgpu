@@ -4,16 +4,6 @@ package wgpu
 
 import "syscall/js"
 
-// ToJS converts this type to one that can be passed as an argument
-// to JavaScript.
-func (g BufferDescriptor) ToJS() any {
-	return map[string]any{
-		"size":             g.Size,
-		"usage":            g.Usage.String(),
-		"mappedAtCreation": g.MappedAtCreation,
-	}
-}
-
 // Buffer as described:
 // https://gpuweb.github.io/gpuweb/#gpubuffer
 type Buffer struct {

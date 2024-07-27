@@ -66,34 +66,6 @@ func (g CommandEncoder) CopyTextureToTexture(source *ImageCopyTexture, destinati
 	return nil
 }
 
-func (g *ImageCopyBuffer) ToJS() any {
-	return map[string]any{
-		"layout": g.Layout.ToJS(),
-		"buffer": g.Buffer.ToJS(),
-	}
-}
-
-func (g *ImageCopyTexture) ToJS() any {
-	return map[string]any{
-		"texture":  g.Texture.ToJS(),
-		"mipLevel": g.MipLevel,
-		"origin":   g.Origin.ToJS(),
-		"aspect":   g.Aspect.String(),
-	}
-}
-
-func (g *TextureDataLayout) ToJS() any {
-	return map[string]any{
-		"offset":       g.Offset,
-		"bytesPerRow":  g.BytesPerRow,
-		"rowsPerImage": g.RowsPerImage,
-	}
-}
-
-func (g *Origin3D) ToJS() any {
-	return []any{g.X, g.Y, g.Z}
-}
-
 // Finish as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-finish
 func (g CommandEncoder) Finish(descriptor *CommandBufferDescriptor) (*CommandBuffer, error) {
