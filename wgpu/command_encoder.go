@@ -123,14 +123,6 @@ func (p *CommandEncoder) BeginComputePass(descriptor *ComputePassDescriptor) *Co
 	return &ComputePassEncoder{deviceRef: p.deviceRef, ref: ref}
 }
 
-type RenderPassColorAttachment struct {
-	View          *TextureView
-	ResolveTarget *TextureView
-	LoadOp        LoadOp
-	StoreOp       StoreOp
-	ClearValue    Color
-}
-
 type RenderPassDepthStencilAttachment struct {
 	View              *TextureView
 	DepthLoadOp       LoadOp

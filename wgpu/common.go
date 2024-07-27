@@ -135,3 +135,13 @@ type BufferDescriptor struct {
 	Size             uint64
 	MappedAtCreation bool
 }
+
+// RenderPassColorAttachment as described:
+// https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpasscolorattachment
+type RenderPassColorAttachment struct {
+	View          *TextureView
+	ResolveTarget *TextureView
+	LoadOp        LoadOp
+	StoreOp       StoreOp
+	ClearValue    Color
+}

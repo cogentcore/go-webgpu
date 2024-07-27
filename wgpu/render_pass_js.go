@@ -6,19 +6,9 @@ import (
 	"syscall/js"
 )
 
-// RenderPassColorAttachment as described:
-// https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpasscolorattachment
-type RenderPassColorAttachment struct {
-	View          TextureView
-	ResolveTarget TextureView
-	ClearValue    Color
-	LoadOp        LoadOp
-	StoreOp       StoreOp
-}
-
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g RenderPassColorAttachment) ToJS() any {
+func (g *RenderPassColorAttachment) ToJS() any {
 	result := make(map[string]any)
 	result["view"] = g.View.jsValue
 	result["loadOp"] = g.LoadOp.String()
