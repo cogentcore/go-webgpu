@@ -713,16 +713,6 @@ type MultisampleState struct {
 	AlphaToCoverageEnabled bool
 }
 
-type RenderPipelineDescriptor struct {
-	Label        string
-	Layout       *PipelineLayout
-	Vertex       VertexState
-	Primitive    PrimitiveState
-	DepthStencil *DepthStencilState
-	Multisample  MultisampleState
-	Fragment     *FragmentState
-}
-
 func (p *Device) CreateRenderPipeline(descriptor *RenderPipelineDescriptor) (*RenderPipeline, error) {
 	var desc C.WGPURenderPipelineDescriptor
 
@@ -985,10 +975,6 @@ func (p *Device) CreateSampler(descriptor *SamplerDescriptor) (*Sampler, error) 
 
 type ShaderModuleSPIRVDescriptor struct {
 	Code []byte
-}
-
-type ShaderModuleWGSLDescriptor struct {
-	Code string
 }
 
 type ShaderModuleGLSLDescriptor struct {

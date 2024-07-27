@@ -22,12 +22,6 @@ func (p *Surface) GetPreferredFormat(adapter *Adapter) TextureFormat {
 	return TextureFormat(format)
 }
 
-type SurfaceCapabilities struct {
-	Formats      []TextureFormat
-	PresentModes []PresentMode
-	AlphaModes   []CompositeAlphaMode
-}
-
 func (p *Surface) GetCapabilities(adapter *Adapter) (ret SurfaceCapabilities) {
 	var caps C.WGPUSurfaceCapabilities
 	C.wgpuSurfaceGetCapabilities(p.ref, adapter.ref, &caps)

@@ -101,6 +101,16 @@ type RequestAdapterOptions struct {
 	BackendType          BackendType
 }
 
+type SurfaceCapabilities struct {
+	Formats      []TextureFormat
+	PresentModes []PresentMode
+	AlphaModes   []CompositeAlphaMode
+}
+
+type ShaderModuleWGSLDescriptor struct {
+	Code string
+}
+
 type RequiredLimits struct {
 	Limits Limits
 }
@@ -146,6 +156,18 @@ type RenderPassColorAttachment struct {
 	LoadOp        LoadOp
 	StoreOp       StoreOp
 	ClearValue    Color
+}
+
+// RenderPipelineDescriptor as described:
+// https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpipelinedescriptor
+type RenderPipelineDescriptor struct {
+	Label        string
+	Layout       *PipelineLayout
+	Vertex       VertexState
+	Primitive    PrimitiveState
+	DepthStencil *DepthStencilState
+	Multisample  MultisampleState
+	Fragment     *FragmentState
 }
 
 type CommandEncoderDescriptor struct {

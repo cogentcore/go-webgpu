@@ -228,17 +228,6 @@ func (g FragmentState) toJS() any {
 	}
 }
 
-// RenderPipelineDescriptor as described:
-// https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpipelinedescriptor
-type RenderPipelineDescriptor struct {
-	Layout       *PipelineLayout
-	Vertex       VertexState
-	Primitive    PrimitiveState
-	DepthStencil *DepthStencilState
-	Multisample  MultisampleState
-	Fragment     *FragmentState
-}
-
 func (g RenderPipelineDescriptor) toJS() any {
 	result := make(map[string]any)
 	result["layout"] = pointerToJS(g.Layout)

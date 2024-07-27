@@ -21,12 +21,13 @@ func (g ProgrammableStage) toJS() any {
 // ShaderModuleDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpushadermoduledescriptor
 type ShaderModuleDescriptor struct {
-	Code string
+	Label          string
+	WGSLDescriptor *ShaderModuleWGSLDescriptor
 }
 
 func (g ShaderModuleDescriptor) toJS() any {
 	return map[string]any{
-		"code": g.Code,
+		"code": g.WGSLDescriptor.Code,
 	}
 }
 
@@ -39,3 +40,5 @@ type ShaderModule struct {
 func (g ShaderModule) toJS() any {
 	return g.jsValue
 }
+
+func (g ShaderModule) Release() {} // no-op
