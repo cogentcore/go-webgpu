@@ -9,7 +9,7 @@ import (
 
 // toJS converts the given value to a type that can be passed as
 // an argument to JavaScript. It should only be called with pointers
-// and enums.
+// and non-bit-flag enums.
 func toJS[T comparable](v T) any {
 	var zero T
 	if v == zero {
@@ -58,7 +58,7 @@ func (g *DeviceDescriptor) toJS() any {
 func (g *TextureDescriptor) toJS() any {
 	return map[string]any{
 		"label":         g.Label,
-		"usage":         toJS(g.Usage),
+		"usage":         uint32(g.Usage),
 		"dimension":     toJS(g.Dimension),
 		"size":          toJS(g.Size),
 		"format":        toJS(g.Format),
@@ -91,7 +91,7 @@ func (g *CommandBufferDescriptor) toJS() any {
 func (g BufferDescriptor) toJS() any {
 	return map[string]any{
 		"size":             g.Size,
-		"usage":            toJS(g.Usage),
+		"usage":            uint32(g.Usage),
 		"mappedAtCreation": g.MappedAtCreation,
 	}
 }
