@@ -2,7 +2,9 @@
 
 package wgpu
 
-import "syscall/js"
+import (
+	"syscall/js"
+)
 
 // NewDevice creates a new GPUDevice that uses the specified JavaScript
 // reference of the device.
@@ -110,18 +112,6 @@ func (g Device) CreateTexture(descriptor *TextureDescriptor) (*Texture, error) {
 	return &Texture{
 		jsValue: jsTexture,
 	}, nil
-}
-
-func (g *TextureDescriptor) toJS() any {
-	return map[string]any{
-		"label":         g.Label,
-		"usage":         toJS(g.Usage),
-		"dimension":     toJS(g.Dimension),
-		"size":          toJS(g.Size),
-		"format":        toJS(g.Format),
-		"mipLevelCount": g.MipLevelCount,
-		"sampleCount":   g.SampleCount,
-	}
 }
 
 func (g Device) Poll(wait bool, wrappedSubmissionIndex *WrappedSubmissionIndex) (queueEmpty bool) {

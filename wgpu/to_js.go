@@ -32,8 +32,12 @@ func (g Color) toJS() any {
 	return []any{g.R, g.G, g.B, g.A}
 }
 
-func (g *Extent3D) toJS() any {
+func (g Extent3D) toJS() any {
 	return []any{g.Width, g.Height, g.DepthOrArrayLayers}
+}
+
+func (g Origin3D) toJS() any {
+	return []any{g.X, g.Y, g.Z}
 }
 
 func (g *RequestAdapterOptions) toJS() any {
@@ -51,6 +55,18 @@ func (g *DeviceDescriptor) toJS() any {
 	return result
 }
 
+func (g *TextureDescriptor) toJS() any {
+	return map[string]any{
+		"label":         g.Label,
+		"usage":         toJS(g.Usage),
+		"dimension":     toJS(g.Dimension),
+		"size":          toJS(g.Size),
+		"format":        toJS(g.Format),
+		"mipLevelCount": g.MipLevelCount,
+		"sampleCount":   g.SampleCount,
+	}
+}
+
 func (g *TextureViewDescriptor) toJS() any {
 	return map[string]any{
 		"label":           g.Label,
@@ -62,7 +78,6 @@ func (g *TextureViewDescriptor) toJS() any {
 		"arrayLayerCount": g.ArrayLayerCount,
 		"aspect":          toJS(g.Aspect),
 	}
-
 }
 
 func (g *CommandEncoderDescriptor) toJS() any {
@@ -99,10 +114,6 @@ func (g *TextureDataLayout) toJS() any {
 		"bytesPerRow":  g.BytesPerRow,
 		"rowsPerImage": g.RowsPerImage,
 	}
-}
-
-func (g *Origin3D) toJS() any {
-	return []any{g.X, g.Y, g.Z}
 }
 
 func (g *RenderPassColorAttachment) toJS() any {
