@@ -34,7 +34,7 @@ func (g Device) GetQueue() *Queue {
 // CreateCommandEncoder as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createcommandencoder
 func (g Device) CreateCommandEncoder(descriptor *CommandEncoderDescriptor) (*CommandEncoder, error) {
-	jsEncoder := g.jsValue.Call("createCommandEncoder", map[string]any{"label": descriptor.Label})
+	jsEncoder := g.jsValue.Call("createCommandEncoder", descriptor.toJS())
 	return &CommandEncoder{
 		jsValue: jsEncoder,
 	}, nil

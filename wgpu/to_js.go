@@ -7,14 +7,24 @@ import (
 	"syscall/js"
 )
 
-// toJS converts the given [fmt.Stringer] to a type that can be passed as
+// toJS converts the given value to a type that can be passed as
 // an argument to JavaScript.
-func toJS(s fmt.Stringer) any {
-	ss := s.String()
-	if ss == "undefined" {
+func toJS[T comparable](v T) any {
+	var zero T
+	if v == zero {
 		return js.Undefined()
 	}
-	return ss
+	if tj, ok := any(v).(interface{ toJS() any }); ok {
+		return tj.toJS()
+	}
+	if s, ok := any(v).(fmt.Stringer); ok {
+		ss := s.String()
+		if ss == "undefined" {
+			return js.Undefined()
+		}
+		return ss
+	}
+	return v
 }
 
 func (g Color) toJS() any {
@@ -34,9 +44,6 @@ func (g *RequestAdapterOptions) toJS() any {
 
 func (g *DeviceDescriptor) toJS() any {
 	result := make(map[string]any)
-	if g == nil {
-		return result
-	}
 	result["label"] = g.Label
 	result["requiredFeatures"] = mapSlice(g.RequiredFeatures, func(f FeatureName) any { return f })
 	// result["requiredLimits"] = // TODO(kai): convert requiredLimits to JS
@@ -55,6 +62,10 @@ func (g *TextureViewDescriptor) toJS() any {
 		"aspect":          toJS(g.Aspect),
 	}
 
+}
+
+func (g *CommandEncoderDescriptor) toJS() any {
+	return map[string]any{"label": g.Label}
 }
 
 func (g BufferDescriptor) toJS() any {
