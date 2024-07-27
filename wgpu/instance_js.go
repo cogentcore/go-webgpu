@@ -32,7 +32,11 @@ func (g Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, erro
 	return &Adapter{jsValue: adapter}, nil
 }
 
-func (g Instance) CreateSurface(any) *Surface {
+type SurfaceDescriptor struct {
+	Label string
+}
+
+func (g Instance) CreateSurface(descriptor *SurfaceDescriptor) *Surface {
 	return &Surface{}
 }
 
