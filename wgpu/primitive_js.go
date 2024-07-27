@@ -15,15 +15,6 @@ func mapSlice[S, T any](slice []S, fn func(S) T) []T {
 	return result
 }
 
-// Color as described:
-// https://gpuweb.github.io/gpuweb/#typedefdef-gpucolor
-type Color struct {
-	R float64
-	G float64
-	B float64
-	A float64
-}
-
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
 func (g Color) ToJS() any {
