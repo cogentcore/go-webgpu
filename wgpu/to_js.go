@@ -4,6 +4,7 @@ package wgpu
 
 import (
 	"fmt"
+	"maps"
 	"syscall/js"
 )
 
@@ -99,10 +100,11 @@ func (g BufferDescriptor) toJS() any {
 }
 
 func (g *ImageCopyBuffer) toJS() any {
-	return map[string]any{
-		"layout": g.Layout.toJS(),
+	result := map[string]any{
 		"buffer": pointerToJS(g.Buffer),
 	}
+	maps.Copy(result, g.Layout.toJS().(map[string]any)) // must be included directly
+	return result
 }
 
 func (g *ImageCopyTexture) toJS() any {
