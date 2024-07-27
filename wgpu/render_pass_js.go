@@ -99,3 +99,5 @@ func (g RenderPassEncoder) Draw(vertexCount uint32, instanceCount, firstVertex, 
 func (g RenderPassEncoder) End() {
 	g.jsValue.Call("end")
 }
+
+func (g RenderPassEncoder) Release() {} // no-op

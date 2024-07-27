@@ -15,3 +15,5 @@ type CommandBuffer struct {
 func (g CommandBuffer) ToJS() any {
 	return g.jsValue
 }
+
+func (g CommandBuffer) Release() {} // no-op

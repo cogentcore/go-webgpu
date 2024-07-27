@@ -16,6 +16,8 @@ func (g TextureView) ToJS() any {
 	return g.jsValue
 }
 
+func (g TextureView) Release() {} // no-op
+
 // Texture as described:
 // https://gpuweb.github.io/gpuweb/#gputexture
 type Texture struct {

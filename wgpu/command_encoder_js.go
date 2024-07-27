@@ -46,3 +46,5 @@ func (g CommandEncoder) Finish() (*CommandBuffer, error) {
 		jsValue: jsBuffer,
 	}, nil
 }
+
+func (g CommandEncoder) Release() {} // no-op
