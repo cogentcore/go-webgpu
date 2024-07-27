@@ -126,4 +126,8 @@ func (g *TextureDescriptor) ToJS() js.Value {
 	return js.ValueOf(result)
 }
 
+func (g Device) Poll(wait bool, wrappedSubmissionIndex *WrappedSubmissionIndex) (queueEmpty bool) {
+	return false // no-op
+}
+
 func (g Device) Release() {} // no-op

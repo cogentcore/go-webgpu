@@ -164,3 +164,10 @@ type TextureViewDescriptor struct {
 type CommandBufferDescriptor struct {
 	Label string
 }
+
+type WrappedSubmissionIndex struct {
+	Queue           *Queue
+	SubmissionIndex SubmissionIndex
+}
+
+type SubmissionIndex uint64

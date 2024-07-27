@@ -1293,11 +1293,6 @@ func (p *Device) HasFeature(feature FeatureName) bool {
 	return bool(hasFeature)
 }
 
-type WrappedSubmissionIndex struct {
-	Queue           *Queue
-	SubmissionIndex SubmissionIndex
-}
-
 func (p *Device) Poll(wait bool, wrappedSubmissionIndex *WrappedSubmissionIndex) (queueEmpty bool) {
 	var index *C.WGPUWrappedSubmissionIndex
 	if wrappedSubmissionIndex != nil {

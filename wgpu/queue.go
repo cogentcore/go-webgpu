@@ -59,8 +59,6 @@ func (p *Queue) OnSubmittedWorkDone(callback QueueWorkDoneCallback) {
 	C.wgpuQueueOnSubmittedWorkDone(p.ref, C.WGPUQueueWorkDoneCallback(C.gowebgpu_queue_work_done_callback_c), unsafe.Pointer(&handle))
 }
 
-type SubmissionIndex uint64
-
 func (p *Queue) Submit(commands ...*CommandBuffer) (submissionIndex SubmissionIndex) {
 	commandCount := len(commands)
 	if commandCount == 0 {
