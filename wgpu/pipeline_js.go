@@ -59,7 +59,7 @@ func (g VertexBufferLayout) toJS() any {
 	result["arrayStride"] = g.ArrayStride
 	result["stepMode"] = toJS(g.StepMode)
 	result["attributes"] = mapSlice(g.Attributes, func(attrib VertexAttribute) any {
-		return attrib.toJS()
+		return toJS(attrib)
 	})
 	return result
 }
@@ -67,14 +67,14 @@ func (g VertexBufferLayout) toJS() any {
 // VertexState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuvertexstate
 type VertexState struct {
-	Module     ShaderModule
+	Module     *ShaderModule
 	EntryPoint string
 	Buffers    []VertexBufferLayout
 }
 
 func (g VertexState) toJS() any {
 	return map[string]any{
-		"module":     g.Module.toJS(),
+		"module":     toJS(g.Module),
 		"entryPoint": g.EntryPoint,
 		"buffers": mapSlice(g.Buffers, func(layout VertexBufferLayout) any {
 			return layout.toJS()
@@ -138,8 +138,8 @@ func (g DepthStencilState) toJS() any {
 	result["format"] = toJS(g.Format)
 	result["depthWriteEnabled"] = g.DepthWriteEnabled
 	result["depthCompare"] = toJS(g.DepthCompare)
-	result["stencilFront"] = g.StencilFront.toJS()
-	result["stencilBack"] = g.StencilBack.toJS()
+	result["stencilFront"] = toJS(g.StencilFront)
+	result["stencilBack"] = toJS(g.StencilBack)
 	result["stencilReadMask"] = g.StencilReadMask
 	result["stencilWriteMask"] = g.StencilWriteMask
 	result["depthBias"] = g.DepthBias
@@ -189,8 +189,8 @@ type BlendState struct {
 
 func (g BlendState) toJS() any {
 	return map[string]any{
-		"color": g.Color.toJS(),
-		"alpha": g.Alpha.toJS(),
+		"color": toJS(g.Color),
+		"alpha": toJS(g.Alpha),
 	}
 }
 
@@ -205,7 +205,7 @@ type ColorTargetState struct {
 func (g ColorTargetState) toJS() any {
 	result := make(map[string]any)
 	result["format"] = toJS(g.Format)
-	result["blend"] = g.Blend.toJS()
+	result["blend"] = toJS(g.Blend)
 	result["writeMask"] = toJS(g.WriteMask)
 	return result
 }
@@ -213,17 +213,17 @@ func (g ColorTargetState) toJS() any {
 // FragmentState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpufragmentstate
 type FragmentState struct {
-	Module     ShaderModule
+	Module     *ShaderModule
 	EntryPoint string
 	Targets    []ColorTargetState
 }
 
 func (g FragmentState) toJS() any {
 	return map[string]any{
-		"module":     g.Module.toJS(),
+		"module":     toJS(g.Module),
 		"entryPoint": g.EntryPoint,
 		"targets": mapSlice(g.Targets, func(target ColorTargetState) any {
-			return target.toJS()
+			return toJS(target)
 		}),
 	}
 }
@@ -231,22 +231,22 @@ func (g FragmentState) toJS() any {
 // RenderPipelineDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpipelinedescriptor
 type RenderPipelineDescriptor struct {
-	Layout       PipelineLayout
+	Layout       *PipelineLayout
 	Vertex       VertexState
 	Primitive    PrimitiveState
-	DepthStencil DepthStencilState
+	DepthStencil *DepthStencilState
 	Multisample  MultisampleState
-	Fragment     FragmentState
+	Fragment     *FragmentState
 }
 
 func (g RenderPipelineDescriptor) toJS() any {
 	result := make(map[string]any)
-	result["layout"] = g.Layout.toJS()
+	result["layout"] = toJS(g.Layout)
 	result["vertex"] = g.Vertex.toJS()
-	result["primitive"] = g.Primitive.toJS()
-	result["depthStencil"] = g.DepthStencil.toJS()
-	result["multisample"] = g.Multisample.toJS()
-	result["fragment"] = g.Fragment.toJS()
+	result["primitive"] = toJS(g.Primitive)
+	result["depthStencil"] = toJS(g.DepthStencil)
+	result["multisample"] = toJS(g.Multisample)
+	result["fragment"] = toJS(g.Fragment)
 	return result
 }
 

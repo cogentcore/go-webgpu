@@ -19,7 +19,7 @@ func (g CommandEncoder) toJS() any {
 // BeginRenderPass as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-beginrenderpass
 func (g CommandEncoder) BeginRenderPass(descriptor *RenderPassDescriptor) *RenderPassEncoder {
-	jsRenderPass := g.jsValue.Call("beginRenderPass", descriptor.toJS())
+	jsRenderPass := g.jsValue.Call("beginRenderPass", toJS(descriptor))
 	return &RenderPassEncoder{
 		jsValue: jsRenderPass,
 	}
@@ -29,7 +29,7 @@ func (g CommandEncoder) BeginRenderPass(descriptor *RenderPassDescriptor) *Rende
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-begincomputepass
 func (g CommandEncoder) BeginComputePass(descriptor *ComputePassDescriptor) *ComputePassEncoder {
 	params := make([]any, 1)
-	params[0] = descriptor.toJS()
+	params[0] = toJS(descriptor)
 	jsComputePass := g.jsValue.Call("beginComputePass", params...)
 	return &ComputePassEncoder{
 		jsValue: jsComputePass,
@@ -39,28 +39,28 @@ func (g CommandEncoder) BeginComputePass(descriptor *ComputePassDescriptor) *Com
 // CopyBufferToBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-copybuffertobuffer
 func (g CommandEncoder) CopyBufferToBuffer(source *Buffer, sourceOffset uint64, destination *Buffer, destinationOffset uint64, size uint64) (err error) {
-	g.jsValue.Call("copyBufferToBuffer", source.toJS(), sourceOffset, destination.toJS(), destinationOffset, size)
+	g.jsValue.Call("copyBufferToBuffer", toJS(source), sourceOffset, toJS(destination), destinationOffset, size)
 	return nil
 }
 
 // CopyBufferToTexture as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-copybuffertotexture
 func (g CommandEncoder) CopyBufferToTexture(source *ImageCopyBuffer, destination *ImageCopyTexture, copySize *Extent3D) (err error) {
-	g.jsValue.Call("copyBufferToTexture", source.toJS(), destination.toJS(), copySize.toJS())
+	g.jsValue.Call("copyBufferToTexture", toJS(source), toJS(destination), toJS(copySize))
 	return nil
 }
 
 // CopyTextureToBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-copytexturetobuffer
 func (g CommandEncoder) CopyTextureToBuffer(source *ImageCopyTexture, destination *ImageCopyBuffer, copySize *Extent3D) (err error) {
-	g.jsValue.Call("copyTextureToBuffer", source.toJS(), destination.toJS(), copySize.toJS())
+	g.jsValue.Call("copyTextureToBuffer", toJS(source), toJS(destination), toJS(copySize))
 	return nil
 }
 
 // CopyTextureToTexture as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-copytexturetotexture
 func (g CommandEncoder) CopyTextureToTexture(source *ImageCopyTexture, destination *ImageCopyTexture, copySize *Extent3D) (err error) {
-	g.jsValue.Call("copyTextureToTexture", source.toJS(), destination.toJS(), copySize.toJS())
+	g.jsValue.Call("copyTextureToTexture", toJS(source), toJS(destination), toJS(copySize))
 	return nil
 }
 

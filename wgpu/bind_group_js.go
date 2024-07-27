@@ -91,10 +91,10 @@ func (g BindGroupLayoutEntry) toJS() any {
 	result := make(map[string]any)
 	result["binding"] = g.Binding
 	result["visibility"] = toJS(g.Visibility)
-	result["buffer"] = g.Buffer.toJS()
-	result["sampler"] = g.Sampler.toJS()
-	result["texture"] = g.Texture.toJS()
-	result["storageTexture"] = g.StorageTexture.toJS()
+	result["buffer"] = toJS(g.Buffer)
+	result["sampler"] = toJS(g.Sampler)
+	result["texture"] = toJS(g.Texture)
+	result["storageTexture"] = toJS(g.StorageTexture)
 	result["externalTexture"] = g.ExternalTexture.toJS()
 	return result
 }
@@ -160,7 +160,7 @@ type BindGroupEntry struct {
 func (g BindGroupEntry) toJS() any {
 	return map[string]any{
 		"binding":  g.Binding,
-		"resource": g.Resource.toJS(),
+		"resource": toJS(g.Resource),
 	}
 }
 
@@ -175,7 +175,7 @@ func (g BindGroupDescriptor) toJS() any {
 	return map[string]any{
 		"layout": g.Layout.toJS(),
 		"entries": mapSlice(g.Entries, func(entry BindGroupEntry) any {
-			return entry.toJS()
+			return toJS(entry)
 		}),
 	}
 }

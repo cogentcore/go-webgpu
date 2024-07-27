@@ -6,16 +6,6 @@ import (
 	"syscall/js"
 )
 
-func (g *RenderPassColorAttachment) toJS() any {
-	result := make(map[string]any)
-	result["view"] = g.View.jsValue
-	result["loadOp"] = toJS(g.LoadOp)
-	result["storeOp"] = toJS(g.StoreOp)
-	result["clearValue"] = g.ClearValue.toJS()
-	result["resolveTarget"] = g.ResolveTarget.toJS()
-	return result
-}
-
 // RenderPassDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpassdescriptor
 type RenderPassDescriptor struct {
@@ -25,7 +15,7 @@ type RenderPassDescriptor struct {
 func (g *RenderPassDescriptor) toJS() any {
 	result := make(map[string]any)
 	result["colorAttachments"] = mapSlice(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {
-		return attachment.toJS()
+		return toJS(attachment)
 	})
 	return result
 }
@@ -42,16 +32,16 @@ func (g RenderPassEncoder) toJS() any {
 
 // SetPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-setpipeline
-func (g RenderPassEncoder) SetPipeline(pipeline RenderPipeline) {
-	g.jsValue.Call("setPipeline", pipeline.toJS())
+func (g RenderPassEncoder) SetPipeline(pipeline *RenderPipeline) {
+	g.jsValue.Call("setPipeline", toJS(pipeline))
 }
 
 // SetVertexBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-setvertexbuffer
-func (g RenderPassEncoder) SetVertexBuffer(slot uint32, vertexBuffer Buffer, offset, size uint64) {
+func (g RenderPassEncoder) SetVertexBuffer(slot uint32, vertexBuffer *Buffer, offset, size uint64) {
 	params := make([]any, 4)
 	params[0] = slot
-	params[1] = vertexBuffer.toJS()
+	params[1] = toJS(vertexBuffer)
 	params[2] = offset
 	params[3] = size
 	g.jsValue.Call("setVertexBuffer", params...)
@@ -59,10 +49,10 @@ func (g RenderPassEncoder) SetVertexBuffer(slot uint32, vertexBuffer Buffer, off
 
 // SetBindGroup as described:
 // https://gpuweb.github.io/gpuweb/#gpubindingcommandsmixin-setbindgroup
-func (g RenderPassEncoder) SetBindGroup(index uint32, bindGroup BindGroup, dynamicOffsets []uint32) {
+func (g RenderPassEncoder) SetBindGroup(index uint32, bindGroup *BindGroup, dynamicOffsets []uint32) {
 	params := make([]any, 3)
 	params[0] = index
-	params[1] = bindGroup.toJS()
+	params[1] = toJS(bindGroup)
 	params[2] = dynamicOffsets
 	g.jsValue.Call("setBindGroup", params...)
 }

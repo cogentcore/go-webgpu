@@ -7,13 +7,13 @@ import "syscall/js"
 // ProgrammableStage as described:
 // https://gpuweb.github.io/gpuweb/#gpuprogrammablestage
 type ProgrammableStage struct {
-	Module     ShaderModule
+	Module     *ShaderModule
 	EntryPoint string
 }
 
 func (g ProgrammableStage) toJS() any {
 	return map[string]any{
-		"module":     g.Module.toJS(),
+		"module":     toJS(g.Module),
 		"entryPoint": g.EntryPoint,
 	}
 }

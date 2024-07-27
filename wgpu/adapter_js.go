@@ -14,7 +14,7 @@ type Adapter struct {
 }
 
 func (g Adapter) RequestDevice(descriptor *DeviceDescriptor) (*Device, error) {
-	device := await(g.jsValue.Call("requestDevice", descriptor.toJS()))
+	device := await(g.jsValue.Call("requestDevice", toJS(descriptor)))
 	if !device.Truthy() {
 		return nil, fmt.Errorf("no WebGPU device avaliable")
 	}

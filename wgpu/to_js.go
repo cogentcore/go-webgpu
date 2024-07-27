@@ -8,7 +8,8 @@ import (
 )
 
 // toJS converts the given value to a type that can be passed as
-// an argument to JavaScript.
+// an argument to JavaScript. It should only be called with pointers
+// and enums.
 func toJS[T comparable](v T) any {
 	var zero T
 	if v == zero {
@@ -78,16 +79,16 @@ func (g BufferDescriptor) toJS() any {
 
 func (g *ImageCopyBuffer) toJS() any {
 	return map[string]any{
-		"layout": g.Layout.toJS(),
-		"buffer": g.Buffer.toJS(),
+		"layout": toJS(g.Layout),
+		"buffer": toJS(g.Buffer),
 	}
 }
 
 func (g *ImageCopyTexture) toJS() any {
 	return map[string]any{
-		"texture":  g.Texture.toJS(),
+		"texture":  toJS(g.Texture),
 		"mipLevel": g.MipLevel,
-		"origin":   g.Origin.toJS(),
+		"origin":   toJS(g.Origin),
 		"aspect":   toJS(g.Aspect),
 	}
 }
@@ -102,4 +103,14 @@ func (g *TextureDataLayout) toJS() any {
 
 func (g *Origin3D) toJS() any {
 	return []any{g.X, g.Y, g.Z}
+}
+
+func (g *RenderPassColorAttachment) toJS() any {
+	result := make(map[string]any)
+	result["view"] = g.View.jsValue
+	result["loadOp"] = toJS(g.LoadOp)
+	result["storeOp"] = toJS(g.StoreOp)
+	result["clearValue"] = toJS(g.ClearValue)
+	result["resolveTarget"] = toJS(g.ResolveTarget)
+	return result
 }
