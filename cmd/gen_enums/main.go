@@ -167,9 +167,9 @@ loop:
 		fmt.Fprintf(w, "switch v {\n")
 		for _, v := range e.Enums {
 			fmt.Fprintf(w, "case %s:\n", v.Enum)
-			// kebab-case is consistent with the enum values in JS
+			// Kebab case is consistent with the enum values in JS.
 			kebab := strcase.ToKebab(strings.TrimPrefix(v.Enum, e.Name))
-			// Remove any hyphens connected to a digit, as JS does not include them
+			// Remove any hyphens connected to a digit, as JS does not include them.
 			b := strings.Builder{}
 			rs := []rune(kebab)
 			for i, r := range rs {
