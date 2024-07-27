@@ -36,28 +36,26 @@ func (g ComputePassEncoder) SetPipeline(pipeline ComputePipeline) {
 
 // SetBindGroup as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpubindingcommandsmixin-setbindgroup
-func (g ComputePassEncoder) SetBindGroup(index Index32, bindGroup BindGroup, dynamicOffsets []BufferDynamicOffset) {
+func (g ComputePassEncoder) SetBindGroup(index uint32, bindGroup BindGroup, dynamicOffsets []uint32) {
 	params := make([]any, 3)
-	params[0] = index.ToJS()
+	params[0] = index
 	params[1] = bindGroup.ToJS()
-	params[2] = mapSlice(dynamicOffsets, func(offset BufferDynamicOffset) any {
-		return offset.ToJS()
-	})
+	params[2] = dynamicOffsets
 	g.jsValue.Call("setBindGroup", params...)
 }
 
 // DispatchWorkgroups as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucomputepassencoder-dispatchworkgroups
-func (g ComputePassEncoder) DispatchWorkgroups(workgroupCountX, workgroupCountY, workgroupCountZ Size32) {
+func (g ComputePassEncoder) DispatchWorkgroups(workgroupCountX, workgroupCountY, workgroupCountZ uint32) {
 	params := make([]any, 3)
-	params[0] = workgroupCountX.ToJS()
+	params[0] = workgroupCountX
 	if workgroupCountY > 0 {
-		params[1] = workgroupCountY.ToJS()
+		params[1] = workgroupCountY
 	} else {
 		params[1] = js.Undefined()
 	}
 	if workgroupCountZ > 0 {
-		params[2] = workgroupCountZ.ToJS()
+		params[2] = workgroupCountZ
 	} else {
 		params[2] = js.Undefined()
 	}

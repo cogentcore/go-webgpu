@@ -7,7 +7,7 @@ import "syscall/js"
 // BufferDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#gpubufferdescriptor
 type BufferDescriptor struct {
-	Size  Size64
+	Size  uint64
 	Usage BufferUsage
 }
 
@@ -15,7 +15,7 @@ type BufferDescriptor struct {
 // to JavaScript.
 func (g BufferDescriptor) ToJS() any {
 	return map[string]any{
-		"size":  g.Size.ToJS(),
+		"size":  g.Size,
 		"usage": g.Usage.String(),
 	}
 }

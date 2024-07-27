@@ -11,7 +11,7 @@ import (
 type BufferBindingLayout struct {
 	Type             BufferBindingType
 	HasDynamicOffset bool
-	MinBindingSize   Size64
+	MinBindingSize   uint64
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -88,7 +88,7 @@ func (g ExternalTextureBindingLayout) ToJS() any {
 // BindGroupLayoutEntry as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubindgrouplayoutentry
 type BindGroupLayoutEntry struct {
-	Binding         Index32
+	Binding         uint32
 	Visibility      ShaderStage
 	Buffer          BufferBindingLayout
 	Sampler         SamplerBindingLayout
@@ -101,7 +101,7 @@ type BindGroupLayoutEntry struct {
 // to JavaScript.
 func (g BindGroupLayoutEntry) ToJS() any {
 	result := make(map[string]any)
-	result["binding"] = g.Binding.ToJS()
+	result["binding"] = g.Binding
 	result["visibility"] = g.Visibility.String()
 	result["buffer"] = g.Buffer.ToJS()
 	result["sampler"] = g.Sampler.ToJS()
@@ -143,8 +143,8 @@ func (g BindGroupLayout) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubufferbinding
 type BufferBinding struct {
 	Buffer Buffer
-	Offset Size64
-	Size   Size64
+	Offset uint64
+	Size   uint64
 }
 
 var _ BindingResource = BufferBinding{}
@@ -154,8 +154,8 @@ var _ BindingResource = BufferBinding{}
 func (g BufferBinding) ToJS() any {
 	result := make(map[string]any)
 	result["buffer"] = g.Buffer.ToJS()
-	result["offset"] = g.Offset.ToJS()
-	result["size"] = g.Size.ToJS()
+	result["offset"] = g.Offset
+	result["size"] = g.Size
 	return result
 }
 
@@ -171,7 +171,7 @@ type BindingResource interface {
 // BindGroupEntry as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubindgroupentry
 type BindGroupEntry struct {
-	Binding  Index32
+	Binding  uint32
 	Resource BindingResource
 }
 
@@ -179,7 +179,7 @@ type BindGroupEntry struct {
 // to JavaScript.
 func (g BindGroupEntry) ToJS() any {
 	return map[string]any{
-		"binding":  g.Binding.ToJS(),
+		"binding":  g.Binding,
 		"resource": g.Resource.ToJS(),
 	}
 }

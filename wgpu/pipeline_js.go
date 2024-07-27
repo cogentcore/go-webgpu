@@ -38,8 +38,8 @@ func (g PipelineLayout) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuvertexattribute
 type VertexAttribute struct {
 	Format         VertexFormat
-	Offset         Size64
-	ShaderLocation Index32
+	Offset         uint64
+	ShaderLocation uint32
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -47,15 +47,15 @@ type VertexAttribute struct {
 func (g VertexAttribute) ToJS() any {
 	return map[string]any{
 		"format":         g.Format.String(),
-		"offset":         g.Offset.ToJS(),
-		"shaderLocation": g.ShaderLocation.ToJS(),
+		"offset":         g.Offset,
+		"shaderLocation": g.ShaderLocation,
 	}
 }
 
 // VertexBufferLayout as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuvertexbufferlayout
 type VertexBufferLayout struct {
-	ArrayStride Size64
+	ArrayStride uint64
 	StepMode    VertexStepMode
 	Attributes  []VertexAttribute
 }
@@ -64,7 +64,7 @@ type VertexBufferLayout struct {
 // to JavaScript.
 func (g VertexBufferLayout) ToJS() any {
 	result := make(map[string]any)
-	result["arrayStride"] = g.ArrayStride.ToJS()
+	result["arrayStride"] = g.ArrayStride
 	result["stepMode"] = g.StepMode.String()
 	result["attributes"] = mapSlice(g.Attributes, func(attrib VertexAttribute) any {
 		return attrib.ToJS()
@@ -140,9 +140,9 @@ type DepthStencilState struct {
 	DepthCompare        CompareFunction
 	StencilFront        StencilFaceState
 	StencilBack         StencilFaceState
-	StencilReadMask     StencilValue
-	StencilWriteMask    StencilValue
-	DepthBias           DepthBias
+	StencilReadMask     uint32
+	StencilWriteMask    uint32
+	DepthBias           int32
 	DepthBiasSlopeScale float32
 	DepthBiasClamp      float32
 }
@@ -156,9 +156,9 @@ func (g DepthStencilState) ToJS() any {
 	result["depthCompare"] = g.DepthCompare.String()
 	result["stencilFront"] = g.StencilFront.ToJS()
 	result["stencilBack"] = g.StencilBack.ToJS()
-	result["stencilReadMask"] = g.StencilReadMask.ToJS()
-	result["stencilWriteMask"] = g.StencilWriteMask.ToJS()
-	result["depthBias"] = g.DepthBias.ToJS()
+	result["stencilReadMask"] = g.StencilReadMask
+	result["stencilWriteMask"] = g.StencilWriteMask
+	result["depthBias"] = g.DepthBias
 	result["depthBiasSlopeScale"] = g.DepthBiasSlopeScale
 	result["depthBiasClamp"] = g.DepthBiasClamp
 	return result
@@ -167,8 +167,8 @@ func (g DepthStencilState) ToJS() any {
 // MultisampleState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpumultisamplestate
 type MultisampleState struct {
-	Count                  Size32
-	Mask                   SampleMask
+	Count                  uint32
+	Mask                   uint32
 	AlphaToCoverageEnabled bool
 }
 
@@ -176,8 +176,8 @@ type MultisampleState struct {
 // to JavaScript.
 func (g MultisampleState) ToJS() any {
 	result := make(map[string]any)
-	result["count"] = g.Count.ToJS()
-	result["mask"] = g.Mask.ToJS()
+	result["count"] = g.Count
+	result["mask"] = g.Mask
 	result["alphaToCoverageEnabled"] = g.AlphaToCoverageEnabled
 	return result
 }
