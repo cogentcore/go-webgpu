@@ -13,6 +13,8 @@ func (g Surface) GetPreferredFormat(adapter *Adapter) TextureFormat {
 
 func (g Surface) GetCapabilities(adapter *Adapter) (ret SurfaceCapabilities) {
 	// TODO(kai): get capabilities
+	ret.Formats = []TextureFormat{TextureFormatRGBA8UnormSrgb}
+	ret.AlphaModes = []CompositeAlphaMode{CompositeAlphaModeAuto}
 	return
 }
 

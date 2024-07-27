@@ -129,3 +129,14 @@ func (g *RenderPassColorAttachment) toJS() any {
 	result["resolveTarget"] = pointerToJS(g.ResolveTarget)
 	return result
 }
+
+func (g *RenderPipelineDescriptor) toJS() any {
+	result := make(map[string]any)
+	result["layout"] = pointerToJS(g.Layout)
+	result["vertex"] = g.Vertex.toJS()
+	result["primitive"] = g.Primitive.toJS()
+	result["depthStencil"] = pointerToJS(g.DepthStencil)
+	result["multisample"] = g.Multisample.toJS()
+	result["fragment"] = pointerToJS(g.Fragment)
+	return result
+}
