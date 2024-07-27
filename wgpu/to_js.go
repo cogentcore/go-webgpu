@@ -34,6 +34,9 @@ func (g *RequestAdapterOptions) toJS() any {
 
 func (g *DeviceDescriptor) toJS() any {
 	result := make(map[string]any)
+	if g == nil {
+		return result
+	}
 	result["label"] = g.Label
 	result["requiredFeatures"] = mapSlice(g.RequiredFeatures, func(f FeatureName) any { return f })
 	// result["requiredLimits"] = // TODO(kai): convert requiredLimits to JS
