@@ -145,3 +145,18 @@ type RenderPassColorAttachment struct {
 	StoreOp       StoreOp
 	ClearValue    Color
 }
+
+type CommandEncoderDescriptor struct {
+	Label string
+}
+
+type TextureViewDescriptor struct {
+	Label           string
+	Format          TextureFormat
+	Dimension       TextureViewDimension
+	BaseMipLevel    uint32
+	MipLevelCount   uint32
+	BaseArrayLayer  uint32
+	ArrayLayerCount uint32
+	Aspect          TextureAspect
+}

@@ -35,8 +35,8 @@ func (g Device) GetQueue() *Queue {
 
 // CreateCommandEncoder as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createcommandencoder
-func (g Device) CreateCommandEncoder() (*CommandEncoder, error) {
-	jsEncoder := g.jsValue.Call("createCommandEncoder")
+func (g Device) CreateCommandEncoder(descriptor *CommandEncoderDescriptor) (*CommandEncoder, error) {
+	jsEncoder := g.jsValue.Call("createCommandEncoder", map[string]any{"label": descriptor.Label})
 	return &CommandEncoder{
 		jsValue: jsEncoder,
 	}, nil
@@ -53,7 +53,7 @@ func (g Device) CreateBuffer(descriptor *BufferDescriptor) (*Buffer, error) {
 
 // CreateShaderModule as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createshadermodule
-func (g Device) CreateShaderModule(desc ShaderModuleDescriptor) (*ShaderModule, error) {
+func (g Device) CreateShaderModule(desc *ShaderModuleDescriptor) (*ShaderModule, error) {
 	jsShader := g.jsValue.Call("createShaderModule", desc.ToJS())
 	return &ShaderModule{
 		jsValue: jsShader,
@@ -62,7 +62,7 @@ func (g Device) CreateShaderModule(desc ShaderModuleDescriptor) (*ShaderModule, 
 
 // CreateRenderPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createrenderpipeline
-func (g Device) CreateRenderPipeline(descriptor RenderPipelineDescriptor) (*RenderPipeline, error) {
+func (g Device) CreateRenderPipeline(descriptor *RenderPipelineDescriptor) (*RenderPipeline, error) {
 	jsPipeline := g.jsValue.Call("createRenderPipeline", descriptor.ToJS())
 	return &RenderPipeline{
 		jsValue: jsPipeline,
@@ -71,7 +71,7 @@ func (g Device) CreateRenderPipeline(descriptor RenderPipelineDescriptor) (*Rend
 
 // CreateBindGroup as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbindgroup
-func (g Device) CreateBindGroup(descriptor BindGroupDescriptor) (*BindGroup, error) {
+func (g Device) CreateBindGroup(descriptor *BindGroupDescriptor) (*BindGroup, error) {
 	jsBindGroup := g.jsValue.Call("createBindGroup", descriptor.ToJS())
 	return &BindGroup{
 		jsValue: jsBindGroup,
@@ -80,7 +80,7 @@ func (g Device) CreateBindGroup(descriptor BindGroupDescriptor) (*BindGroup, err
 
 // CreateBindGroupLayout as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbindgrouplayout
-func (g Device) CreateBindGroupLayout(descriptor BindGroupLayoutDescriptor) (*BindGroupLayout, error) {
+func (g Device) CreateBindGroupLayout(descriptor *BindGroupLayoutDescriptor) (*BindGroupLayout, error) {
 	jsLayout := g.jsValue.Call("createBindGroupLayout", descriptor.ToJS())
 	return &BindGroupLayout{
 		jsValue: jsLayout,
@@ -89,7 +89,7 @@ func (g Device) CreateBindGroupLayout(descriptor BindGroupLayoutDescriptor) (*Bi
 
 // CreatePipelineLayout as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createpipelinelayout
-func (g Device) CreatePipelineLayout(descriptor PipelineLayoutDescriptor) (*PipelineLayout, error) {
+func (g Device) CreatePipelineLayout(descriptor *PipelineLayoutDescriptor) (*PipelineLayout, error) {
 	jsLayout := g.jsValue.Call("createPipelineLayout", descriptor.ToJS())
 	return &PipelineLayout{
 		jsValue: jsLayout,
@@ -98,7 +98,7 @@ func (g Device) CreatePipelineLayout(descriptor PipelineLayoutDescriptor) (*Pipe
 
 // CreateComputePipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createcomputepipeline
-func (g Device) CreateComputePipeline(descriptor ComputePipelineDescriptor) (*ComputePipeline, error) {
+func (g Device) CreateComputePipeline(descriptor *ComputePipelineDescriptor) (*ComputePipeline, error) {
 	jsPipeline := g.jsValue.Call("createComputePipeline", descriptor.ToJS())
 	return &ComputePipeline{
 		jsValue: jsPipeline,

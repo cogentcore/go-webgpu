@@ -350,10 +350,6 @@ func (p *Device) CreateBuffer(descriptor *BufferDescriptor) (*Buffer, error) {
 	return &Buffer{deviceRef: p.ref, ref: ref}, nil
 }
 
-type CommandEncoderDescriptor struct {
-	Label string
-}
-
 func (p *Device) CreateCommandEncoder(descriptor *CommandEncoderDescriptor) (*CommandEncoder, error) {
 	var desc *C.WGPUCommandEncoderDescriptor
 

@@ -39,11 +39,25 @@ func (g Texture) GetFormat() TextureFormat {
 
 // CreateView as described:
 // https://gpuweb.github.io/gpuweb/#dom-gputexture-createview
-func (g Texture) CreateView() (*TextureView, error) {
-	jsView := g.jsValue.Call("createView")
+func (g Texture) CreateView(descriptor *TextureViewDescriptor) (*TextureView, error) {
+	jsView := g.jsValue.Call("createView", descriptor.ToJS())
 	return &TextureView{
 		jsValue: jsView,
 	}, nil
+}
+
+func (g *TextureViewDescriptor) ToJS() js.Value {
+	return js.ValueOf(map[string]any{
+		"label":           g.Label,
+		"format":          g.Format.String(),
+		"dimension":       g.Dimension.String(),
+		"baseMipLevel":    g.BaseMipLevel,
+		"mipLevelCount":   g.MipLevelCount,
+		"baseArrayLayer":  g.BaseArrayLayer,
+		"arrayLayerCount": g.ArrayLayerCount,
+		"aspect":          g.Aspect.String(),
+	})
+
 }
 
 func (g Texture) Release() {} // no-op
