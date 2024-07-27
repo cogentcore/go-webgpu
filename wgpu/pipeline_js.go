@@ -206,7 +206,7 @@ func (g ColorTargetState) toJS() any {
 	result := make(map[string]any)
 	result["format"] = enumToJS(g.Format)
 	result["blend"] = pointerToJS(g.Blend)
-	result["writeMask"] = g.WriteMask
+	result["writeMask"] = uint32(g.WriteMask)
 	return result
 }
 
