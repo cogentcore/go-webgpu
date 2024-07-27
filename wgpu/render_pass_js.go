@@ -11,8 +11,8 @@ import (
 func (g *RenderPassColorAttachment) ToJS() any {
 	result := make(map[string]any)
 	result["view"] = g.View.jsValue
-	result["loadOp"] = g.LoadOp.String()
-	result["storeOp"] = g.StoreOp.String()
+	result["loadOp"] = ToJS(g.LoadOp)
+	result["storeOp"] = ToJS(g.StoreOp)
 	result["clearValue"] = g.ClearValue.ToJS()
 	result["resolveTarget"] = g.ResolveTarget.ToJS()
 	return result

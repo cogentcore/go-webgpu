@@ -117,10 +117,10 @@ func (g Device) CreateTexture(descriptor *TextureDescriptor) (*Texture, error) {
 func (g *TextureDescriptor) ToJS() any {
 	return map[string]any{
 		"label":         g.Label,
-		"usage":         g.Usage.String(),
-		"dimension":     g.Dimension.String(),
+		"usage":         ToJS(g.Usage),
+		"dimension":     ToJS(g.Dimension),
 		"size":          g.Size.ToJS(),
-		"format":        g.Format.String(),
+		"format":        ToJS(g.Format),
 		"mipLevelCount": g.MipLevelCount,
 		"sampleCount":   g.SampleCount,
 	}

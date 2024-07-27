@@ -46,7 +46,7 @@ type VertexAttribute struct {
 // to JavaScript.
 func (g VertexAttribute) ToJS() any {
 	return map[string]any{
-		"format":         g.Format.String(),
+		"format":         ToJS(g.Format),
 		"offset":         g.Offset,
 		"shaderLocation": g.ShaderLocation,
 	}
@@ -65,7 +65,7 @@ type VertexBufferLayout struct {
 func (g VertexBufferLayout) ToJS() any {
 	result := make(map[string]any)
 	result["arrayStride"] = g.ArrayStride
-	result["stepMode"] = g.StepMode.String()
+	result["stepMode"] = ToJS(g.StepMode)
 	result["attributes"] = mapSlice(g.Attributes, func(attrib VertexAttribute) any {
 		return attrib.ToJS()
 	})
@@ -105,10 +105,10 @@ type PrimitiveState struct {
 // to JavaScript.
 func (g PrimitiveState) ToJS() any {
 	result := make(map[string]any)
-	result["topology"] = g.Topology.String()
-	result["stripIndexFormat"] = g.StripIndexFormat.String()
-	result["frontFace"] = g.FrontFace.String()
-	result["cullMode"] = g.CullMode.String()
+	result["topology"] = ToJS(g.Topology)
+	result["stripIndexFormat"] = ToJS(g.StripIndexFormat)
+	result["frontFace"] = ToJS(g.FrontFace)
+	result["cullMode"] = ToJS(g.CullMode)
 	return result
 }
 
@@ -125,10 +125,10 @@ type StencilFaceState struct {
 // to JavaScript.
 func (g StencilFaceState) ToJS() any {
 	result := make(map[string]any)
-	result["compare"] = g.Compare.String()
-	result["failOp"] = g.FailOp.String()
-	result["depthFailOp"] = g.DepthFailOp.String()
-	result["passOp"] = g.PassOp.String()
+	result["compare"] = ToJS(g.Compare)
+	result["failOp"] = ToJS(g.FailOp)
+	result["depthFailOp"] = ToJS(g.DepthFailOp)
+	result["passOp"] = ToJS(g.PassOp)
 	return result
 }
 
@@ -151,9 +151,9 @@ type DepthStencilState struct {
 // to JavaScript.
 func (g DepthStencilState) ToJS() any {
 	result := make(map[string]any)
-	result["format"] = g.Format.String()
+	result["format"] = ToJS(g.Format)
 	result["depthWriteEnabled"] = g.DepthWriteEnabled
-	result["depthCompare"] = g.DepthCompare.String()
+	result["depthCompare"] = ToJS(g.DepthCompare)
 	result["stencilFront"] = g.StencilFront.ToJS()
 	result["stencilBack"] = g.StencilBack.ToJS()
 	result["stencilReadMask"] = g.StencilReadMask
@@ -194,9 +194,9 @@ type BlendComponent struct {
 // to JavaScript.
 func (g BlendComponent) ToJS() any {
 	result := make(map[string]any)
-	result["operation"] = g.Operation.String()
-	result["srcFactor"] = g.SrcFactor.String()
-	result["dstFactor"] = g.DstFactor.String()
+	result["operation"] = ToJS(g.Operation)
+	result["srcFactor"] = ToJS(g.SrcFactor)
+	result["dstFactor"] = ToJS(g.DstFactor)
 	return result
 }
 
@@ -228,9 +228,9 @@ type ColorTargetState struct {
 // to JavaScript.
 func (g ColorTargetState) ToJS() any {
 	result := make(map[string]any)
-	result["format"] = g.Format.String()
+	result["format"] = ToJS(g.Format)
 	result["blend"] = g.Blend.ToJS()
-	result["writeMask"] = g.WriteMask.String()
+	result["writeMask"] = ToJS(g.WriteMask)
 	return result
 }
 

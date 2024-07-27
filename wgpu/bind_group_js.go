@@ -18,7 +18,7 @@ type BufferBindingLayout struct {
 // to JavaScript.
 func (g BufferBindingLayout) ToJS() any {
 	result := make(map[string]any)
-	result["type"] = g.Type.String()
+	result["type"] = ToJS(g.Type)
 	result["hasDynamicOffset"] = g.HasDynamicOffset
 	result["minBindingSize"] = g.MinBindingSize
 	return result
@@ -34,7 +34,7 @@ type SamplerBindingLayout struct {
 // to JavaScript.
 func (g SamplerBindingLayout) ToJS() any {
 	result := make(map[string]any)
-	result["type"] = g.Type.String()
+	result["type"] = ToJS(g.Type)
 	return result
 }
 
@@ -50,8 +50,8 @@ type TextureBindingLayout struct {
 // to JavaScript.
 func (g TextureBindingLayout) ToJS() any {
 	result := make(map[string]any)
-	result["sampleType"] = g.SampleType.String()
-	result["viewDimension"] = g.ViewDimension.String()
+	result["sampleType"] = ToJS(g.SampleType)
+	result["viewDimension"] = ToJS(g.ViewDimension)
 	result["multisampled"] = g.Multisampled
 	return result
 }
@@ -68,9 +68,9 @@ type StorageTextureBindingLayout struct {
 // to JavaScript.
 func (g StorageTextureBindingLayout) ToJS() any {
 	result := make(map[string]any)
-	result["access"] = g.Access.String()
-	result["format"] = g.Format.String()
-	result["viewDimension"] = g.ViewDimension.String()
+	result["access"] = ToJS(g.Access)
+	result["format"] = ToJS(g.Format)
+	result["viewDimension"] = ToJS(g.ViewDimension)
 	return result
 }
 
@@ -102,7 +102,7 @@ type BindGroupLayoutEntry struct {
 func (g BindGroupLayoutEntry) ToJS() any {
 	result := make(map[string]any)
 	result["binding"] = g.Binding
-	result["visibility"] = g.Visibility.String()
+	result["visibility"] = ToJS(g.Visibility)
 	result["buffer"] = g.Buffer.ToJS()
 	result["sampler"] = g.Sampler.ToJS()
 	result["texture"] = g.Texture.ToJS()

@@ -27,7 +27,7 @@ func (g *Extent3D) ToJS() any {
 
 func (g *RequestAdapterOptions) ToJS() any {
 	result := make(map[string]any)
-	result["powerPreference"] = g.PowerPreference.String()
+	result["powerPreference"] = ToJS(g.PowerPreference)
 	result["forceFallbackAdapter"] = g.ForceFallbackAdapter
 	return result
 }
@@ -43,13 +43,13 @@ func (g *DeviceDescriptor) ToJS() any {
 func (g *TextureViewDescriptor) ToJS() any {
 	return map[string]any{
 		"label":           g.Label,
-		"format":          g.Format.String(),
-		"dimension":       g.Dimension.String(),
+		"format":          ToJS(g.Format),
+		"dimension":       ToJS(g.Dimension),
 		"baseMipLevel":    g.BaseMipLevel,
 		"mipLevelCount":   g.MipLevelCount,
 		"baseArrayLayer":  g.BaseArrayLayer,
 		"arrayLayerCount": g.ArrayLayerCount,
-		"aspect":          g.Aspect.String(),
+		"aspect":          ToJS(g.Aspect),
 	}
 
 }
@@ -57,7 +57,7 @@ func (g *TextureViewDescriptor) ToJS() any {
 func (g BufferDescriptor) ToJS() any {
 	return map[string]any{
 		"size":             g.Size,
-		"usage":            g.Usage.String(),
+		"usage":            ToJS(g.Usage),
 		"mappedAtCreation": g.MappedAtCreation,
 	}
 }
@@ -74,7 +74,7 @@ func (g *ImageCopyTexture) ToJS() any {
 		"texture":  g.Texture.ToJS(),
 		"mipLevel": g.MipLevel,
 		"origin":   g.Origin.ToJS(),
-		"aspect":   g.Aspect.String(),
+		"aspect":   ToJS(g.Aspect),
 	}
 }
 
