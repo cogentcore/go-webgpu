@@ -99,11 +99,15 @@ func (g BufferDescriptor) toJS() any {
 }
 
 func (g *ImageCopyBuffer) toJS() any {
+	rpi := any(g.Layout.RowsPerImage)
+	if g.Layout.RowsPerImage == CopyStrideUndefined {
+		rpi = js.Undefined()
+	}
 	return map[string]any{
 		"buffer":       pointerToJS(g.Buffer),
 		"offset":       g.Layout.Offset,
 		"bytesPerRow":  g.Layout.BytesPerRow,
-		"rowsPerImage": g.Layout.RowsPerImage,
+		"rowsPerImage": rpi,
 	}
 }
 
