@@ -132,7 +132,11 @@ func (g *RenderPassColorAttachment) toJS() any {
 
 func (g *RenderPipelineDescriptor) toJS() any {
 	result := make(map[string]any)
-	result["layout"] = pointerToJS(g.Layout)
+	if g.Layout == nil {
+		result["layout"] = "auto"
+	} else {
+		result["layout"] = pointerToJS(g.Layout)
+	}
 	result["vertex"] = g.Vertex.toJS()
 	result["primitive"] = g.Primitive.toJS()
 	result["depthStencil"] = pointerToJS(g.DepthStencil)
