@@ -33,3 +33,7 @@ func (g Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, erro
 }
 
 func (g Instance) Release() {} // no-op
+
+func (g Instance) CreateSurface(any) *Surface {
+	return &Surface{}
+}

@@ -22,5 +22,3 @@ func (g Adapter) RequestDevice(descriptor *DeviceDescriptor) (*Device, error) {
 }
 
 func (g Adapter) Release() {} // no-op
-
-type Surface struct{} // no-op
