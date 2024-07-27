@@ -11,6 +11,7 @@ import (
 	"runtime"
 	"strings"
 
+	"github.com/iancoleman/strcase"
 	"golang.org/x/exp/slices"
 	"modernc.org/cc/v3"
 	gofumpt "mvdan.cc/gofumpt/format"
@@ -158,11 +159,12 @@ loop:
 		fmt.Fprintf(w, "switch v {\n")
 		for _, v := range e.Enums {
 			fmt.Fprintf(w, "case %s:\n", v.Enum)
-			fmt.Fprintf(w, "return \"%s\"\n", strings.TrimPrefix(v.Enum, e.Name+"_"))
+			// kebab case is consistent with the enum values in js
+			fmt.Fprintf(w, "return \"%s\"\n", strcase.ToKebab(strings.TrimPrefix(v.Enum, e.Name+"_")))
 		}
 		if e.Name == "ErrorType" {
 			fmt.Fprintf(w, "default:\n")
-			fmt.Fprintf(w, "return \"Unknown\"\n")
+			fmt.Fprintf(w, "return \"unknown\"\n")
 		} else {
 			fmt.Fprintf(w, "default:\n")
 			fmt.Fprintf(w, "return \"\"\n")

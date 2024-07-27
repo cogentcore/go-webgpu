@@ -3,6 +3,7 @@ module github.com/rajveermalviya/go-webgpu/cmd/gen_enums
 go 1.20
 
 require (
+	github.com/iancoleman/strcase v0.3.0
 	golang.org/x/exp v0.0.0-20230711153332-06a737ee72cb
 	modernc.org/cc/v3 v3.41.0
 	mvdan.cc/gofumpt v0.5.0
