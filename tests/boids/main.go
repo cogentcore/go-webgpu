@@ -23,17 +23,17 @@ func init() {
 
 	switch os.Getenv("WGPU_LOG_LEVEL") {
 	case "OFF":
-		wgpu.SetLogLevel(wgpu.LogLevel_Off)
+		wgpu.SetLogLevel(wgpu.LogLevelOff)
 	case "ERROR":
-		wgpu.SetLogLevel(wgpu.LogLevel_Error)
+		wgpu.SetLogLevel(wgpu.LogLevelError)
 	case "WARN":
-		wgpu.SetLogLevel(wgpu.LogLevel_Warn)
+		wgpu.SetLogLevel(wgpu.LogLevelWarn)
 	case "INFO":
-		wgpu.SetLogLevel(wgpu.LogLevel_Info)
+		wgpu.SetLogLevel(wgpu.LogLevelInfo)
 	case "DEBUG":
-		wgpu.SetLogLevel(wgpu.LogLevel_Debug)
+		wgpu.SetLogLevel(wgpu.LogLevelDebug)
 	case "TRACE":
-		wgpu.SetLogLevel(wgpu.LogLevel_Trace)
+		wgpu.SetLogLevel(wgpu.LogLevelTrace)
 	}
 }
 
@@ -98,11 +98,11 @@ func InitState(window *glfw.Window) (s *State, err error) {
 
 	width, height := window.GetSize()
 	s.config = &wgpu.SwapChainDescriptor{
-		Usage:       wgpu.TextureUsage_RenderAttachment,
+		Usage:       wgpu.TextureUsageRenderAttachment,
 		Format:      caps.Formats[0],
 		Width:       uint32(width),
 		Height:      uint32(height),
-		PresentMode: wgpu.PresentMode_Fifo,
+		PresentMode: wgpu.PresentModeFifo,
 		AlphaMode:   caps.AlphaModes[0],
 	}
 
@@ -146,7 +146,7 @@ func InitState(window *glfw.Window) (s *State, err error) {
 	simParamBuffer, err := s.device.CreateBufferInit(&wgpu.BufferInitDescriptor{
 		Label:    "Simulation Param Buffer",
 		Contents: wgpu.ToBytes(simParamData[:]),
-		Usage:    wgpu.BufferUsage_Uniform | wgpu.BufferUsage_CopyDst,
+		Usage:    wgpu.BufferUsageUniform | wgpu.BufferUsageCopyDst,
 	})
 	if err != nil {
 		return s, err
@@ -160,26 +160,26 @@ func InitState(window *glfw.Window) (s *State, err error) {
 			Buffers: []wgpu.VertexBufferLayout{
 				{
 					ArrayStride: 4 * 4,
-					StepMode:    wgpu.VertexStepMode_Instance,
+					StepMode:    wgpu.VertexStepModeInstance,
 					Attributes: []wgpu.VertexAttribute{
 						{
-							Format:         wgpu.VertexFormat_Float32x2,
+							Format:         wgpu.VertexFormatFloat32x2,
 							Offset:         0,
 							ShaderLocation: 0,
 						},
 						{
-							Format:         wgpu.VertexFormat_Float32x2,
-							Offset:         0 + wgpu.VertexFormat_Float32x2.Size(),
+							Format:         wgpu.VertexFormatFloat32x2,
+							Offset:         0 + wgpu.VertexFormatFloat32x2.Size(),
 							ShaderLocation: 1,
 						},
 					},
 				},
 				{
 					ArrayStride: 2 * 4,
-					StepMode:    wgpu.VertexStepMode_Vertex,
+					StepMode:    wgpu.VertexStepModeVertex,
 					Attributes: []wgpu.VertexAttribute{
 						{
-							Format:         wgpu.VertexFormat_Float32x2,
+							Format:         wgpu.VertexFormatFloat32x2,
 							Offset:         0,
 							ShaderLocation: 2,
 						},
@@ -194,13 +194,13 @@ func InitState(window *glfw.Window) (s *State, err error) {
 				{
 					Format:    s.config.Format,
 					Blend:     nil,
-					WriteMask: wgpu.ColorWriteMask_All,
+					WriteMask: wgpu.ColorWriteMaskAll,
 				},
 			},
 		},
 		Primitive: wgpu.PrimitiveState{
-			Topology:  wgpu.PrimitiveTopology_TriangleList,
-			FrontFace: wgpu.FrontFace_CCW,
+			Topology:  wgpu.PrimitiveTopologyTriangleList,
+			FrontFace: wgpu.FrontFaceCCW,
 		},
 		Multisample: wgpu.MultisampleState{
 			Count:                  1,
@@ -227,7 +227,7 @@ func InitState(window *glfw.Window) (s *State, err error) {
 	s.vertexBuffer, err = s.device.CreateBufferInit(&wgpu.BufferInitDescriptor{
 		Label:    "Vertex Buffer",
 		Contents: wgpu.ToBytes(vertexBufferData[:]),
-		Usage:    wgpu.BufferUsage_Vertex | wgpu.BufferUsage_CopyDst,
+		Usage:    wgpu.BufferUsageVertex | wgpu.BufferUsageCopyDst,
 	})
 	if err != nil {
 		return s, err
@@ -247,9 +247,9 @@ func InitState(window *glfw.Window) (s *State, err error) {
 		particleBuffer, err := s.device.CreateBufferInit(&wgpu.BufferInitDescriptor{
 			Label:    "Particle Buffer " + strconv.Itoa(i),
 			Contents: wgpu.ToBytes(initialParticleData[:]),
-			Usage: wgpu.BufferUsage_Vertex |
-				wgpu.BufferUsage_Storage |
-				wgpu.BufferUsage_CopyDst,
+			Usage: wgpu.BufferUsageVertex |
+				wgpu.BufferUsageStorage |
+				wgpu.BufferUsageCopyDst,
 		})
 		if err != nil {
 			return s, err
@@ -335,8 +335,8 @@ func (s *State) Render() error {
 		ColorAttachments: []wgpu.RenderPassColorAttachment{
 			{
 				View:    nextTexture,
-				LoadOp:  wgpu.LoadOp_Load,
-				StoreOp: wgpu.StoreOp_Store,
+				LoadOp:  wgpu.LoadOpLoad,
+				StoreOp: wgpu.StoreOpStore,
 			},
 		},
 	})

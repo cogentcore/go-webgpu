@@ -16,17 +16,17 @@ var forceFallbackAdapter = os.Getenv("WGPU_FORCE_FALLBACK_ADAPTER") == "1"
 func init() {
 	switch os.Getenv("WGPU_LOG_LEVEL") {
 	case "OFF":
-		wgpu.SetLogLevel(wgpu.LogLevel_Off)
+		wgpu.SetLogLevel(wgpu.LogLevelOff)
 	case "ERROR":
-		wgpu.SetLogLevel(wgpu.LogLevel_Error)
+		wgpu.SetLogLevel(wgpu.LogLevelError)
 	case "WARN":
-		wgpu.SetLogLevel(wgpu.LogLevel_Warn)
+		wgpu.SetLogLevel(wgpu.LogLevelWarn)
 	case "INFO":
-		wgpu.SetLogLevel(wgpu.LogLevel_Info)
+		wgpu.SetLogLevel(wgpu.LogLevelInfo)
 	case "DEBUG":
-		wgpu.SetLogLevel(wgpu.LogLevel_Debug)
+		wgpu.SetLogLevel(wgpu.LogLevelDebug)
 	case "TRACE":
-		wgpu.SetLogLevel(wgpu.LogLevel_Trace)
+		wgpu.SetLogLevel(wgpu.LogLevelTrace)
 	}
 }
 
@@ -73,7 +73,7 @@ func main() {
 
 	stagingBuffer, err := device.CreateBuffer(&wgpu.BufferDescriptor{
 		Size:             size,
-		Usage:            wgpu.BufferUsage_MapRead | wgpu.BufferUsage_CopyDst,
+		Usage:            wgpu.BufferUsageMapRead | wgpu.BufferUsageCopyDst,
 		MappedAtCreation: false,
 	})
 	if err != nil {
@@ -84,9 +84,9 @@ func main() {
 	storageBuffer, err := device.CreateBufferInit(&wgpu.BufferInitDescriptor{
 		Label:    "Storage Buffer",
 		Contents: wgpu.ToBytes(numbers),
-		Usage: wgpu.BufferUsage_Storage |
-			wgpu.BufferUsage_CopyDst |
-			wgpu.BufferUsage_CopySrc,
+		Usage: wgpu.BufferUsageStorage |
+			wgpu.BufferUsageCopyDst |
+			wgpu.BufferUsageCopySrc,
 	})
 	if err != nil {
 		panic(err)
@@ -143,7 +143,7 @@ func main() {
 	queue.Submit(cmdBuffer)
 
 	var status wgpu.BufferMapAsyncStatus
-	err = stagingBuffer.MapAsync(wgpu.MapMode_Read, 0, size, func(s wgpu.BufferMapAsyncStatus) {
+	err = stagingBuffer.MapAsync(wgpu.MapModeRead, 0, size, func(s wgpu.BufferMapAsyncStatus) {
 		status = s
 	})
 	if err != nil {
@@ -153,7 +153,7 @@ func main() {
 
 	device.Poll(true, nil)
 
-	if status != wgpu.BufferMapAsyncStatus_Success {
+	if status != wgpu.BufferMapAsyncStatusSuccess {
 		panic(status)
 	}
 

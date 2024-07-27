@@ -21,17 +21,17 @@ func init() {
 
 	switch os.Getenv("WGPU_LOG_LEVEL") {
 	case "OFF":
-		wgpu.SetLogLevel(wgpu.LogLevel_Off)
+		wgpu.SetLogLevel(wgpu.LogLevelOff)
 	case "ERROR":
-		wgpu.SetLogLevel(wgpu.LogLevel_Error)
+		wgpu.SetLogLevel(wgpu.LogLevelError)
 	case "WARN":
-		wgpu.SetLogLevel(wgpu.LogLevel_Warn)
+		wgpu.SetLogLevel(wgpu.LogLevelWarn)
 	case "INFO":
-		wgpu.SetLogLevel(wgpu.LogLevel_Info)
+		wgpu.SetLogLevel(wgpu.LogLevelInfo)
 	case "DEBUG":
-		wgpu.SetLogLevel(wgpu.LogLevel_Debug)
+		wgpu.SetLogLevel(wgpu.LogLevelDebug)
 	case "TRACE":
-		wgpu.SetLogLevel(wgpu.LogLevel_Trace)
+		wgpu.SetLogLevel(wgpu.LogLevelTrace)
 	}
 }
 
@@ -89,11 +89,11 @@ func InitState(window *glfw.Window) (s *State, err error) {
 
 	width, height := window.GetSize()
 	s.config = &wgpu.SwapChainDescriptor{
-		Usage:       wgpu.TextureUsage_RenderAttachment,
+		Usage:       wgpu.TextureUsageRenderAttachment,
 		Format:      caps.Formats[0],
 		Width:       uint32(width),
 		Height:      uint32(height),
-		PresentMode: wgpu.PresentMode_Fifo,
+		PresentMode: wgpu.PresentModeFifo,
 		AlphaMode:   caps.AlphaModes[0],
 	}
 
@@ -109,10 +109,10 @@ func InitState(window *glfw.Window) (s *State, err error) {
 			EntryPoint: "vs_main",
 		},
 		Primitive: wgpu.PrimitiveState{
-			Topology:         wgpu.PrimitiveTopology_TriangleList,
-			StripIndexFormat: wgpu.IndexFormat_Undefined,
-			FrontFace:        wgpu.FrontFace_CCW,
-			CullMode:         wgpu.CullMode_None,
+			Topology:         wgpu.PrimitiveTopologyTriangleList,
+			StripIndexFormat: wgpu.IndexFormatUndefined,
+			FrontFace:        wgpu.FrontFaceCCW,
+			CullMode:         wgpu.CullModeNone,
 		},
 		Multisample: wgpu.MultisampleState{
 			Count:                  1,
@@ -125,8 +125,8 @@ func InitState(window *glfw.Window) (s *State, err error) {
 			Targets: []wgpu.ColorTargetState{
 				{
 					Format:    s.config.Format,
-					Blend:     &wgpu.BlendState_Replace,
-					WriteMask: wgpu.ColorWriteMask_All,
+					Blend:     &wgpu.BlendStateReplace,
+					WriteMask: wgpu.ColorWriteMaskAll,
 				},
 			},
 		},
@@ -173,9 +173,9 @@ func (s *State) Render() error {
 		ColorAttachments: []wgpu.RenderPassColorAttachment{
 			{
 				View:       nextTexture,
-				LoadOp:     wgpu.LoadOp_Clear,
-				StoreOp:    wgpu.StoreOp_Store,
-				ClearValue: wgpu.Color_Green,
+				LoadOp:     wgpu.LoadOpClear,
+				StoreOp:    wgpu.StoreOpStore,
+				ClearValue: wgpu.ColorGreen,
 			},
 		},
 	})

@@ -5,6 +5,6 @@ func (p *Texture) AsImageCopy() *ImageCopyTexture {
 		Texture:  p,
 		MipLevel: 0,
 		Origin:   Origin3D{},
-		Aspect:   TextureAspect_All,
+		Aspect:   TextureAspectAll,
 	}
 }

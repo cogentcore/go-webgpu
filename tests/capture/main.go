@@ -14,17 +14,17 @@ var forceFallbackAdapter = os.Getenv("WGPU_FORCE_FALLBACK_ADAPTER") == "1"
 func init() {
 	switch os.Getenv("WGPU_LOG_LEVEL") {
 	case "OFF":
-		wgpu.SetLogLevel(wgpu.LogLevel_Off)
+		wgpu.SetLogLevel(wgpu.LogLevelOff)
 	case "ERROR":
-		wgpu.SetLogLevel(wgpu.LogLevel_Error)
+		wgpu.SetLogLevel(wgpu.LogLevelError)
 	case "WARN":
-		wgpu.SetLogLevel(wgpu.LogLevel_Warn)
+		wgpu.SetLogLevel(wgpu.LogLevelWarn)
 	case "INFO":
-		wgpu.SetLogLevel(wgpu.LogLevel_Info)
+		wgpu.SetLogLevel(wgpu.LogLevelInfo)
 	case "DEBUG":
-		wgpu.SetLogLevel(wgpu.LogLevel_Debug)
+		wgpu.SetLogLevel(wgpu.LogLevelDebug)
 	case "TRACE":
-		wgpu.SetLogLevel(wgpu.LogLevel_Trace)
+		wgpu.SetLogLevel(wgpu.LogLevelTrace)
 	}
 }
 
@@ -78,7 +78,7 @@ func main() {
 	// The output buffer lets us retrieve the data as an array
 	outputBuffer, err := device.CreateBuffer(&wgpu.BufferDescriptor{
 		Size:  bufferSize,
-		Usage: wgpu.BufferUsage_MapRead | wgpu.BufferUsage_CopyDst,
+		Usage: wgpu.BufferUsageMapRead | wgpu.BufferUsageCopyDst,
 	})
 	if err != nil {
 		panic(err)
@@ -96,9 +96,9 @@ func main() {
 		Size:          textureExtent,
 		MipLevelCount: 1,
 		SampleCount:   1,
-		Dimension:     wgpu.TextureDimension_2D,
-		Format:        wgpu.TextureFormat_RGBA8UnormSrgb,
-		Usage:         wgpu.TextureUsage_RenderAttachment | wgpu.TextureUsage_CopySrc,
+		Dimension:     wgpu.TextureDimension2D,
+		Format:        wgpu.TextureFormatRGBA8UnormSrgb,
+		Usage:         wgpu.TextureUsageRenderAttachment | wgpu.TextureUsageCopySrc,
 	})
 	if err != nil {
 		panic(err)
@@ -121,9 +121,9 @@ func main() {
 	renderPass := encoder.BeginRenderPass(&wgpu.RenderPassDescriptor{
 		ColorAttachments: []wgpu.RenderPassColorAttachment{{
 			View:       textureView,
-			LoadOp:     wgpu.LoadOp_Clear,
-			StoreOp:    wgpu.StoreOp_Store,
-			ClearValue: wgpu.Color_Red,
+			LoadOp:     wgpu.LoadOpClear,
+			StoreOp:    wgpu.StoreOpStore,
+			ClearValue: wgpu.ColorRed,
 		}},
 	})
 	defer renderPass.Release()
@@ -151,8 +151,8 @@ func main() {
 
 	queue.Submit(cmdBuffer)
 
-	outputBuffer.MapAsync(wgpu.MapMode_Read, 0, bufferSize, func(status wgpu.BufferMapAsyncStatus) {
-		if status != wgpu.BufferMapAsyncStatus_Success {
+	outputBuffer.MapAsync(wgpu.MapModeRead, 0, bufferSize, func(status wgpu.BufferMapAsyncStatus) {
+		if status != wgpu.BufferMapAsyncStatusSuccess {
 			panic("failed to map buffer")
 		}
 	})
