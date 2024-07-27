@@ -38,6 +38,13 @@ func (g CommandEncoder) BeginComputePass(descriptor *ComputePassDescriptor) *Com
 	}
 }
 
+// CopyBufferToTexture as described:
+// https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-copybuffertotexture
+func (g CommandEncoder) CopyBufferToTexture(source *ImageCopyBuffer, destination *ImageCopyTexture, copySize *Extent3D) (err error) {
+	g.jsValue.Call("copyBufferToTexture", source.ToJS(), destination.ToJS(), copySize.ToJS())
+	return nil
+}
+
 // Finish as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-finish
 func (g CommandEncoder) Finish(descriptor *CommandBufferDescriptor) (*CommandBuffer, error) {

@@ -119,7 +119,7 @@ func (g *TextureDescriptor) ToJS() js.Value {
 	result["label"] = g.Label
 	result["usage"] = g.Usage.String()
 	result["dimension"] = g.Dimension.String()
-	result["size"] = []any{g.Size.Width, g.Size.Height, g.Size.DepthOrArrayLayers}
+	result["size"] = g.Size.ToJS()
 	result["format"] = g.Format.String()
 	result["mipLevelCount"] = g.MipLevelCount
 	result["sampleCount"] = g.SampleCount

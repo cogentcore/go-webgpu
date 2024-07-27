@@ -171,3 +171,8 @@ type WrappedSubmissionIndex struct {
 }
 
 type SubmissionIndex uint64
+
+type ImageCopyBuffer struct {
+	Layout TextureDataLayout
+	Buffer *Buffer
+}

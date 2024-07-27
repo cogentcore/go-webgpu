@@ -251,11 +251,6 @@ func (p *CommandEncoder) CopyBufferToBuffer(source *Buffer, sourceOffset uint64,
 	return
 }
 
-type ImageCopyBuffer struct {
-	Layout TextureDataLayout
-	Buffer *Buffer
-}
-
 func (p *CommandEncoder) CopyBufferToTexture(source *ImageCopyBuffer, destination *ImageCopyTexture, copySize *Extent3D) (err error) {
 	var src C.WGPUImageCopyBuffer
 	if source != nil {
