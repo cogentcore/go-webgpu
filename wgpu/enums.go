@@ -70,9 +70,9 @@ func (v BackendType) String() string {
 	case BackendTypeWebGPU:
 		return "web-gpu"
 	case BackendTypeD3D11:
-		return "d3-d11"
+		return "d3d11"
 	case BackendTypeD3D12:
-		return "d3-d12"
+		return "d3d12"
 	case BackendTypeMetal:
 		return "metal"
 	case BackendTypeVulkan:
@@ -623,7 +623,7 @@ func (v FeatureName) String() string {
 	case FeatureNameDepthClipControl:
 		return "depth-clip-control"
 	case FeatureNameDepth32FloatStencil8:
-		return "depth-32-float-stencil-8"
+		return "depth32float-stencil8"
 	case FeatureNameTimestampQuery:
 		return "timestamp-query"
 	case FeatureNamePipelineStatisticsQuery:
@@ -631,19 +631,19 @@ func (v FeatureName) String() string {
 	case FeatureNameTextureCompressionBC:
 		return "texture-compression-bc"
 	case FeatureNameTextureCompressionETC2:
-		return "texture-compression-etc-2"
+		return "texture-compression-etc2"
 	case FeatureNameTextureCompressionASTC:
 		return "texture-compression-astc"
 	case FeatureNameIndirectFirstInstance:
 		return "indirect-first-instance"
 	case FeatureNameShaderF16:
-		return "shader-f-16"
+		return "shader-f16"
 	case FeatureNameRG11B10UfloatRenderable:
-		return "rg-11-b-10-ufloat-renderable"
+		return "rg11b10ufloat-renderable"
 	case FeatureNameBGRA8UnormStorage:
-		return "bgra-8-unorm-storage"
+		return "bgra8unorm-storage"
 	case FeatureNameFloat32Filterable:
-		return "float-32-filterable"
+		return "float32filterable"
 	case NativeFeaturePushConstants:
 		return "native-feature-push-constants"
 	case NativeFeatureTextureAdapterSpecificFormatFeatures:
@@ -708,9 +708,9 @@ func (v IndexFormat) String() string {
 	case IndexFormatUndefined:
 		return "undefined"
 	case IndexFormatUint16:
-		return "uint-16"
+		return "uint16"
 	case IndexFormatUint32:
-		return "uint-32"
+		return "uint32"
 	default:
 		return ""
 	}
@@ -739,9 +739,9 @@ func (v InstanceBackend) String() string {
 	case InstanceBackendMetal:
 		return "metal"
 	case InstanceBackendDX12:
-		return "dx-12"
+		return "dx12"
 	case InstanceBackendDX11:
-		return "dx-11"
+		return "dx11"
 	case InstanceBackendGL:
 		return "gl"
 	case InstanceBackendSecondary:
@@ -1319,193 +1319,193 @@ func (v TextureFormat) String() string {
 	case TextureFormatUndefined:
 		return "undefined"
 	case TextureFormatR8Unorm:
-		return "r-8-unorm"
+		return "r8unorm"
 	case TextureFormatR8Snorm:
-		return "r-8-snorm"
+		return "r8snorm"
 	case TextureFormatR8Uint:
-		return "r-8-uint"
+		return "r8uint"
 	case TextureFormatR8Sint:
-		return "r-8-sint"
+		return "r8sint"
 	case TextureFormatR16Uint:
-		return "r-16-uint"
+		return "r16uint"
 	case TextureFormatR16Sint:
-		return "r-16-sint"
+		return "r16sint"
 	case TextureFormatR16Float:
-		return "r-16-float"
+		return "r16float"
 	case TextureFormatRG8Unorm:
-		return "rg-8-unorm"
+		return "rg8unorm"
 	case TextureFormatRG8Snorm:
-		return "rg-8-snorm"
+		return "rg8snorm"
 	case TextureFormatRG8Uint:
-		return "rg-8-uint"
+		return "rg8uint"
 	case TextureFormatRG8Sint:
-		return "rg-8-sint"
+		return "rg8sint"
 	case TextureFormatR32Float:
-		return "r-32-float"
+		return "r32float"
 	case TextureFormatR32Uint:
-		return "r-32-uint"
+		return "r32uint"
 	case TextureFormatR32Sint:
-		return "r-32-sint"
+		return "r32sint"
 	case TextureFormatRG16Uint:
-		return "rg-16-uint"
+		return "rg16uint"
 	case TextureFormatRG16Sint:
-		return "rg-16-sint"
+		return "rg16sint"
 	case TextureFormatRG16Float:
-		return "rg-16-float"
+		return "rg16float"
 	case TextureFormatRGBA8Unorm:
-		return "rgba-8-unorm"
+		return "rgba8unorm"
 	case TextureFormatRGBA8UnormSrgb:
-		return "rgba-8-unorm-srgb"
+		return "rgba8unorm-srgb"
 	case TextureFormatRGBA8Snorm:
-		return "rgba-8-snorm"
+		return "rgba8snorm"
 	case TextureFormatRGBA8Uint:
-		return "rgba-8-uint"
+		return "rgba8uint"
 	case TextureFormatRGBA8Sint:
-		return "rgba-8-sint"
+		return "rgba8sint"
 	case TextureFormatBGRA8Unorm:
-		return "bgra-8-unorm"
+		return "bgra8unorm"
 	case TextureFormatBGRA8UnormSrgb:
-		return "bgra-8-unorm-srgb"
+		return "bgra8unorm-srgb"
 	case TextureFormatRGB10A2Unorm:
-		return "rgb-10-a-2-unorm"
+		return "rgb10a2unorm"
 	case TextureFormatRG11B10Ufloat:
-		return "rg-11-b-10-ufloat"
+		return "rg11b10ufloat"
 	case TextureFormatRGB9E5Ufloat:
-		return "rgb-9-e-5-ufloat"
+		return "rgb9e5ufloat"
 	case TextureFormatRG32Float:
-		return "rg-32-float"
+		return "rg32float"
 	case TextureFormatRG32Uint:
-		return "rg-32-uint"
+		return "rg32uint"
 	case TextureFormatRG32Sint:
-		return "rg-32-sint"
+		return "rg32sint"
 	case TextureFormatRGBA16Uint:
-		return "rgba-16-uint"
+		return "rgba16uint"
 	case TextureFormatRGBA16Sint:
-		return "rgba-16-sint"
+		return "rgba16sint"
 	case TextureFormatRGBA16Float:
-		return "rgba-16-float"
+		return "rgba16float"
 	case TextureFormatRGBA32Float:
-		return "rgba-32-float"
+		return "rgba32float"
 	case TextureFormatRGBA32Uint:
-		return "rgba-32-uint"
+		return "rgba32uint"
 	case TextureFormatRGBA32Sint:
-		return "rgba-32-sint"
+		return "rgba32sint"
 	case TextureFormatStencil8:
-		return "stencil-8"
+		return "stencil8"
 	case TextureFormatDepth16Unorm:
-		return "depth-16-unorm"
+		return "depth16unorm"
 	case TextureFormatDepth24Plus:
-		return "depth-24-plus"
+		return "depth24plus"
 	case TextureFormatDepth24PlusStencil8:
-		return "depth-24-plus-stencil-8"
+		return "depth24plus-stencil8"
 	case TextureFormatDepth32Float:
-		return "depth-32-float"
+		return "depth32float"
 	case TextureFormatDepth32FloatStencil8:
-		return "depth-32-float-stencil-8"
+		return "depth32float-stencil8"
 	case TextureFormatBC1RGBAUnorm:
-		return "bc-1-rgba-unorm"
+		return "bc1rgba-unorm"
 	case TextureFormatBC1RGBAUnormSrgb:
-		return "bc-1-rgba-unorm-srgb"
+		return "bc1rgba-unorm-srgb"
 	case TextureFormatBC2RGBAUnorm:
-		return "bc-2-rgba-unorm"
+		return "bc2rgba-unorm"
 	case TextureFormatBC2RGBAUnormSrgb:
-		return "bc-2-rgba-unorm-srgb"
+		return "bc2rgba-unorm-srgb"
 	case TextureFormatBC3RGBAUnorm:
-		return "bc-3-rgba-unorm"
+		return "bc3rgba-unorm"
 	case TextureFormatBC3RGBAUnormSrgb:
-		return "bc-3-rgba-unorm-srgb"
+		return "bc3rgba-unorm-srgb"
 	case TextureFormatBC4RUnorm:
-		return "bc-4-r-unorm"
+		return "bc4r-unorm"
 	case TextureFormatBC4RSnorm:
-		return "bc-4-r-snorm"
+		return "bc4r-snorm"
 	case TextureFormatBC5RGUnorm:
-		return "bc-5-rg-unorm"
+		return "bc5rg-unorm"
 	case TextureFormatBC5RGSnorm:
-		return "bc-5-rg-snorm"
+		return "bc5rg-snorm"
 	case TextureFormatBC6HRGBUfloat:
-		return "bc-6-hrgb-ufloat"
+		return "bc6hrgb-ufloat"
 	case TextureFormatBC6HRGBFloat:
-		return "bc-6-hrgb-float"
+		return "bc6hrgb-float"
 	case TextureFormatBC7RGBAUnorm:
-		return "bc-7-rgba-unorm"
+		return "bc7rgba-unorm"
 	case TextureFormatBC7RGBAUnormSrgb:
-		return "bc-7-rgba-unorm-srgb"
+		return "bc7rgba-unorm-srgb"
 	case TextureFormatETC2RGB8Unorm:
-		return "etc-2-rgb-8-unorm"
+		return "etc2rgb8unorm"
 	case TextureFormatETC2RGB8UnormSrgb:
-		return "etc-2-rgb-8-unorm-srgb"
+		return "etc2rgb8unorm-srgb"
 	case TextureFormatETC2RGB8A1Unorm:
-		return "etc-2-rgb-8-a-1-unorm"
+		return "etc2rgb8a1unorm"
 	case TextureFormatETC2RGB8A1UnormSrgb:
-		return "etc-2-rgb-8-a-1-unorm-srgb"
+		return "etc2rgb8a1unorm-srgb"
 	case TextureFormatETC2RGBA8Unorm:
-		return "etc-2-rgba-8-unorm"
+		return "etc2rgba8unorm"
 	case TextureFormatETC2RGBA8UnormSrgb:
-		return "etc-2-rgba-8-unorm-srgb"
+		return "etc2rgba8unorm-srgb"
 	case TextureFormatEACR11Unorm:
-		return "eacr-11-unorm"
+		return "eacr11unorm"
 	case TextureFormatEACR11Snorm:
-		return "eacr-11-snorm"
+		return "eacr11snorm"
 	case TextureFormatEACRG11Unorm:
-		return "eacrg-11-unorm"
+		return "eacrg11unorm"
 	case TextureFormatEACRG11Snorm:
-		return "eacrg-11-snorm"
+		return "eacrg11snorm"
 	case TextureFormatASTC4x4Unorm:
-		return "astc-4-x-4-unorm"
+		return "astc4x4unorm"
 	case TextureFormatASTC4x4UnormSrgb:
-		return "astc-4-x-4-unorm-srgb"
+		return "astc4x4unorm-srgb"
 	case TextureFormatASTC5x4Unorm:
-		return "astc-5-x-4-unorm"
+		return "astc5x4unorm"
 	case TextureFormatASTC5x4UnormSrgb:
-		return "astc-5-x-4-unorm-srgb"
+		return "astc5x4unorm-srgb"
 	case TextureFormatASTC5x5Unorm:
-		return "astc-5-x-5-unorm"
+		return "astc5x5unorm"
 	case TextureFormatASTC5x5UnormSrgb:
-		return "astc-5-x-5-unorm-srgb"
+		return "astc5x5unorm-srgb"
 	case TextureFormatASTC6x5Unorm:
-		return "astc-6-x-5-unorm"
+		return "astc6x5unorm"
 	case TextureFormatASTC6x5UnormSrgb:
-		return "astc-6-x-5-unorm-srgb"
+		return "astc6x5unorm-srgb"
 	case TextureFormatASTC6x6Unorm:
-		return "astc-6-x-6-unorm"
+		return "astc6x6unorm"
 	case TextureFormatASTC6x6UnormSrgb:
-		return "astc-6-x-6-unorm-srgb"
+		return "astc6x6unorm-srgb"
 	case TextureFormatASTC8x5Unorm:
-		return "astc-8-x-5-unorm"
+		return "astc8x5unorm"
 	case TextureFormatASTC8x5UnormSrgb:
-		return "astc-8-x-5-unorm-srgb"
+		return "astc8x5unorm-srgb"
 	case TextureFormatASTC8x6Unorm:
-		return "astc-8-x-6-unorm"
+		return "astc8x6unorm"
 	case TextureFormatASTC8x6UnormSrgb:
-		return "astc-8-x-6-unorm-srgb"
+		return "astc8x6unorm-srgb"
 	case TextureFormatASTC8x8Unorm:
-		return "astc-8-x-8-unorm"
+		return "astc8x8unorm"
 	case TextureFormatASTC8x8UnormSrgb:
-		return "astc-8-x-8-unorm-srgb"
+		return "astc8x8unorm-srgb"
 	case TextureFormatASTC10x5Unorm:
-		return "astc-10-x-5-unorm"
+		return "astc10x5unorm"
 	case TextureFormatASTC10x5UnormSrgb:
-		return "astc-10-x-5-unorm-srgb"
+		return "astc10x5unorm-srgb"
 	case TextureFormatASTC10x6Unorm:
-		return "astc-10-x-6-unorm"
+		return "astc10x6unorm"
 	case TextureFormatASTC10x6UnormSrgb:
-		return "astc-10-x-6-unorm-srgb"
+		return "astc10x6unorm-srgb"
 	case TextureFormatASTC10x8Unorm:
-		return "astc-10-x-8-unorm"
+		return "astc10x8unorm"
 	case TextureFormatASTC10x8UnormSrgb:
-		return "astc-10-x-8-unorm-srgb"
+		return "astc10x8unorm-srgb"
 	case TextureFormatASTC10x10Unorm:
-		return "astc-10-x-10-unorm"
+		return "astc10x10unorm"
 	case TextureFormatASTC10x10UnormSrgb:
-		return "astc-10-x-10-unorm-srgb"
+		return "astc10x10unorm-srgb"
 	case TextureFormatASTC12x10Unorm:
-		return "astc-12-x-10-unorm"
+		return "astc12x10unorm"
 	case TextureFormatASTC12x10UnormSrgb:
-		return "astc-12-x-10-unorm-srgb"
+		return "astc12x10unorm-srgb"
 	case TextureFormatASTC12x12Unorm:
-		return "astc-12-x-12-unorm"
+		return "astc12x12unorm"
 	case TextureFormatASTC12x12UnormSrgb:
-		return "astc-12-x-12-unorm-srgb"
+		return "astc12x12unorm-srgb"
 	default:
 		return ""
 	}
@@ -1645,65 +1645,65 @@ func (v VertexFormat) String() string {
 	case VertexFormatUndefined:
 		return "undefined"
 	case VertexFormatUint8x2:
-		return "uint-8-x-2"
+		return "uint8x2"
 	case VertexFormatUint8x4:
-		return "uint-8-x-4"
+		return "uint8x4"
 	case VertexFormatSint8x2:
-		return "sint-8-x-2"
+		return "sint8x2"
 	case VertexFormatSint8x4:
-		return "sint-8-x-4"
+		return "sint8x4"
 	case VertexFormatUnorm8x2:
-		return "unorm-8-x-2"
+		return "unorm8x2"
 	case VertexFormatUnorm8x4:
-		return "unorm-8-x-4"
+		return "unorm8x4"
 	case VertexFormatSnorm8x2:
-		return "snorm-8-x-2"
+		return "snorm8x2"
 	case VertexFormatSnorm8x4:
-		return "snorm-8-x-4"
+		return "snorm8x4"
 	case VertexFormatUint16x2:
-		return "uint-16-x-2"
+		return "uint16x2"
 	case VertexFormatUint16x4:
-		return "uint-16-x-4"
+		return "uint16x4"
 	case VertexFormatSint16x2:
-		return "sint-16-x-2"
+		return "sint16x2"
 	case VertexFormatSint16x4:
-		return "sint-16-x-4"
+		return "sint16x4"
 	case VertexFormatUnorm16x2:
-		return "unorm-16-x-2"
+		return "unorm16x2"
 	case VertexFormatUnorm16x4:
-		return "unorm-16-x-4"
+		return "unorm16x4"
 	case VertexFormatSnorm16x2:
-		return "snorm-16-x-2"
+		return "snorm16x2"
 	case VertexFormatSnorm16x4:
-		return "snorm-16-x-4"
+		return "snorm16x4"
 	case VertexFormatFloat16x2:
-		return "float-16-x-2"
+		return "float16x2"
 	case VertexFormatFloat16x4:
-		return "float-16-x-4"
+		return "float16x4"
 	case VertexFormatFloat32:
-		return "float-32"
+		return "float32"
 	case VertexFormatFloat32x2:
-		return "float-32-x-2"
+		return "float32x2"
 	case VertexFormatFloat32x3:
-		return "float-32-x-3"
+		return "float32x3"
 	case VertexFormatFloat32x4:
-		return "float-32-x-4"
+		return "float32x4"
 	case VertexFormatUint32:
-		return "uint-32"
+		return "uint32"
 	case VertexFormatUint32x2:
-		return "uint-32-x-2"
+		return "uint32x2"
 	case VertexFormatUint32x3:
-		return "uint-32-x-3"
+		return "uint32x3"
 	case VertexFormatUint32x4:
-		return "uint-32-x-4"
+		return "uint32x4"
 	case VertexFormatSint32:
-		return "sint-32"
+		return "sint32"
 	case VertexFormatSint32x2:
-		return "sint-32-x-2"
+		return "sint32x2"
 	case VertexFormatSint32x3:
-		return "sint-32-x-3"
+		return "sint32x3"
 	case VertexFormatSint32x4:
-		return "sint-32-x-4"
+		return "sint32x4"
 	default:
 		return ""
 	}
