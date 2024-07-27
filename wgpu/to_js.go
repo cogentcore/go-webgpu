@@ -61,7 +61,10 @@ func (g *SwapChainDescriptor) toJS() any {
 	result := make(map[string]any)
 	result["usage"] = uint32(g.Usage)
 	result["format"] = enumToJS(g.Format)
-	result["alphaMode"] = enumToJS(g.AlphaMode)
+	// only these two are supported:
+	if g.AlphaMode == CompositeAlphaModeOpaque || g.AlphaMode == CompositeAlphaModePreMultiplied {
+		result["alphaMode"] = enumToJS(g.AlphaMode)
+	}
 	result["viewFormats"] = mapSlice(g.ViewFormats, func(f TextureFormat) any {
 		return enumToJS(f)
 	})
