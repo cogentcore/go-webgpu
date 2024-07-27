@@ -1,6 +1,24 @@
 package wgpu
 
-// common types
+import "strconv"
+
+// This file contains common types and constants
+
+const (
+	ArrayLayerCountUndefined        = 0xffffffff
+	CopyStrideUndefined             = 0xffffffff
+	LimitU32Undefined        uint32 = 0xffffffff
+	LimitU64Undefined        uint64 = 0xffffffffffffffff
+	MipLevelCountUndefined          = 0xffffffff
+	WholeMapSize                    = ^uint(0)
+	WholeSize                       = 0xffffffffffffffff
+)
+
+type Version uint32
+
+func (v Version) String() string {
+	return "0x" + strconv.FormatUint(uint64(v), 8)
+}
 
 type Limits struct {
 	MaxTextureDimension1D                     uint32

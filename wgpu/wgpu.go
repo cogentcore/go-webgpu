@@ -75,25 +75,6 @@ void logCallback_cgo(WGPULogLevel level, char const *msg) {
 
 */
 import "C"
-import (
-	"strconv"
-)
-
-const (
-	ArrayLayerCountUndefined        = 0xffffffff
-	CopyStrideUndefined             = 0xffffffff
-	LimitU32Undefined        uint32 = 0xffffffff
-	LimitU64Undefined        uint64 = 0xffffffffffffffff
-	MipLevelCountUndefined          = 0xffffffff
-	WholeMapSize                    = ^uint(0)
-	WholeSize                       = 0xffffffffffffffff
-)
-
-type Version uint32
-
-func (v Version) String() string {
-	return "0x" + strconv.FormatUint(uint64(v), 8)
-}
 
 func init() {
 	C.wgpuSetLogCallback(C.WGPULogCallback(C.logCallback_cgo), nil)
