@@ -22,11 +22,18 @@ func CreateInstance(descriptor *InstanceDescriptor) *Instance {
 }
 
 func (g Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, error) {
-	adapter := g.jsValue.Call("requestAdapter", options.ToJS())
+	promise := g.jsValue.Call("requestAdapter", options.ToJS())
+	then := make(chan js.Value)
+	promise.Call("then", js.FuncOf(func(this js.Value, args []js.Value) any {
+		then <- args[0]
+		return nil
+	}))
+	adapter := <-then
 	if !adapter.Truthy() {
+		log.Println("No WebGPU adapter available")
 		return nil
 	}
-	return &Adapter{jsValue: adapter}
+	return &Adapter{jsValue: then}
 }
 
 // no-op
