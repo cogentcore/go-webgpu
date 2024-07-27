@@ -5,21 +5,21 @@ package wgpu
 type AdapterType uint32
 
 const (
-	AdapterType_DiscreteGPU   AdapterType = 0x00000000
-	AdapterType_IntegratedGPU AdapterType = 0x00000001
-	AdapterType_CPU           AdapterType = 0x00000002
-	AdapterType_Unknown       AdapterType = 0x00000003
+	AdapterTypeDiscreteGPU   AdapterType = 0x00000000
+	AdapterTypeIntegratedGPU AdapterType = 0x00000001
+	AdapterTypeCPU           AdapterType = 0x00000002
+	AdapterTypeUnknown       AdapterType = 0x00000003
 )
 
 func (v AdapterType) String() string {
 	switch v {
-	case AdapterType_DiscreteGPU:
+	case AdapterTypeDiscreteGPU:
 		return "discrete-gpu"
-	case AdapterType_IntegratedGPU:
+	case AdapterTypeIntegratedGPU:
 		return "integrated-gpu"
-	case AdapterType_CPU:
+	case AdapterTypeCPU:
 		return "cpu"
-	case AdapterType_Unknown:
+	case AdapterTypeUnknown:
 		return "unknown"
 	default:
 		return ""
@@ -29,18 +29,18 @@ func (v AdapterType) String() string {
 type AddressMode uint32
 
 const (
-	AddressMode_Repeat       AddressMode = 0x00000000
-	AddressMode_MirrorRepeat AddressMode = 0x00000001
-	AddressMode_ClampToEdge  AddressMode = 0x00000002
+	AddressModeRepeat       AddressMode = 0x00000000
+	AddressModeMirrorRepeat AddressMode = 0x00000001
+	AddressModeClampToEdge  AddressMode = 0x00000002
 )
 
 func (v AddressMode) String() string {
 	switch v {
-	case AddressMode_Repeat:
+	case AddressModeRepeat:
 		return "repeat"
-	case AddressMode_MirrorRepeat:
+	case AddressModeMirrorRepeat:
 		return "mirror-repeat"
-	case AddressMode_ClampToEdge:
+	case AddressModeClampToEdge:
 		return "clamp-to-edge"
 	default:
 		return ""
@@ -50,36 +50,36 @@ func (v AddressMode) String() string {
 type BackendType uint32
 
 const (
-	BackendType_Undefined BackendType = 0x00000000
-	BackendType_Null      BackendType = 0x00000001
-	BackendType_WebGPU    BackendType = 0x00000002
-	BackendType_D3D11     BackendType = 0x00000003
-	BackendType_D3D12     BackendType = 0x00000004
-	BackendType_Metal     BackendType = 0x00000005
-	BackendType_Vulkan    BackendType = 0x00000006
-	BackendType_OpenGL    BackendType = 0x00000007
-	BackendType_OpenGLES  BackendType = 0x00000008
+	BackendTypeUndefined BackendType = 0x00000000
+	BackendTypeNull      BackendType = 0x00000001
+	BackendTypeWebGPU    BackendType = 0x00000002
+	BackendTypeD3D11     BackendType = 0x00000003
+	BackendTypeD3D12     BackendType = 0x00000004
+	BackendTypeMetal     BackendType = 0x00000005
+	BackendTypeVulkan    BackendType = 0x00000006
+	BackendTypeOpenGL    BackendType = 0x00000007
+	BackendTypeOpenGLES  BackendType = 0x00000008
 )
 
 func (v BackendType) String() string {
 	switch v {
-	case BackendType_Undefined:
+	case BackendTypeUndefined:
 		return "undefined"
-	case BackendType_Null:
+	case BackendTypeNull:
 		return "null"
-	case BackendType_WebGPU:
+	case BackendTypeWebGPU:
 		return "web-gpu"
-	case BackendType_D3D11:
+	case BackendTypeD3D11:
 		return "d-3-d-11"
-	case BackendType_D3D12:
+	case BackendTypeD3D12:
 		return "d-3-d-12"
-	case BackendType_Metal:
+	case BackendTypeMetal:
 		return "metal"
-	case BackendType_Vulkan:
+	case BackendTypeVulkan:
 		return "vulkan"
-	case BackendType_OpenGL:
+	case BackendTypeOpenGL:
 		return "open-gl"
-	case BackendType_OpenGLES:
+	case BackendTypeOpenGLES:
 		return "open-gles"
 	default:
 		return ""
@@ -89,48 +89,48 @@ func (v BackendType) String() string {
 type BlendFactor uint32
 
 const (
-	BlendFactor_Zero              BlendFactor = 0x00000000
-	BlendFactor_One               BlendFactor = 0x00000001
-	BlendFactor_Src               BlendFactor = 0x00000002
-	BlendFactor_OneMinusSrc       BlendFactor = 0x00000003
-	BlendFactor_SrcAlpha          BlendFactor = 0x00000004
-	BlendFactor_OneMinusSrcAlpha  BlendFactor = 0x00000005
-	BlendFactor_Dst               BlendFactor = 0x00000006
-	BlendFactor_OneMinusDst       BlendFactor = 0x00000007
-	BlendFactor_DstAlpha          BlendFactor = 0x00000008
-	BlendFactor_OneMinusDstAlpha  BlendFactor = 0x00000009
-	BlendFactor_SrcAlphaSaturated BlendFactor = 0x0000000A
-	BlendFactor_Constant          BlendFactor = 0x0000000B
-	BlendFactor_OneMinusConstant  BlendFactor = 0x0000000C
+	BlendFactorZero              BlendFactor = 0x00000000
+	BlendFactorOne               BlendFactor = 0x00000001
+	BlendFactorSrc               BlendFactor = 0x00000002
+	BlendFactorOneMinusSrc       BlendFactor = 0x00000003
+	BlendFactorSrcAlpha          BlendFactor = 0x00000004
+	BlendFactorOneMinusSrcAlpha  BlendFactor = 0x00000005
+	BlendFactorDst               BlendFactor = 0x00000006
+	BlendFactorOneMinusDst       BlendFactor = 0x00000007
+	BlendFactorDstAlpha          BlendFactor = 0x00000008
+	BlendFactorOneMinusDstAlpha  BlendFactor = 0x00000009
+	BlendFactorSrcAlphaSaturated BlendFactor = 0x0000000A
+	BlendFactorConstant          BlendFactor = 0x0000000B
+	BlendFactorOneMinusConstant  BlendFactor = 0x0000000C
 )
 
 func (v BlendFactor) String() string {
 	switch v {
-	case BlendFactor_Zero:
+	case BlendFactorZero:
 		return "zero"
-	case BlendFactor_One:
+	case BlendFactorOne:
 		return "one"
-	case BlendFactor_Src:
+	case BlendFactorSrc:
 		return "src"
-	case BlendFactor_OneMinusSrc:
+	case BlendFactorOneMinusSrc:
 		return "one-minus-src"
-	case BlendFactor_SrcAlpha:
+	case BlendFactorSrcAlpha:
 		return "src-alpha"
-	case BlendFactor_OneMinusSrcAlpha:
+	case BlendFactorOneMinusSrcAlpha:
 		return "one-minus-src-alpha"
-	case BlendFactor_Dst:
+	case BlendFactorDst:
 		return "dst"
-	case BlendFactor_OneMinusDst:
+	case BlendFactorOneMinusDst:
 		return "one-minus-dst"
-	case BlendFactor_DstAlpha:
+	case BlendFactorDstAlpha:
 		return "dst-alpha"
-	case BlendFactor_OneMinusDstAlpha:
+	case BlendFactorOneMinusDstAlpha:
 		return "one-minus-dst-alpha"
-	case BlendFactor_SrcAlphaSaturated:
+	case BlendFactorSrcAlphaSaturated:
 		return "src-alpha-saturated"
-	case BlendFactor_Constant:
+	case BlendFactorConstant:
 		return "constant"
-	case BlendFactor_OneMinusConstant:
+	case BlendFactorOneMinusConstant:
 		return "one-minus-constant"
 	default:
 		return ""
@@ -140,24 +140,24 @@ func (v BlendFactor) String() string {
 type BlendOperation uint32
 
 const (
-	BlendOperation_Add             BlendOperation = 0x00000000
-	BlendOperation_Subtract        BlendOperation = 0x00000001
-	BlendOperation_ReverseSubtract BlendOperation = 0x00000002
-	BlendOperation_Min             BlendOperation = 0x00000003
-	BlendOperation_Max             BlendOperation = 0x00000004
+	BlendOperationAdd             BlendOperation = 0x00000000
+	BlendOperationSubtract        BlendOperation = 0x00000001
+	BlendOperationReverseSubtract BlendOperation = 0x00000002
+	BlendOperationMin             BlendOperation = 0x00000003
+	BlendOperationMax             BlendOperation = 0x00000004
 )
 
 func (v BlendOperation) String() string {
 	switch v {
-	case BlendOperation_Add:
+	case BlendOperationAdd:
 		return "add"
-	case BlendOperation_Subtract:
+	case BlendOperationSubtract:
 		return "subtract"
-	case BlendOperation_ReverseSubtract:
+	case BlendOperationReverseSubtract:
 		return "reverse-subtract"
-	case BlendOperation_Min:
+	case BlendOperationMin:
 		return "min"
-	case BlendOperation_Max:
+	case BlendOperationMax:
 		return "max"
 	default:
 		return ""
@@ -167,21 +167,21 @@ func (v BlendOperation) String() string {
 type BufferBindingType uint32
 
 const (
-	BufferBindingType_Undefined       BufferBindingType = 0x00000000
-	BufferBindingType_Uniform         BufferBindingType = 0x00000001
-	BufferBindingType_Storage         BufferBindingType = 0x00000002
-	BufferBindingType_ReadOnlyStorage BufferBindingType = 0x00000003
+	BufferBindingTypeUndefined       BufferBindingType = 0x00000000
+	BufferBindingTypeUniform         BufferBindingType = 0x00000001
+	BufferBindingTypeStorage         BufferBindingType = 0x00000002
+	BufferBindingTypeReadOnlyStorage BufferBindingType = 0x00000003
 )
 
 func (v BufferBindingType) String() string {
 	switch v {
-	case BufferBindingType_Undefined:
+	case BufferBindingTypeUndefined:
 		return "undefined"
-	case BufferBindingType_Uniform:
+	case BufferBindingTypeUniform:
 		return "uniform"
-	case BufferBindingType_Storage:
+	case BufferBindingTypeStorage:
 		return "storage"
-	case BufferBindingType_ReadOnlyStorage:
+	case BufferBindingTypeReadOnlyStorage:
 		return "read-only-storage"
 	default:
 		return ""
@@ -191,36 +191,36 @@ func (v BufferBindingType) String() string {
 type BufferMapAsyncStatus uint32
 
 const (
-	BufferMapAsyncStatus_Success                 BufferMapAsyncStatus = 0x00000000
-	BufferMapAsyncStatus_ValidationError         BufferMapAsyncStatus = 0x00000001
-	BufferMapAsyncStatus_Unknown                 BufferMapAsyncStatus = 0x00000002
-	BufferMapAsyncStatus_DeviceLost              BufferMapAsyncStatus = 0x00000003
-	BufferMapAsyncStatus_DestroyedBeforeCallback BufferMapAsyncStatus = 0x00000004
-	BufferMapAsyncStatus_UnmappedBeforeCallback  BufferMapAsyncStatus = 0x00000005
-	BufferMapAsyncStatus_MappingAlreadyPending   BufferMapAsyncStatus = 0x00000006
-	BufferMapAsyncStatus_OffsetOutOfRange        BufferMapAsyncStatus = 0x00000007
-	BufferMapAsyncStatus_SizeOutOfRange          BufferMapAsyncStatus = 0x00000008
+	BufferMapAsyncStatusSuccess                 BufferMapAsyncStatus = 0x00000000
+	BufferMapAsyncStatusValidationError         BufferMapAsyncStatus = 0x00000001
+	BufferMapAsyncStatusUnknown                 BufferMapAsyncStatus = 0x00000002
+	BufferMapAsyncStatusDeviceLost              BufferMapAsyncStatus = 0x00000003
+	BufferMapAsyncStatusDestroyedBeforeCallback BufferMapAsyncStatus = 0x00000004
+	BufferMapAsyncStatusUnmappedBeforeCallback  BufferMapAsyncStatus = 0x00000005
+	BufferMapAsyncStatusMappingAlreadyPending   BufferMapAsyncStatus = 0x00000006
+	BufferMapAsyncStatusOffsetOutOfRange        BufferMapAsyncStatus = 0x00000007
+	BufferMapAsyncStatusSizeOutOfRange          BufferMapAsyncStatus = 0x00000008
 )
 
 func (v BufferMapAsyncStatus) String() string {
 	switch v {
-	case BufferMapAsyncStatus_Success:
+	case BufferMapAsyncStatusSuccess:
 		return "success"
-	case BufferMapAsyncStatus_ValidationError:
+	case BufferMapAsyncStatusValidationError:
 		return "validation-error"
-	case BufferMapAsyncStatus_Unknown:
+	case BufferMapAsyncStatusUnknown:
 		return "unknown"
-	case BufferMapAsyncStatus_DeviceLost:
+	case BufferMapAsyncStatusDeviceLost:
 		return "device-lost"
-	case BufferMapAsyncStatus_DestroyedBeforeCallback:
+	case BufferMapAsyncStatusDestroyedBeforeCallback:
 		return "destroyed-before-callback"
-	case BufferMapAsyncStatus_UnmappedBeforeCallback:
+	case BufferMapAsyncStatusUnmappedBeforeCallback:
 		return "unmapped-before-callback"
-	case BufferMapAsyncStatus_MappingAlreadyPending:
+	case BufferMapAsyncStatusMappingAlreadyPending:
 		return "mapping-already-pending"
-	case BufferMapAsyncStatus_OffsetOutOfRange:
+	case BufferMapAsyncStatusOffsetOutOfRange:
 		return "offset-out-of-range"
-	case BufferMapAsyncStatus_SizeOutOfRange:
+	case BufferMapAsyncStatusSizeOutOfRange:
 		return "size-out-of-range"
 	default:
 		return ""
@@ -230,18 +230,18 @@ func (v BufferMapAsyncStatus) String() string {
 type BufferMapState uint32
 
 const (
-	BufferMapState_Unmapped BufferMapState = 0x00000000
-	BufferMapState_Pending  BufferMapState = 0x00000001
-	BufferMapState_Mapped   BufferMapState = 0x00000002
+	BufferMapStateUnmapped BufferMapState = 0x00000000
+	BufferMapStatePending  BufferMapState = 0x00000001
+	BufferMapStateMapped   BufferMapState = 0x00000002
 )
 
 func (v BufferMapState) String() string {
 	switch v {
-	case BufferMapState_Unmapped:
+	case BufferMapStateUnmapped:
 		return "unmapped"
-	case BufferMapState_Pending:
+	case BufferMapStatePending:
 		return "pending"
-	case BufferMapState_Mapped:
+	case BufferMapStateMapped:
 		return "mapped"
 	default:
 		return ""
@@ -251,42 +251,42 @@ func (v BufferMapState) String() string {
 type BufferUsage uint32
 
 const (
-	BufferUsage_None         BufferUsage = 0x00000000
-	BufferUsage_MapRead      BufferUsage = 0x00000001
-	BufferUsage_MapWrite     BufferUsage = 0x00000002
-	BufferUsage_CopySrc      BufferUsage = 0x00000004
-	BufferUsage_CopyDst      BufferUsage = 0x00000008
-	BufferUsage_Index        BufferUsage = 0x00000010
-	BufferUsage_Vertex       BufferUsage = 0x00000020
-	BufferUsage_Uniform      BufferUsage = 0x00000040
-	BufferUsage_Storage      BufferUsage = 0x00000080
-	BufferUsage_Indirect     BufferUsage = 0x00000100
-	BufferUsage_QueryResolve BufferUsage = 0x00000200
+	BufferUsageNone         BufferUsage = 0x00000000
+	BufferUsageMapRead      BufferUsage = 0x00000001
+	BufferUsageMapWrite     BufferUsage = 0x00000002
+	BufferUsageCopySrc      BufferUsage = 0x00000004
+	BufferUsageCopyDst      BufferUsage = 0x00000008
+	BufferUsageIndex        BufferUsage = 0x00000010
+	BufferUsageVertex       BufferUsage = 0x00000020
+	BufferUsageUniform      BufferUsage = 0x00000040
+	BufferUsageStorage      BufferUsage = 0x00000080
+	BufferUsageIndirect     BufferUsage = 0x00000100
+	BufferUsageQueryResolve BufferUsage = 0x00000200
 )
 
 func (v BufferUsage) String() string {
 	switch v {
-	case BufferUsage_None:
+	case BufferUsageNone:
 		return "none"
-	case BufferUsage_MapRead:
+	case BufferUsageMapRead:
 		return "map-read"
-	case BufferUsage_MapWrite:
+	case BufferUsageMapWrite:
 		return "map-write"
-	case BufferUsage_CopySrc:
+	case BufferUsageCopySrc:
 		return "copy-src"
-	case BufferUsage_CopyDst:
+	case BufferUsageCopyDst:
 		return "copy-dst"
-	case BufferUsage_Index:
+	case BufferUsageIndex:
 		return "index"
-	case BufferUsage_Vertex:
+	case BufferUsageVertex:
 		return "vertex"
-	case BufferUsage_Uniform:
+	case BufferUsageUniform:
 		return "uniform"
-	case BufferUsage_Storage:
+	case BufferUsageStorage:
 		return "storage"
-	case BufferUsage_Indirect:
+	case BufferUsageIndirect:
 		return "indirect"
-	case BufferUsage_QueryResolve:
+	case BufferUsageQueryResolve:
 		return "query-resolve"
 	default:
 		return ""
@@ -296,27 +296,27 @@ func (v BufferUsage) String() string {
 type ColorWriteMask uint32
 
 const (
-	ColorWriteMask_None  ColorWriteMask = 0x00000000
-	ColorWriteMask_Red   ColorWriteMask = 0x00000001
-	ColorWriteMask_Green ColorWriteMask = 0x00000002
-	ColorWriteMask_Blue  ColorWriteMask = 0x00000004
-	ColorWriteMask_Alpha ColorWriteMask = 0x00000008
-	ColorWriteMask_All   ColorWriteMask = 0x0000000F
+	ColorWriteMaskNone  ColorWriteMask = 0x00000000
+	ColorWriteMaskRed   ColorWriteMask = 0x00000001
+	ColorWriteMaskGreen ColorWriteMask = 0x00000002
+	ColorWriteMaskBlue  ColorWriteMask = 0x00000004
+	ColorWriteMaskAlpha ColorWriteMask = 0x00000008
+	ColorWriteMaskAll   ColorWriteMask = 0x0000000F
 )
 
 func (v ColorWriteMask) String() string {
 	switch v {
-	case ColorWriteMask_None:
+	case ColorWriteMaskNone:
 		return "none"
-	case ColorWriteMask_Red:
+	case ColorWriteMaskRed:
 		return "red"
-	case ColorWriteMask_Green:
+	case ColorWriteMaskGreen:
 		return "green"
-	case ColorWriteMask_Blue:
+	case ColorWriteMaskBlue:
 		return "blue"
-	case ColorWriteMask_Alpha:
+	case ColorWriteMaskAlpha:
 		return "alpha"
-	case ColorWriteMask_All:
+	case ColorWriteMaskAll:
 		return "all"
 	default:
 		return ""
@@ -326,36 +326,36 @@ func (v ColorWriteMask) String() string {
 type CompareFunction uint32
 
 const (
-	CompareFunction_Undefined    CompareFunction = 0x00000000
-	CompareFunction_Never        CompareFunction = 0x00000001
-	CompareFunction_Less         CompareFunction = 0x00000002
-	CompareFunction_LessEqual    CompareFunction = 0x00000003
-	CompareFunction_Greater      CompareFunction = 0x00000004
-	CompareFunction_GreaterEqual CompareFunction = 0x00000005
-	CompareFunction_Equal        CompareFunction = 0x00000006
-	CompareFunction_NotEqual     CompareFunction = 0x00000007
-	CompareFunction_Always       CompareFunction = 0x00000008
+	CompareFunctionUndefined    CompareFunction = 0x00000000
+	CompareFunctionNever        CompareFunction = 0x00000001
+	CompareFunctionLess         CompareFunction = 0x00000002
+	CompareFunctionLessEqual    CompareFunction = 0x00000003
+	CompareFunctionGreater      CompareFunction = 0x00000004
+	CompareFunctionGreaterEqual CompareFunction = 0x00000005
+	CompareFunctionEqual        CompareFunction = 0x00000006
+	CompareFunctionNotEqual     CompareFunction = 0x00000007
+	CompareFunctionAlways       CompareFunction = 0x00000008
 )
 
 func (v CompareFunction) String() string {
 	switch v {
-	case CompareFunction_Undefined:
+	case CompareFunctionUndefined:
 		return "undefined"
-	case CompareFunction_Never:
+	case CompareFunctionNever:
 		return "never"
-	case CompareFunction_Less:
+	case CompareFunctionLess:
 		return "less"
-	case CompareFunction_LessEqual:
+	case CompareFunctionLessEqual:
 		return "less-equal"
-	case CompareFunction_Greater:
+	case CompareFunctionGreater:
 		return "greater"
-	case CompareFunction_GreaterEqual:
+	case CompareFunctionGreaterEqual:
 		return "greater-equal"
-	case CompareFunction_Equal:
+	case CompareFunctionEqual:
 		return "equal"
-	case CompareFunction_NotEqual:
+	case CompareFunctionNotEqual:
 		return "not-equal"
-	case CompareFunction_Always:
+	case CompareFunctionAlways:
 		return "always"
 	default:
 		return ""
@@ -365,21 +365,21 @@ func (v CompareFunction) String() string {
 type CompilationInfoRequestStatus uint32
 
 const (
-	CompilationInfoRequestStatus_Success    CompilationInfoRequestStatus = 0x00000000
-	CompilationInfoRequestStatus_Error      CompilationInfoRequestStatus = 0x00000001
-	CompilationInfoRequestStatus_DeviceLost CompilationInfoRequestStatus = 0x00000002
-	CompilationInfoRequestStatus_Unknown    CompilationInfoRequestStatus = 0x00000003
+	CompilationInfoRequestStatusSuccess    CompilationInfoRequestStatus = 0x00000000
+	CompilationInfoRequestStatusError      CompilationInfoRequestStatus = 0x00000001
+	CompilationInfoRequestStatusDeviceLost CompilationInfoRequestStatus = 0x00000002
+	CompilationInfoRequestStatusUnknown    CompilationInfoRequestStatus = 0x00000003
 )
 
 func (v CompilationInfoRequestStatus) String() string {
 	switch v {
-	case CompilationInfoRequestStatus_Success:
+	case CompilationInfoRequestStatusSuccess:
 		return "success"
-	case CompilationInfoRequestStatus_Error:
+	case CompilationInfoRequestStatusError:
 		return "error"
-	case CompilationInfoRequestStatus_DeviceLost:
+	case CompilationInfoRequestStatusDeviceLost:
 		return "device-lost"
-	case CompilationInfoRequestStatus_Unknown:
+	case CompilationInfoRequestStatusUnknown:
 		return "unknown"
 	default:
 		return ""
@@ -389,18 +389,18 @@ func (v CompilationInfoRequestStatus) String() string {
 type CompilationMessageType uint32
 
 const (
-	CompilationMessageType_Error   CompilationMessageType = 0x00000000
-	CompilationMessageType_Warning CompilationMessageType = 0x00000001
-	CompilationMessageType_Info    CompilationMessageType = 0x00000002
+	CompilationMessageTypeError   CompilationMessageType = 0x00000000
+	CompilationMessageTypeWarning CompilationMessageType = 0x00000001
+	CompilationMessageTypeInfo    CompilationMessageType = 0x00000002
 )
 
 func (v CompilationMessageType) String() string {
 	switch v {
-	case CompilationMessageType_Error:
+	case CompilationMessageTypeError:
 		return "error"
-	case CompilationMessageType_Warning:
+	case CompilationMessageTypeWarning:
 		return "warning"
-	case CompilationMessageType_Info:
+	case CompilationMessageTypeInfo:
 		return "info"
 	default:
 		return ""
@@ -410,24 +410,24 @@ func (v CompilationMessageType) String() string {
 type CompositeAlphaMode uint32
 
 const (
-	CompositeAlphaMode_Auto           CompositeAlphaMode = 0x00000000
-	CompositeAlphaMode_Opaque         CompositeAlphaMode = 0x00000001
-	CompositeAlphaMode_PreMultiplied  CompositeAlphaMode = 0x00000002
-	CompositeAlphaMode_PostMultiplied CompositeAlphaMode = 0x00000003
-	CompositeAlphaMode_Inherit        CompositeAlphaMode = 0x00000004
+	CompositeAlphaModeAuto           CompositeAlphaMode = 0x00000000
+	CompositeAlphaModeOpaque         CompositeAlphaMode = 0x00000001
+	CompositeAlphaModePreMultiplied  CompositeAlphaMode = 0x00000002
+	CompositeAlphaModePostMultiplied CompositeAlphaMode = 0x00000003
+	CompositeAlphaModeInherit        CompositeAlphaMode = 0x00000004
 )
 
 func (v CompositeAlphaMode) String() string {
 	switch v {
-	case CompositeAlphaMode_Auto:
+	case CompositeAlphaModeAuto:
 		return "auto"
-	case CompositeAlphaMode_Opaque:
+	case CompositeAlphaModeOpaque:
 		return "opaque"
-	case CompositeAlphaMode_PreMultiplied:
+	case CompositeAlphaModePreMultiplied:
 		return "pre-multiplied"
-	case CompositeAlphaMode_PostMultiplied:
+	case CompositeAlphaModePostMultiplied:
 		return "post-multiplied"
-	case CompositeAlphaMode_Inherit:
+	case CompositeAlphaModeInherit:
 		return "inherit"
 	default:
 		return ""
@@ -437,15 +437,15 @@ func (v CompositeAlphaMode) String() string {
 type ComputePassTimestampLocation uint32
 
 const (
-	ComputePassTimestampLocation_Beginning ComputePassTimestampLocation = 0x00000000
-	ComputePassTimestampLocation_End       ComputePassTimestampLocation = 0x00000001
+	ComputePassTimestampLocationBeginning ComputePassTimestampLocation = 0x00000000
+	ComputePassTimestampLocationEnd       ComputePassTimestampLocation = 0x00000001
 )
 
 func (v ComputePassTimestampLocation) String() string {
 	switch v {
-	case ComputePassTimestampLocation_Beginning:
+	case ComputePassTimestampLocationBeginning:
 		return "beginning"
-	case ComputePassTimestampLocation_End:
+	case ComputePassTimestampLocationEnd:
 		return "end"
 	default:
 		return ""
@@ -455,27 +455,27 @@ func (v ComputePassTimestampLocation) String() string {
 type CreatePipelineAsyncStatus uint32
 
 const (
-	CreatePipelineAsyncStatus_Success         CreatePipelineAsyncStatus = 0x00000000
-	CreatePipelineAsyncStatus_ValidationError CreatePipelineAsyncStatus = 0x00000001
-	CreatePipelineAsyncStatus_InternalError   CreatePipelineAsyncStatus = 0x00000002
-	CreatePipelineAsyncStatus_DeviceLost      CreatePipelineAsyncStatus = 0x00000003
-	CreatePipelineAsyncStatus_DeviceDestroyed CreatePipelineAsyncStatus = 0x00000004
-	CreatePipelineAsyncStatus_Unknown         CreatePipelineAsyncStatus = 0x00000005
+	CreatePipelineAsyncStatusSuccess         CreatePipelineAsyncStatus = 0x00000000
+	CreatePipelineAsyncStatusValidationError CreatePipelineAsyncStatus = 0x00000001
+	CreatePipelineAsyncStatusInternalError   CreatePipelineAsyncStatus = 0x00000002
+	CreatePipelineAsyncStatusDeviceLost      CreatePipelineAsyncStatus = 0x00000003
+	CreatePipelineAsyncStatusDeviceDestroyed CreatePipelineAsyncStatus = 0x00000004
+	CreatePipelineAsyncStatusUnknown         CreatePipelineAsyncStatus = 0x00000005
 )
 
 func (v CreatePipelineAsyncStatus) String() string {
 	switch v {
-	case CreatePipelineAsyncStatus_Success:
+	case CreatePipelineAsyncStatusSuccess:
 		return "success"
-	case CreatePipelineAsyncStatus_ValidationError:
+	case CreatePipelineAsyncStatusValidationError:
 		return "validation-error"
-	case CreatePipelineAsyncStatus_InternalError:
+	case CreatePipelineAsyncStatusInternalError:
 		return "internal-error"
-	case CreatePipelineAsyncStatus_DeviceLost:
+	case CreatePipelineAsyncStatusDeviceLost:
 		return "device-lost"
-	case CreatePipelineAsyncStatus_DeviceDestroyed:
+	case CreatePipelineAsyncStatusDeviceDestroyed:
 		return "device-destroyed"
-	case CreatePipelineAsyncStatus_Unknown:
+	case CreatePipelineAsyncStatusUnknown:
 		return "unknown"
 	default:
 		return ""
@@ -485,18 +485,18 @@ func (v CreatePipelineAsyncStatus) String() string {
 type CullMode uint32
 
 const (
-	CullMode_None  CullMode = 0x00000000
-	CullMode_Front CullMode = 0x00000001
-	CullMode_Back  CullMode = 0x00000002
+	CullModeNone  CullMode = 0x00000000
+	CullModeFront CullMode = 0x00000001
+	CullModeBack  CullMode = 0x00000002
 )
 
 func (v CullMode) String() string {
 	switch v {
-	case CullMode_None:
+	case CullModeNone:
 		return "none"
-	case CullMode_Front:
+	case CullModeFront:
 		return "front"
-	case CullMode_Back:
+	case CullModeBack:
 		return "back"
 	default:
 		return ""
@@ -506,15 +506,15 @@ func (v CullMode) String() string {
 type DeviceLostReason uint32
 
 const (
-	DeviceLostReason_Undefined DeviceLostReason = 0x00000000
-	DeviceLostReason_Destroyed DeviceLostReason = 0x00000001
+	DeviceLostReasonUndefined DeviceLostReason = 0x00000000
+	DeviceLostReasonDestroyed DeviceLostReason = 0x00000001
 )
 
 func (v DeviceLostReason) String() string {
 	switch v {
-	case DeviceLostReason_Undefined:
+	case DeviceLostReasonUndefined:
 		return "undefined"
-	case DeviceLostReason_Destroyed:
+	case DeviceLostReasonDestroyed:
 		return "destroyed"
 	default:
 		return ""
@@ -524,18 +524,18 @@ func (v DeviceLostReason) String() string {
 type Dx12Compiler uint32
 
 const (
-	Dx12Compiler_Undefined Dx12Compiler = 0x00000000
-	Dx12Compiler_Fxc       Dx12Compiler = 0x00000001
-	Dx12Compiler_Dxc       Dx12Compiler = 0x00000002
+	Dx12CompilerUndefined Dx12Compiler = 0x00000000
+	Dx12CompilerFxc       Dx12Compiler = 0x00000001
+	Dx12CompilerDxc       Dx12Compiler = 0x00000002
 )
 
 func (v Dx12Compiler) String() string {
 	switch v {
-	case Dx12Compiler_Undefined:
+	case Dx12CompilerUndefined:
 		return "undefined"
-	case Dx12Compiler_Fxc:
+	case Dx12CompilerFxc:
 		return "fxc"
-	case Dx12Compiler_Dxc:
+	case Dx12CompilerDxc:
 		return "dxc"
 	default:
 		return ""
@@ -545,18 +545,18 @@ func (v Dx12Compiler) String() string {
 type ErrorFilter uint32
 
 const (
-	ErrorFilter_Validation  ErrorFilter = 0x00000000
-	ErrorFilter_OutOfMemory ErrorFilter = 0x00000001
-	ErrorFilter_Internal    ErrorFilter = 0x00000002
+	ErrorFilterValidation  ErrorFilter = 0x00000000
+	ErrorFilterOutOfMemory ErrorFilter = 0x00000001
+	ErrorFilterInternal    ErrorFilter = 0x00000002
 )
 
 func (v ErrorFilter) String() string {
 	switch v {
-	case ErrorFilter_Validation:
+	case ErrorFilterValidation:
 		return "validation"
-	case ErrorFilter_OutOfMemory:
+	case ErrorFilterOutOfMemory:
 		return "out-of-memory"
-	case ErrorFilter_Internal:
+	case ErrorFilterInternal:
 		return "internal"
 	default:
 		return ""
@@ -566,27 +566,27 @@ func (v ErrorFilter) String() string {
 type ErrorType uint32
 
 const (
-	ErrorType_NoError     ErrorType = 0x00000000
-	ErrorType_Validation  ErrorType = 0x00000001
-	ErrorType_OutOfMemory ErrorType = 0x00000002
-	ErrorType_Internal    ErrorType = 0x00000003
-	ErrorType_Unknown     ErrorType = 0x00000004
-	ErrorType_DeviceLost  ErrorType = 0x00000005
+	ErrorTypeNoError     ErrorType = 0x00000000
+	ErrorTypeValidation  ErrorType = 0x00000001
+	ErrorTypeOutOfMemory ErrorType = 0x00000002
+	ErrorTypeInternal    ErrorType = 0x00000003
+	ErrorTypeUnknown     ErrorType = 0x00000004
+	ErrorTypeDeviceLost  ErrorType = 0x00000005
 )
 
 func (v ErrorType) String() string {
 	switch v {
-	case ErrorType_NoError:
+	case ErrorTypeNoError:
 		return "no-error"
-	case ErrorType_Validation:
+	case ErrorTypeValidation:
 		return "validation"
-	case ErrorType_OutOfMemory:
+	case ErrorTypeOutOfMemory:
 		return "out-of-memory"
-	case ErrorType_Internal:
+	case ErrorTypeInternal:
 		return "internal"
-	case ErrorType_Unknown:
+	case ErrorTypeUnknown:
 		return "unknown"
-	case ErrorType_DeviceLost:
+	case ErrorTypeDeviceLost:
 		return "device-lost"
 	default:
 		return "unknown"
@@ -596,63 +596,63 @@ func (v ErrorType) String() string {
 type FeatureName uint32
 
 const (
-	FeatureName_Undefined                              FeatureName = 0x00000000
-	FeatureName_DepthClipControl                       FeatureName = 0x00000001
-	FeatureName_Depth32FloatStencil8                   FeatureName = 0x00000002
-	FeatureName_TimestampQuery                         FeatureName = 0x00000003
-	FeatureName_PipelineStatisticsQuery                FeatureName = 0x00000004
-	FeatureName_TextureCompressionBC                   FeatureName = 0x00000005
-	FeatureName_TextureCompressionETC2                 FeatureName = 0x00000006
-	FeatureName_TextureCompressionASTC                 FeatureName = 0x00000007
-	FeatureName_IndirectFirstInstance                  FeatureName = 0x00000008
-	FeatureName_ShaderF16                              FeatureName = 0x00000009
-	FeatureName_RG11B10UfloatRenderable                FeatureName = 0x0000000A
-	FeatureName_BGRA8UnormStorage                      FeatureName = 0x0000000B
-	FeatureName_Float32Filterable                      FeatureName = 0x0000000C
-	NativeFeature_PushConstants                        FeatureName = 0x60000001
-	NativeFeature_TextureAdapterSpecificFormatFeatures FeatureName = 0x60000002
-	NativeFeature_MultiDrawIndirect                    FeatureName = 0x60000003
-	NativeFeature_MultiDrawIndirectCount               FeatureName = 0x60000004
-	NativeFeature_VertexWritableStorage                FeatureName = 0x60000005
+	FeatureNameUndefined                              FeatureName = 0x00000000
+	FeatureNameDepthClipControl                       FeatureName = 0x00000001
+	FeatureNameDepth32FloatStencil8                   FeatureName = 0x00000002
+	FeatureNameTimestampQuery                         FeatureName = 0x00000003
+	FeatureNamePipelineStatisticsQuery                FeatureName = 0x00000004
+	FeatureNameTextureCompressionBC                   FeatureName = 0x00000005
+	FeatureNameTextureCompressionETC2                 FeatureName = 0x00000006
+	FeatureNameTextureCompressionASTC                 FeatureName = 0x00000007
+	FeatureNameIndirectFirstInstance                  FeatureName = 0x00000008
+	FeatureNameShaderF16                              FeatureName = 0x00000009
+	FeatureNameRG11B10UfloatRenderable                FeatureName = 0x0000000A
+	FeatureNameBGRA8UnormStorage                      FeatureName = 0x0000000B
+	FeatureNameFloat32Filterable                      FeatureName = 0x0000000C
+	NativeFeaturePushConstants                        FeatureName = 0x60000001
+	NativeFeatureTextureAdapterSpecificFormatFeatures FeatureName = 0x60000002
+	NativeFeatureMultiDrawIndirect                    FeatureName = 0x60000003
+	NativeFeatureMultiDrawIndirectCount               FeatureName = 0x60000004
+	NativeFeatureVertexWritableStorage                FeatureName = 0x60000005
 )
 
 func (v FeatureName) String() string {
 	switch v {
-	case FeatureName_Undefined:
+	case FeatureNameUndefined:
 		return "undefined"
-	case FeatureName_DepthClipControl:
+	case FeatureNameDepthClipControl:
 		return "depth-clip-control"
-	case FeatureName_Depth32FloatStencil8:
+	case FeatureNameDepth32FloatStencil8:
 		return "depth-32-float-stencil-8"
-	case FeatureName_TimestampQuery:
+	case FeatureNameTimestampQuery:
 		return "timestamp-query"
-	case FeatureName_PipelineStatisticsQuery:
+	case FeatureNamePipelineStatisticsQuery:
 		return "pipeline-statistics-query"
-	case FeatureName_TextureCompressionBC:
+	case FeatureNameTextureCompressionBC:
 		return "texture-compression-bc"
-	case FeatureName_TextureCompressionETC2:
+	case FeatureNameTextureCompressionETC2:
 		return "texture-compression-etc-2"
-	case FeatureName_TextureCompressionASTC:
+	case FeatureNameTextureCompressionASTC:
 		return "texture-compression-astc"
-	case FeatureName_IndirectFirstInstance:
+	case FeatureNameIndirectFirstInstance:
 		return "indirect-first-instance"
-	case FeatureName_ShaderF16:
+	case FeatureNameShaderF16:
 		return "shader-f-16"
-	case FeatureName_RG11B10UfloatRenderable:
+	case FeatureNameRG11B10UfloatRenderable:
 		return "rg-11-b-10-ufloat-renderable"
-	case FeatureName_BGRA8UnormStorage:
+	case FeatureNameBGRA8UnormStorage:
 		return "bgra-8-unorm-storage"
-	case FeatureName_Float32Filterable:
+	case FeatureNameFloat32Filterable:
 		return "float-32-filterable"
-	case NativeFeature_PushConstants:
+	case NativeFeaturePushConstants:
 		return "native-feature-push-constants"
-	case NativeFeature_TextureAdapterSpecificFormatFeatures:
+	case NativeFeatureTextureAdapterSpecificFormatFeatures:
 		return "native-feature-texture-adapter-specific-format-features"
-	case NativeFeature_MultiDrawIndirect:
+	case NativeFeatureMultiDrawIndirect:
 		return "native-feature-multi-draw-indirect"
-	case NativeFeature_MultiDrawIndirectCount:
+	case NativeFeatureMultiDrawIndirectCount:
 		return "native-feature-multi-draw-indirect-count"
-	case NativeFeature_VertexWritableStorage:
+	case NativeFeatureVertexWritableStorage:
 		return "native-feature-vertex-writable-storage"
 	default:
 		return ""
@@ -662,15 +662,15 @@ func (v FeatureName) String() string {
 type FilterMode uint32
 
 const (
-	FilterMode_Nearest FilterMode = 0x00000000
-	FilterMode_Linear  FilterMode = 0x00000001
+	FilterModeNearest FilterMode = 0x00000000
+	FilterModeLinear  FilterMode = 0x00000001
 )
 
 func (v FilterMode) String() string {
 	switch v {
-	case FilterMode_Nearest:
+	case FilterModeNearest:
 		return "nearest"
-	case FilterMode_Linear:
+	case FilterModeLinear:
 		return "linear"
 	default:
 		return ""
@@ -680,15 +680,15 @@ func (v FilterMode) String() string {
 type FrontFace uint32
 
 const (
-	FrontFace_CCW FrontFace = 0x00000000
-	FrontFace_CW  FrontFace = 0x00000001
+	FrontFaceCCW FrontFace = 0x00000000
+	FrontFaceCW  FrontFace = 0x00000001
 )
 
 func (v FrontFace) String() string {
 	switch v {
-	case FrontFace_CCW:
+	case FrontFaceCCW:
 		return "ccw"
-	case FrontFace_CW:
+	case FrontFaceCW:
 		return "cw"
 	default:
 		return ""
@@ -698,18 +698,18 @@ func (v FrontFace) String() string {
 type IndexFormat uint32
 
 const (
-	IndexFormat_Undefined IndexFormat = 0x00000000
-	IndexFormat_Uint16    IndexFormat = 0x00000001
-	IndexFormat_Uint32    IndexFormat = 0x00000002
+	IndexFormatUndefined IndexFormat = 0x00000000
+	IndexFormatUint16    IndexFormat = 0x00000001
+	IndexFormatUint32    IndexFormat = 0x00000002
 )
 
 func (v IndexFormat) String() string {
 	switch v {
-	case IndexFormat_Undefined:
+	case IndexFormatUndefined:
 		return "undefined"
-	case IndexFormat_Uint16:
+	case IndexFormatUint16:
 		return "uint-16"
-	case IndexFormat_Uint32:
+	case IndexFormatUint32:
 		return "uint-32"
 	default:
 		return ""
@@ -719,36 +719,36 @@ func (v IndexFormat) String() string {
 type InstanceBackend uint32
 
 const (
-	InstanceBackend_None          InstanceBackend = 0x00000000
-	InstanceBackend_Vulkan        InstanceBackend = 0x00000002
-	InstanceBackend_Metal         InstanceBackend = 0x00000004
-	InstanceBackend_DX12          InstanceBackend = 0x00000008
-	InstanceBackend_DX11          InstanceBackend = 0x00000010
-	InstanceBackend_GL            InstanceBackend = 0x00000020
-	InstanceBackend_Secondary     InstanceBackend = 0x00000030
-	InstanceBackend_BrowserWebGPU InstanceBackend = 0x00000040
-	InstanceBackend_Primary       InstanceBackend = 0x0000004E
+	InstanceBackendNone          InstanceBackend = 0x00000000
+	InstanceBackendVulkan        InstanceBackend = 0x00000002
+	InstanceBackendMetal         InstanceBackend = 0x00000004
+	InstanceBackendDX12          InstanceBackend = 0x00000008
+	InstanceBackendDX11          InstanceBackend = 0x00000010
+	InstanceBackendGL            InstanceBackend = 0x00000020
+	InstanceBackendSecondary     InstanceBackend = 0x00000030
+	InstanceBackendBrowserWebGPU InstanceBackend = 0x00000040
+	InstanceBackendPrimary       InstanceBackend = 0x0000004E
 )
 
 func (v InstanceBackend) String() string {
 	switch v {
-	case InstanceBackend_None:
+	case InstanceBackendNone:
 		return "none"
-	case InstanceBackend_Vulkan:
+	case InstanceBackendVulkan:
 		return "vulkan"
-	case InstanceBackend_Metal:
+	case InstanceBackendMetal:
 		return "metal"
-	case InstanceBackend_DX12:
+	case InstanceBackendDX12:
 		return "dx-12"
-	case InstanceBackend_DX11:
+	case InstanceBackendDX11:
 		return "dx-11"
-	case InstanceBackend_GL:
+	case InstanceBackendGL:
 		return "gl"
-	case InstanceBackend_Secondary:
+	case InstanceBackendSecondary:
 		return "secondary"
-	case InstanceBackend_BrowserWebGPU:
+	case InstanceBackendBrowserWebGPU:
 		return "browser-web-gpu"
-	case InstanceBackend_Primary:
+	case InstanceBackendPrimary:
 		return "primary"
 	default:
 		return ""
@@ -758,18 +758,18 @@ func (v InstanceBackend) String() string {
 type LoadOp uint32
 
 const (
-	LoadOp_Undefined LoadOp = 0x00000000
-	LoadOp_Clear     LoadOp = 0x00000001
-	LoadOp_Load      LoadOp = 0x00000002
+	LoadOpUndefined LoadOp = 0x00000000
+	LoadOpClear     LoadOp = 0x00000001
+	LoadOpLoad      LoadOp = 0x00000002
 )
 
 func (v LoadOp) String() string {
 	switch v {
-	case LoadOp_Undefined:
+	case LoadOpUndefined:
 		return "undefined"
-	case LoadOp_Clear:
+	case LoadOpClear:
 		return "clear"
-	case LoadOp_Load:
+	case LoadOpLoad:
 		return "load"
 	default:
 		return ""
@@ -779,27 +779,27 @@ func (v LoadOp) String() string {
 type LogLevel uint32
 
 const (
-	LogLevel_Off   LogLevel = 0x00000000
-	LogLevel_Error LogLevel = 0x00000001
-	LogLevel_Warn  LogLevel = 0x00000002
-	LogLevel_Info  LogLevel = 0x00000003
-	LogLevel_Debug LogLevel = 0x00000004
-	LogLevel_Trace LogLevel = 0x00000005
+	LogLevelOff   LogLevel = 0x00000000
+	LogLevelError LogLevel = 0x00000001
+	LogLevelWarn  LogLevel = 0x00000002
+	LogLevelInfo  LogLevel = 0x00000003
+	LogLevelDebug LogLevel = 0x00000004
+	LogLevelTrace LogLevel = 0x00000005
 )
 
 func (v LogLevel) String() string {
 	switch v {
-	case LogLevel_Off:
+	case LogLevelOff:
 		return "off"
-	case LogLevel_Error:
+	case LogLevelError:
 		return "error"
-	case LogLevel_Warn:
+	case LogLevelWarn:
 		return "warn"
-	case LogLevel_Info:
+	case LogLevelInfo:
 		return "info"
-	case LogLevel_Debug:
+	case LogLevelDebug:
 		return "debug"
-	case LogLevel_Trace:
+	case LogLevelTrace:
 		return "trace"
 	default:
 		return ""
@@ -809,18 +809,18 @@ func (v LogLevel) String() string {
 type MapMode uint32
 
 const (
-	MapMode_None  MapMode = 0x00000000
-	MapMode_Read  MapMode = 0x00000001
-	MapMode_Write MapMode = 0x00000002
+	MapModeNone  MapMode = 0x00000000
+	MapModeRead  MapMode = 0x00000001
+	MapModeWrite MapMode = 0x00000002
 )
 
 func (v MapMode) String() string {
 	switch v {
-	case MapMode_None:
+	case MapModeNone:
 		return "none"
-	case MapMode_Read:
+	case MapModeRead:
 		return "read"
-	case MapMode_Write:
+	case MapModeWrite:
 		return "write"
 	default:
 		return ""
@@ -830,15 +830,15 @@ func (v MapMode) String() string {
 type MipmapFilterMode uint32
 
 const (
-	MipmapFilterMode_Nearest MipmapFilterMode = 0x00000000
-	MipmapFilterMode_Linear  MipmapFilterMode = 0x00000001
+	MipmapFilterModeNearest MipmapFilterMode = 0x00000000
+	MipmapFilterModeLinear  MipmapFilterMode = 0x00000001
 )
 
 func (v MipmapFilterMode) String() string {
 	switch v {
-	case MipmapFilterMode_Nearest:
+	case MipmapFilterModeNearest:
 		return "nearest"
-	case MipmapFilterMode_Linear:
+	case MipmapFilterModeLinear:
 		return "linear"
 	default:
 		return ""
@@ -848,24 +848,24 @@ func (v MipmapFilterMode) String() string {
 type PipelineStatisticName uint32
 
 const (
-	PipelineStatisticName_VertexShaderInvocations   PipelineStatisticName = 0x00000000
-	PipelineStatisticName_ClipperInvocations        PipelineStatisticName = 0x00000001
-	PipelineStatisticName_ClipperPrimitivesOut      PipelineStatisticName = 0x00000002
-	PipelineStatisticName_FragmentShaderInvocations PipelineStatisticName = 0x00000003
-	PipelineStatisticName_ComputeShaderInvocations  PipelineStatisticName = 0x00000004
+	PipelineStatisticNameVertexShaderInvocations   PipelineStatisticName = 0x00000000
+	PipelineStatisticNameClipperInvocations        PipelineStatisticName = 0x00000001
+	PipelineStatisticNameClipperPrimitivesOut      PipelineStatisticName = 0x00000002
+	PipelineStatisticNameFragmentShaderInvocations PipelineStatisticName = 0x00000003
+	PipelineStatisticNameComputeShaderInvocations  PipelineStatisticName = 0x00000004
 )
 
 func (v PipelineStatisticName) String() string {
 	switch v {
-	case PipelineStatisticName_VertexShaderInvocations:
+	case PipelineStatisticNameVertexShaderInvocations:
 		return "vertex-shader-invocations"
-	case PipelineStatisticName_ClipperInvocations:
+	case PipelineStatisticNameClipperInvocations:
 		return "clipper-invocations"
-	case PipelineStatisticName_ClipperPrimitivesOut:
+	case PipelineStatisticNameClipperPrimitivesOut:
 		return "clipper-primitives-out"
-	case PipelineStatisticName_FragmentShaderInvocations:
+	case PipelineStatisticNameFragmentShaderInvocations:
 		return "fragment-shader-invocations"
-	case PipelineStatisticName_ComputeShaderInvocations:
+	case PipelineStatisticNameComputeShaderInvocations:
 		return "compute-shader-invocations"
 	default:
 		return ""
@@ -875,18 +875,18 @@ func (v PipelineStatisticName) String() string {
 type PowerPreference uint32
 
 const (
-	PowerPreference_Undefined       PowerPreference = 0x00000000
-	PowerPreference_LowPower        PowerPreference = 0x00000001
-	PowerPreference_HighPerformance PowerPreference = 0x00000002
+	PowerPreferenceUndefined       PowerPreference = 0x00000000
+	PowerPreferenceLowPower        PowerPreference = 0x00000001
+	PowerPreferenceHighPerformance PowerPreference = 0x00000002
 )
 
 func (v PowerPreference) String() string {
 	switch v {
-	case PowerPreference_Undefined:
+	case PowerPreferenceUndefined:
 		return "undefined"
-	case PowerPreference_LowPower:
+	case PowerPreferenceLowPower:
 		return "low-power"
-	case PowerPreference_HighPerformance:
+	case PowerPreferenceHighPerformance:
 		return "high-performance"
 	default:
 		return ""
@@ -896,18 +896,18 @@ func (v PowerPreference) String() string {
 type PresentMode uint32
 
 const (
-	PresentMode_Immediate PresentMode = 0x00000000
-	PresentMode_Mailbox   PresentMode = 0x00000001
-	PresentMode_Fifo      PresentMode = 0x00000002
+	PresentModeImmediate PresentMode = 0x00000000
+	PresentModeMailbox   PresentMode = 0x00000001
+	PresentModeFifo      PresentMode = 0x00000002
 )
 
 func (v PresentMode) String() string {
 	switch v {
-	case PresentMode_Immediate:
+	case PresentModeImmediate:
 		return "immediate"
-	case PresentMode_Mailbox:
+	case PresentModeMailbox:
 		return "mailbox"
-	case PresentMode_Fifo:
+	case PresentModeFifo:
 		return "fifo"
 	default:
 		return ""
@@ -917,24 +917,24 @@ func (v PresentMode) String() string {
 type PrimitiveTopology uint32
 
 const (
-	PrimitiveTopology_PointList     PrimitiveTopology = 0x00000000
-	PrimitiveTopology_LineList      PrimitiveTopology = 0x00000001
-	PrimitiveTopology_LineStrip     PrimitiveTopology = 0x00000002
-	PrimitiveTopology_TriangleList  PrimitiveTopology = 0x00000003
-	PrimitiveTopology_TriangleStrip PrimitiveTopology = 0x00000004
+	PrimitiveTopologyPointList     PrimitiveTopology = 0x00000000
+	PrimitiveTopologyLineList      PrimitiveTopology = 0x00000001
+	PrimitiveTopologyLineStrip     PrimitiveTopology = 0x00000002
+	PrimitiveTopologyTriangleList  PrimitiveTopology = 0x00000003
+	PrimitiveTopologyTriangleStrip PrimitiveTopology = 0x00000004
 )
 
 func (v PrimitiveTopology) String() string {
 	switch v {
-	case PrimitiveTopology_PointList:
+	case PrimitiveTopologyPointList:
 		return "point-list"
-	case PrimitiveTopology_LineList:
+	case PrimitiveTopologyLineList:
 		return "line-list"
-	case PrimitiveTopology_LineStrip:
+	case PrimitiveTopologyLineStrip:
 		return "line-strip"
-	case PrimitiveTopology_TriangleList:
+	case PrimitiveTopologyTriangleList:
 		return "triangle-list"
-	case PrimitiveTopology_TriangleStrip:
+	case PrimitiveTopologyTriangleStrip:
 		return "triangle-strip"
 	default:
 		return ""
@@ -944,18 +944,18 @@ func (v PrimitiveTopology) String() string {
 type QueryType uint32
 
 const (
-	QueryType_Occlusion          QueryType = 0x00000000
-	QueryType_PipelineStatistics QueryType = 0x00000001
-	QueryType_Timestamp          QueryType = 0x00000002
+	QueryTypeOcclusion          QueryType = 0x00000000
+	QueryTypePipelineStatistics QueryType = 0x00000001
+	QueryTypeTimestamp          QueryType = 0x00000002
 )
 
 func (v QueryType) String() string {
 	switch v {
-	case QueryType_Occlusion:
+	case QueryTypeOcclusion:
 		return "occlusion"
-	case QueryType_PipelineStatistics:
+	case QueryTypePipelineStatistics:
 		return "pipeline-statistics"
-	case QueryType_Timestamp:
+	case QueryTypeTimestamp:
 		return "timestamp"
 	default:
 		return ""
@@ -965,21 +965,21 @@ func (v QueryType) String() string {
 type QueueWorkDoneStatus uint32
 
 const (
-	QueueWorkDoneStatus_Success    QueueWorkDoneStatus = 0x00000000
-	QueueWorkDoneStatus_Error      QueueWorkDoneStatus = 0x00000001
-	QueueWorkDoneStatus_Unknown    QueueWorkDoneStatus = 0x00000002
-	QueueWorkDoneStatus_DeviceLost QueueWorkDoneStatus = 0x00000003
+	QueueWorkDoneStatusSuccess    QueueWorkDoneStatus = 0x00000000
+	QueueWorkDoneStatusError      QueueWorkDoneStatus = 0x00000001
+	QueueWorkDoneStatusUnknown    QueueWorkDoneStatus = 0x00000002
+	QueueWorkDoneStatusDeviceLost QueueWorkDoneStatus = 0x00000003
 )
 
 func (v QueueWorkDoneStatus) String() string {
 	switch v {
-	case QueueWorkDoneStatus_Success:
+	case QueueWorkDoneStatusSuccess:
 		return "success"
-	case QueueWorkDoneStatus_Error:
+	case QueueWorkDoneStatusError:
 		return "error"
-	case QueueWorkDoneStatus_Unknown:
+	case QueueWorkDoneStatusUnknown:
 		return "unknown"
-	case QueueWorkDoneStatus_DeviceLost:
+	case QueueWorkDoneStatusDeviceLost:
 		return "device-lost"
 	default:
 		return ""
@@ -989,15 +989,15 @@ func (v QueueWorkDoneStatus) String() string {
 type RenderPassTimestampLocation uint32
 
 const (
-	RenderPassTimestampLocation_Beginning RenderPassTimestampLocation = 0x00000000
-	RenderPassTimestampLocation_End       RenderPassTimestampLocation = 0x00000001
+	RenderPassTimestampLocationBeginning RenderPassTimestampLocation = 0x00000000
+	RenderPassTimestampLocationEnd       RenderPassTimestampLocation = 0x00000001
 )
 
 func (v RenderPassTimestampLocation) String() string {
 	switch v {
-	case RenderPassTimestampLocation_Beginning:
+	case RenderPassTimestampLocationBeginning:
 		return "beginning"
-	case RenderPassTimestampLocation_End:
+	case RenderPassTimestampLocationEnd:
 		return "end"
 	default:
 		return ""
@@ -1007,21 +1007,21 @@ func (v RenderPassTimestampLocation) String() string {
 type RequestAdapterStatus uint32
 
 const (
-	RequestAdapterStatus_Success     RequestAdapterStatus = 0x00000000
-	RequestAdapterStatus_Unavailable RequestAdapterStatus = 0x00000001
-	RequestAdapterStatus_Error       RequestAdapterStatus = 0x00000002
-	RequestAdapterStatus_Unknown     RequestAdapterStatus = 0x00000003
+	RequestAdapterStatusSuccess     RequestAdapterStatus = 0x00000000
+	RequestAdapterStatusUnavailable RequestAdapterStatus = 0x00000001
+	RequestAdapterStatusError       RequestAdapterStatus = 0x00000002
+	RequestAdapterStatusUnknown     RequestAdapterStatus = 0x00000003
 )
 
 func (v RequestAdapterStatus) String() string {
 	switch v {
-	case RequestAdapterStatus_Success:
+	case RequestAdapterStatusSuccess:
 		return "success"
-	case RequestAdapterStatus_Unavailable:
+	case RequestAdapterStatusUnavailable:
 		return "unavailable"
-	case RequestAdapterStatus_Error:
+	case RequestAdapterStatusError:
 		return "error"
-	case RequestAdapterStatus_Unknown:
+	case RequestAdapterStatusUnknown:
 		return "unknown"
 	default:
 		return ""
@@ -1031,18 +1031,18 @@ func (v RequestAdapterStatus) String() string {
 type RequestDeviceStatus uint32
 
 const (
-	RequestDeviceStatus_Success RequestDeviceStatus = 0x00000000
-	RequestDeviceStatus_Error   RequestDeviceStatus = 0x00000001
-	RequestDeviceStatus_Unknown RequestDeviceStatus = 0x00000002
+	RequestDeviceStatusSuccess RequestDeviceStatus = 0x00000000
+	RequestDeviceStatusError   RequestDeviceStatus = 0x00000001
+	RequestDeviceStatusUnknown RequestDeviceStatus = 0x00000002
 )
 
 func (v RequestDeviceStatus) String() string {
 	switch v {
-	case RequestDeviceStatus_Success:
+	case RequestDeviceStatusSuccess:
 		return "success"
-	case RequestDeviceStatus_Error:
+	case RequestDeviceStatusError:
 		return "error"
-	case RequestDeviceStatus_Unknown:
+	case RequestDeviceStatusUnknown:
 		return "unknown"
 	default:
 		return ""
@@ -1052,21 +1052,21 @@ func (v RequestDeviceStatus) String() string {
 type SamplerBindingType uint32
 
 const (
-	SamplerBindingType_Undefined    SamplerBindingType = 0x00000000
-	SamplerBindingType_Filtering    SamplerBindingType = 0x00000001
-	SamplerBindingType_NonFiltering SamplerBindingType = 0x00000002
-	SamplerBindingType_Comparison   SamplerBindingType = 0x00000003
+	SamplerBindingTypeUndefined    SamplerBindingType = 0x00000000
+	SamplerBindingTypeFiltering    SamplerBindingType = 0x00000001
+	SamplerBindingTypeNonFiltering SamplerBindingType = 0x00000002
+	SamplerBindingTypeComparison   SamplerBindingType = 0x00000003
 )
 
 func (v SamplerBindingType) String() string {
 	switch v {
-	case SamplerBindingType_Undefined:
+	case SamplerBindingTypeUndefined:
 		return "undefined"
-	case SamplerBindingType_Filtering:
+	case SamplerBindingTypeFiltering:
 		return "filtering"
-	case SamplerBindingType_NonFiltering:
+	case SamplerBindingTypeNonFiltering:
 		return "non-filtering"
-	case SamplerBindingType_Comparison:
+	case SamplerBindingTypeComparison:
 		return "comparison"
 	default:
 		return ""
@@ -1076,21 +1076,21 @@ func (v SamplerBindingType) String() string {
 type ShaderStage uint32
 
 const (
-	ShaderStage_None     ShaderStage = 0x00000000
-	ShaderStage_Vertex   ShaderStage = 0x00000001
-	ShaderStage_Fragment ShaderStage = 0x00000002
-	ShaderStage_Compute  ShaderStage = 0x00000004
+	ShaderStageNone     ShaderStage = 0x00000000
+	ShaderStageVertex   ShaderStage = 0x00000001
+	ShaderStageFragment ShaderStage = 0x00000002
+	ShaderStageCompute  ShaderStage = 0x00000004
 )
 
 func (v ShaderStage) String() string {
 	switch v {
-	case ShaderStage_None:
+	case ShaderStageNone:
 		return "none"
-	case ShaderStage_Vertex:
+	case ShaderStageVertex:
 		return "vertex"
-	case ShaderStage_Fragment:
+	case ShaderStageFragment:
 		return "fragment"
-	case ShaderStage_Compute:
+	case ShaderStageCompute:
 		return "compute"
 	default:
 		return ""
@@ -1100,33 +1100,33 @@ func (v ShaderStage) String() string {
 type StencilOperation uint32
 
 const (
-	StencilOperation_Keep           StencilOperation = 0x00000000
-	StencilOperation_Zero           StencilOperation = 0x00000001
-	StencilOperation_Replace        StencilOperation = 0x00000002
-	StencilOperation_Invert         StencilOperation = 0x00000003
-	StencilOperation_IncrementClamp StencilOperation = 0x00000004
-	StencilOperation_DecrementClamp StencilOperation = 0x00000005
-	StencilOperation_IncrementWrap  StencilOperation = 0x00000006
-	StencilOperation_DecrementWrap  StencilOperation = 0x00000007
+	StencilOperationKeep           StencilOperation = 0x00000000
+	StencilOperationZero           StencilOperation = 0x00000001
+	StencilOperationReplace        StencilOperation = 0x00000002
+	StencilOperationInvert         StencilOperation = 0x00000003
+	StencilOperationIncrementClamp StencilOperation = 0x00000004
+	StencilOperationDecrementClamp StencilOperation = 0x00000005
+	StencilOperationIncrementWrap  StencilOperation = 0x00000006
+	StencilOperationDecrementWrap  StencilOperation = 0x00000007
 )
 
 func (v StencilOperation) String() string {
 	switch v {
-	case StencilOperation_Keep:
+	case StencilOperationKeep:
 		return "keep"
-	case StencilOperation_Zero:
+	case StencilOperationZero:
 		return "zero"
-	case StencilOperation_Replace:
+	case StencilOperationReplace:
 		return "replace"
-	case StencilOperation_Invert:
+	case StencilOperationInvert:
 		return "invert"
-	case StencilOperation_IncrementClamp:
+	case StencilOperationIncrementClamp:
 		return "increment-clamp"
-	case StencilOperation_DecrementClamp:
+	case StencilOperationDecrementClamp:
 		return "decrement-clamp"
-	case StencilOperation_IncrementWrap:
+	case StencilOperationIncrementWrap:
 		return "increment-wrap"
-	case StencilOperation_DecrementWrap:
+	case StencilOperationDecrementWrap:
 		return "decrement-wrap"
 	default:
 		return ""
@@ -1136,15 +1136,15 @@ func (v StencilOperation) String() string {
 type StorageTextureAccess uint32
 
 const (
-	StorageTextureAccess_Undefined StorageTextureAccess = 0x00000000
-	StorageTextureAccess_WriteOnly StorageTextureAccess = 0x00000001
+	StorageTextureAccessUndefined StorageTextureAccess = 0x00000000
+	StorageTextureAccessWriteOnly StorageTextureAccess = 0x00000001
 )
 
 func (v StorageTextureAccess) String() string {
 	switch v {
-	case StorageTextureAccess_Undefined:
+	case StorageTextureAccessUndefined:
 		return "undefined"
-	case StorageTextureAccess_WriteOnly:
+	case StorageTextureAccessWriteOnly:
 		return "write-only"
 	default:
 		return ""
@@ -1154,18 +1154,18 @@ func (v StorageTextureAccess) String() string {
 type StoreOp uint32
 
 const (
-	StoreOp_Undefined StoreOp = 0x00000000
-	StoreOp_Store     StoreOp = 0x00000001
-	StoreOp_Discard   StoreOp = 0x00000002
+	StoreOpUndefined StoreOp = 0x00000000
+	StoreOpStore     StoreOp = 0x00000001
+	StoreOpDiscard   StoreOp = 0x00000002
 )
 
 func (v StoreOp) String() string {
 	switch v {
-	case StoreOp_Undefined:
+	case StoreOpUndefined:
 		return "undefined"
-	case StoreOp_Store:
+	case StoreOpStore:
 		return "store"
-	case StoreOp_Discard:
+	case StoreOpDiscard:
 		return "discard"
 	default:
 		return ""
@@ -1175,18 +1175,18 @@ func (v StoreOp) String() string {
 type TextureAspect uint32
 
 const (
-	TextureAspect_All         TextureAspect = 0x00000000
-	TextureAspect_StencilOnly TextureAspect = 0x00000001
-	TextureAspect_DepthOnly   TextureAspect = 0x00000002
+	TextureAspectAll         TextureAspect = 0x00000000
+	TextureAspectStencilOnly TextureAspect = 0x00000001
+	TextureAspectDepthOnly   TextureAspect = 0x00000002
 )
 
 func (v TextureAspect) String() string {
 	switch v {
-	case TextureAspect_All:
+	case TextureAspectAll:
 		return "all"
-	case TextureAspect_StencilOnly:
+	case TextureAspectStencilOnly:
 		return "stencil-only"
-	case TextureAspect_DepthOnly:
+	case TextureAspectDepthOnly:
 		return "depth-only"
 	default:
 		return ""
@@ -1196,18 +1196,18 @@ func (v TextureAspect) String() string {
 type TextureDimension uint32
 
 const (
-	TextureDimension_1D TextureDimension = 0x00000000
-	TextureDimension_2D TextureDimension = 0x00000001
-	TextureDimension_3D TextureDimension = 0x00000002
+	TextureDimension1D TextureDimension = 0x00000000
+	TextureDimension2D TextureDimension = 0x00000001
+	TextureDimension3D TextureDimension = 0x00000002
 )
 
 func (v TextureDimension) String() string {
 	switch v {
-	case TextureDimension_1D:
+	case TextureDimension1D:
 		return "1-d"
-	case TextureDimension_2D:
+	case TextureDimension2D:
 		return "2-d"
-	case TextureDimension_3D:
+	case TextureDimension3D:
 		return "3-d"
 	default:
 		return ""
@@ -1217,294 +1217,294 @@ func (v TextureDimension) String() string {
 type TextureFormat uint32
 
 const (
-	TextureFormat_Undefined            TextureFormat = 0x00000000
-	TextureFormat_R8Unorm              TextureFormat = 0x00000001
-	TextureFormat_R8Snorm              TextureFormat = 0x00000002
-	TextureFormat_R8Uint               TextureFormat = 0x00000003
-	TextureFormat_R8Sint               TextureFormat = 0x00000004
-	TextureFormat_R16Uint              TextureFormat = 0x00000005
-	TextureFormat_R16Sint              TextureFormat = 0x00000006
-	TextureFormat_R16Float             TextureFormat = 0x00000007
-	TextureFormat_RG8Unorm             TextureFormat = 0x00000008
-	TextureFormat_RG8Snorm             TextureFormat = 0x00000009
-	TextureFormat_RG8Uint              TextureFormat = 0x0000000A
-	TextureFormat_RG8Sint              TextureFormat = 0x0000000B
-	TextureFormat_R32Float             TextureFormat = 0x0000000C
-	TextureFormat_R32Uint              TextureFormat = 0x0000000D
-	TextureFormat_R32Sint              TextureFormat = 0x0000000E
-	TextureFormat_RG16Uint             TextureFormat = 0x0000000F
-	TextureFormat_RG16Sint             TextureFormat = 0x00000010
-	TextureFormat_RG16Float            TextureFormat = 0x00000011
-	TextureFormat_RGBA8Unorm           TextureFormat = 0x00000012
-	TextureFormat_RGBA8UnormSrgb       TextureFormat = 0x00000013
-	TextureFormat_RGBA8Snorm           TextureFormat = 0x00000014
-	TextureFormat_RGBA8Uint            TextureFormat = 0x00000015
-	TextureFormat_RGBA8Sint            TextureFormat = 0x00000016
-	TextureFormat_BGRA8Unorm           TextureFormat = 0x00000017
-	TextureFormat_BGRA8UnormSrgb       TextureFormat = 0x00000018
-	TextureFormat_RGB10A2Unorm         TextureFormat = 0x00000019
-	TextureFormat_RG11B10Ufloat        TextureFormat = 0x0000001A
-	TextureFormat_RGB9E5Ufloat         TextureFormat = 0x0000001B
-	TextureFormat_RG32Float            TextureFormat = 0x0000001C
-	TextureFormat_RG32Uint             TextureFormat = 0x0000001D
-	TextureFormat_RG32Sint             TextureFormat = 0x0000001E
-	TextureFormat_RGBA16Uint           TextureFormat = 0x0000001F
-	TextureFormat_RGBA16Sint           TextureFormat = 0x00000020
-	TextureFormat_RGBA16Float          TextureFormat = 0x00000021
-	TextureFormat_RGBA32Float          TextureFormat = 0x00000022
-	TextureFormat_RGBA32Uint           TextureFormat = 0x00000023
-	TextureFormat_RGBA32Sint           TextureFormat = 0x00000024
-	TextureFormat_Stencil8             TextureFormat = 0x00000025
-	TextureFormat_Depth16Unorm         TextureFormat = 0x00000026
-	TextureFormat_Depth24Plus          TextureFormat = 0x00000027
-	TextureFormat_Depth24PlusStencil8  TextureFormat = 0x00000028
-	TextureFormat_Depth32Float         TextureFormat = 0x00000029
-	TextureFormat_Depth32FloatStencil8 TextureFormat = 0x0000002A
-	TextureFormat_BC1RGBAUnorm         TextureFormat = 0x0000002B
-	TextureFormat_BC1RGBAUnormSrgb     TextureFormat = 0x0000002C
-	TextureFormat_BC2RGBAUnorm         TextureFormat = 0x0000002D
-	TextureFormat_BC2RGBAUnormSrgb     TextureFormat = 0x0000002E
-	TextureFormat_BC3RGBAUnorm         TextureFormat = 0x0000002F
-	TextureFormat_BC3RGBAUnormSrgb     TextureFormat = 0x00000030
-	TextureFormat_BC4RUnorm            TextureFormat = 0x00000031
-	TextureFormat_BC4RSnorm            TextureFormat = 0x00000032
-	TextureFormat_BC5RGUnorm           TextureFormat = 0x00000033
-	TextureFormat_BC5RGSnorm           TextureFormat = 0x00000034
-	TextureFormat_BC6HRGBUfloat        TextureFormat = 0x00000035
-	TextureFormat_BC6HRGBFloat         TextureFormat = 0x00000036
-	TextureFormat_BC7RGBAUnorm         TextureFormat = 0x00000037
-	TextureFormat_BC7RGBAUnormSrgb     TextureFormat = 0x00000038
-	TextureFormat_ETC2RGB8Unorm        TextureFormat = 0x00000039
-	TextureFormat_ETC2RGB8UnormSrgb    TextureFormat = 0x0000003A
-	TextureFormat_ETC2RGB8A1Unorm      TextureFormat = 0x0000003B
-	TextureFormat_ETC2RGB8A1UnormSrgb  TextureFormat = 0x0000003C
-	TextureFormat_ETC2RGBA8Unorm       TextureFormat = 0x0000003D
-	TextureFormat_ETC2RGBA8UnormSrgb   TextureFormat = 0x0000003E
-	TextureFormat_EACR11Unorm          TextureFormat = 0x0000003F
-	TextureFormat_EACR11Snorm          TextureFormat = 0x00000040
-	TextureFormat_EACRG11Unorm         TextureFormat = 0x00000041
-	TextureFormat_EACRG11Snorm         TextureFormat = 0x00000042
-	TextureFormat_ASTC4x4Unorm         TextureFormat = 0x00000043
-	TextureFormat_ASTC4x4UnormSrgb     TextureFormat = 0x00000044
-	TextureFormat_ASTC5x4Unorm         TextureFormat = 0x00000045
-	TextureFormat_ASTC5x4UnormSrgb     TextureFormat = 0x00000046
-	TextureFormat_ASTC5x5Unorm         TextureFormat = 0x00000047
-	TextureFormat_ASTC5x5UnormSrgb     TextureFormat = 0x00000048
-	TextureFormat_ASTC6x5Unorm         TextureFormat = 0x00000049
-	TextureFormat_ASTC6x5UnormSrgb     TextureFormat = 0x0000004A
-	TextureFormat_ASTC6x6Unorm         TextureFormat = 0x0000004B
-	TextureFormat_ASTC6x6UnormSrgb     TextureFormat = 0x0000004C
-	TextureFormat_ASTC8x5Unorm         TextureFormat = 0x0000004D
-	TextureFormat_ASTC8x5UnormSrgb     TextureFormat = 0x0000004E
-	TextureFormat_ASTC8x6Unorm         TextureFormat = 0x0000004F
-	TextureFormat_ASTC8x6UnormSrgb     TextureFormat = 0x00000050
-	TextureFormat_ASTC8x8Unorm         TextureFormat = 0x00000051
-	TextureFormat_ASTC8x8UnormSrgb     TextureFormat = 0x00000052
-	TextureFormat_ASTC10x5Unorm        TextureFormat = 0x00000053
-	TextureFormat_ASTC10x5UnormSrgb    TextureFormat = 0x00000054
-	TextureFormat_ASTC10x6Unorm        TextureFormat = 0x00000055
-	TextureFormat_ASTC10x6UnormSrgb    TextureFormat = 0x00000056
-	TextureFormat_ASTC10x8Unorm        TextureFormat = 0x00000057
-	TextureFormat_ASTC10x8UnormSrgb    TextureFormat = 0x00000058
-	TextureFormat_ASTC10x10Unorm       TextureFormat = 0x00000059
-	TextureFormat_ASTC10x10UnormSrgb   TextureFormat = 0x0000005A
-	TextureFormat_ASTC12x10Unorm       TextureFormat = 0x0000005B
-	TextureFormat_ASTC12x10UnormSrgb   TextureFormat = 0x0000005C
-	TextureFormat_ASTC12x12Unorm       TextureFormat = 0x0000005D
-	TextureFormat_ASTC12x12UnormSrgb   TextureFormat = 0x0000005E
+	TextureFormatUndefined            TextureFormat = 0x00000000
+	TextureFormatR8Unorm              TextureFormat = 0x00000001
+	TextureFormatR8Snorm              TextureFormat = 0x00000002
+	TextureFormatR8Uint               TextureFormat = 0x00000003
+	TextureFormatR8Sint               TextureFormat = 0x00000004
+	TextureFormatR16Uint              TextureFormat = 0x00000005
+	TextureFormatR16Sint              TextureFormat = 0x00000006
+	TextureFormatR16Float             TextureFormat = 0x00000007
+	TextureFormatRG8Unorm             TextureFormat = 0x00000008
+	TextureFormatRG8Snorm             TextureFormat = 0x00000009
+	TextureFormatRG8Uint              TextureFormat = 0x0000000A
+	TextureFormatRG8Sint              TextureFormat = 0x0000000B
+	TextureFormatR32Float             TextureFormat = 0x0000000C
+	TextureFormatR32Uint              TextureFormat = 0x0000000D
+	TextureFormatR32Sint              TextureFormat = 0x0000000E
+	TextureFormatRG16Uint             TextureFormat = 0x0000000F
+	TextureFormatRG16Sint             TextureFormat = 0x00000010
+	TextureFormatRG16Float            TextureFormat = 0x00000011
+	TextureFormatRGBA8Unorm           TextureFormat = 0x00000012
+	TextureFormatRGBA8UnormSrgb       TextureFormat = 0x00000013
+	TextureFormatRGBA8Snorm           TextureFormat = 0x00000014
+	TextureFormatRGBA8Uint            TextureFormat = 0x00000015
+	TextureFormatRGBA8Sint            TextureFormat = 0x00000016
+	TextureFormatBGRA8Unorm           TextureFormat = 0x00000017
+	TextureFormatBGRA8UnormSrgb       TextureFormat = 0x00000018
+	TextureFormatRGB10A2Unorm         TextureFormat = 0x00000019
+	TextureFormatRG11B10Ufloat        TextureFormat = 0x0000001A
+	TextureFormatRGB9E5Ufloat         TextureFormat = 0x0000001B
+	TextureFormatRG32Float            TextureFormat = 0x0000001C
+	TextureFormatRG32Uint             TextureFormat = 0x0000001D
+	TextureFormatRG32Sint             TextureFormat = 0x0000001E
+	TextureFormatRGBA16Uint           TextureFormat = 0x0000001F
+	TextureFormatRGBA16Sint           TextureFormat = 0x00000020
+	TextureFormatRGBA16Float          TextureFormat = 0x00000021
+	TextureFormatRGBA32Float          TextureFormat = 0x00000022
+	TextureFormatRGBA32Uint           TextureFormat = 0x00000023
+	TextureFormatRGBA32Sint           TextureFormat = 0x00000024
+	TextureFormatStencil8             TextureFormat = 0x00000025
+	TextureFormatDepth16Unorm         TextureFormat = 0x00000026
+	TextureFormatDepth24Plus          TextureFormat = 0x00000027
+	TextureFormatDepth24PlusStencil8  TextureFormat = 0x00000028
+	TextureFormatDepth32Float         TextureFormat = 0x00000029
+	TextureFormatDepth32FloatStencil8 TextureFormat = 0x0000002A
+	TextureFormatBC1RGBAUnorm         TextureFormat = 0x0000002B
+	TextureFormatBC1RGBAUnormSrgb     TextureFormat = 0x0000002C
+	TextureFormatBC2RGBAUnorm         TextureFormat = 0x0000002D
+	TextureFormatBC2RGBAUnormSrgb     TextureFormat = 0x0000002E
+	TextureFormatBC3RGBAUnorm         TextureFormat = 0x0000002F
+	TextureFormatBC3RGBAUnormSrgb     TextureFormat = 0x00000030
+	TextureFormatBC4RUnorm            TextureFormat = 0x00000031
+	TextureFormatBC4RSnorm            TextureFormat = 0x00000032
+	TextureFormatBC5RGUnorm           TextureFormat = 0x00000033
+	TextureFormatBC5RGSnorm           TextureFormat = 0x00000034
+	TextureFormatBC6HRGBUfloat        TextureFormat = 0x00000035
+	TextureFormatBC6HRGBFloat         TextureFormat = 0x00000036
+	TextureFormatBC7RGBAUnorm         TextureFormat = 0x00000037
+	TextureFormatBC7RGBAUnormSrgb     TextureFormat = 0x00000038
+	TextureFormatETC2RGB8Unorm        TextureFormat = 0x00000039
+	TextureFormatETC2RGB8UnormSrgb    TextureFormat = 0x0000003A
+	TextureFormatETC2RGB8A1Unorm      TextureFormat = 0x0000003B
+	TextureFormatETC2RGB8A1UnormSrgb  TextureFormat = 0x0000003C
+	TextureFormatETC2RGBA8Unorm       TextureFormat = 0x0000003D
+	TextureFormatETC2RGBA8UnormSrgb   TextureFormat = 0x0000003E
+	TextureFormatEACR11Unorm          TextureFormat = 0x0000003F
+	TextureFormatEACR11Snorm          TextureFormat = 0x00000040
+	TextureFormatEACRG11Unorm         TextureFormat = 0x00000041
+	TextureFormatEACRG11Snorm         TextureFormat = 0x00000042
+	TextureFormatASTC4x4Unorm         TextureFormat = 0x00000043
+	TextureFormatASTC4x4UnormSrgb     TextureFormat = 0x00000044
+	TextureFormatASTC5x4Unorm         TextureFormat = 0x00000045
+	TextureFormatASTC5x4UnormSrgb     TextureFormat = 0x00000046
+	TextureFormatASTC5x5Unorm         TextureFormat = 0x00000047
+	TextureFormatASTC5x5UnormSrgb     TextureFormat = 0x00000048
+	TextureFormatASTC6x5Unorm         TextureFormat = 0x00000049
+	TextureFormatASTC6x5UnormSrgb     TextureFormat = 0x0000004A
+	TextureFormatASTC6x6Unorm         TextureFormat = 0x0000004B
+	TextureFormatASTC6x6UnormSrgb     TextureFormat = 0x0000004C
+	TextureFormatASTC8x5Unorm         TextureFormat = 0x0000004D
+	TextureFormatASTC8x5UnormSrgb     TextureFormat = 0x0000004E
+	TextureFormatASTC8x6Unorm         TextureFormat = 0x0000004F
+	TextureFormatASTC8x6UnormSrgb     TextureFormat = 0x00000050
+	TextureFormatASTC8x8Unorm         TextureFormat = 0x00000051
+	TextureFormatASTC8x8UnormSrgb     TextureFormat = 0x00000052
+	TextureFormatASTC10x5Unorm        TextureFormat = 0x00000053
+	TextureFormatASTC10x5UnormSrgb    TextureFormat = 0x00000054
+	TextureFormatASTC10x6Unorm        TextureFormat = 0x00000055
+	TextureFormatASTC10x6UnormSrgb    TextureFormat = 0x00000056
+	TextureFormatASTC10x8Unorm        TextureFormat = 0x00000057
+	TextureFormatASTC10x8UnormSrgb    TextureFormat = 0x00000058
+	TextureFormatASTC10x10Unorm       TextureFormat = 0x00000059
+	TextureFormatASTC10x10UnormSrgb   TextureFormat = 0x0000005A
+	TextureFormatASTC12x10Unorm       TextureFormat = 0x0000005B
+	TextureFormatASTC12x10UnormSrgb   TextureFormat = 0x0000005C
+	TextureFormatASTC12x12Unorm       TextureFormat = 0x0000005D
+	TextureFormatASTC12x12UnormSrgb   TextureFormat = 0x0000005E
 )
 
 func (v TextureFormat) String() string {
 	switch v {
-	case TextureFormat_Undefined:
+	case TextureFormatUndefined:
 		return "undefined"
-	case TextureFormat_R8Unorm:
+	case TextureFormatR8Unorm:
 		return "r-8-unorm"
-	case TextureFormat_R8Snorm:
+	case TextureFormatR8Snorm:
 		return "r-8-snorm"
-	case TextureFormat_R8Uint:
+	case TextureFormatR8Uint:
 		return "r-8-uint"
-	case TextureFormat_R8Sint:
+	case TextureFormatR8Sint:
 		return "r-8-sint"
-	case TextureFormat_R16Uint:
+	case TextureFormatR16Uint:
 		return "r-16-uint"
-	case TextureFormat_R16Sint:
+	case TextureFormatR16Sint:
 		return "r-16-sint"
-	case TextureFormat_R16Float:
+	case TextureFormatR16Float:
 		return "r-16-float"
-	case TextureFormat_RG8Unorm:
+	case TextureFormatRG8Unorm:
 		return "rg-8-unorm"
-	case TextureFormat_RG8Snorm:
+	case TextureFormatRG8Snorm:
 		return "rg-8-snorm"
-	case TextureFormat_RG8Uint:
+	case TextureFormatRG8Uint:
 		return "rg-8-uint"
-	case TextureFormat_RG8Sint:
+	case TextureFormatRG8Sint:
 		return "rg-8-sint"
-	case TextureFormat_R32Float:
+	case TextureFormatR32Float:
 		return "r-32-float"
-	case TextureFormat_R32Uint:
+	case TextureFormatR32Uint:
 		return "r-32-uint"
-	case TextureFormat_R32Sint:
+	case TextureFormatR32Sint:
 		return "r-32-sint"
-	case TextureFormat_RG16Uint:
+	case TextureFormatRG16Uint:
 		return "rg-16-uint"
-	case TextureFormat_RG16Sint:
+	case TextureFormatRG16Sint:
 		return "rg-16-sint"
-	case TextureFormat_RG16Float:
+	case TextureFormatRG16Float:
 		return "rg-16-float"
-	case TextureFormat_RGBA8Unorm:
+	case TextureFormatRGBA8Unorm:
 		return "rgba-8-unorm"
-	case TextureFormat_RGBA8UnormSrgb:
+	case TextureFormatRGBA8UnormSrgb:
 		return "rgba-8-unorm-srgb"
-	case TextureFormat_RGBA8Snorm:
+	case TextureFormatRGBA8Snorm:
 		return "rgba-8-snorm"
-	case TextureFormat_RGBA8Uint:
+	case TextureFormatRGBA8Uint:
 		return "rgba-8-uint"
-	case TextureFormat_RGBA8Sint:
+	case TextureFormatRGBA8Sint:
 		return "rgba-8-sint"
-	case TextureFormat_BGRA8Unorm:
+	case TextureFormatBGRA8Unorm:
 		return "bgra-8-unorm"
-	case TextureFormat_BGRA8UnormSrgb:
+	case TextureFormatBGRA8UnormSrgb:
 		return "bgra-8-unorm-srgb"
-	case TextureFormat_RGB10A2Unorm:
+	case TextureFormatRGB10A2Unorm:
 		return "rgb-10-a-2-unorm"
-	case TextureFormat_RG11B10Ufloat:
+	case TextureFormatRG11B10Ufloat:
 		return "rg-11-b-10-ufloat"
-	case TextureFormat_RGB9E5Ufloat:
+	case TextureFormatRGB9E5Ufloat:
 		return "rgb-9-e-5-ufloat"
-	case TextureFormat_RG32Float:
+	case TextureFormatRG32Float:
 		return "rg-32-float"
-	case TextureFormat_RG32Uint:
+	case TextureFormatRG32Uint:
 		return "rg-32-uint"
-	case TextureFormat_RG32Sint:
+	case TextureFormatRG32Sint:
 		return "rg-32-sint"
-	case TextureFormat_RGBA16Uint:
+	case TextureFormatRGBA16Uint:
 		return "rgba-16-uint"
-	case TextureFormat_RGBA16Sint:
+	case TextureFormatRGBA16Sint:
 		return "rgba-16-sint"
-	case TextureFormat_RGBA16Float:
+	case TextureFormatRGBA16Float:
 		return "rgba-16-float"
-	case TextureFormat_RGBA32Float:
+	case TextureFormatRGBA32Float:
 		return "rgba-32-float"
-	case TextureFormat_RGBA32Uint:
+	case TextureFormatRGBA32Uint:
 		return "rgba-32-uint"
-	case TextureFormat_RGBA32Sint:
+	case TextureFormatRGBA32Sint:
 		return "rgba-32-sint"
-	case TextureFormat_Stencil8:
+	case TextureFormatStencil8:
 		return "stencil-8"
-	case TextureFormat_Depth16Unorm:
+	case TextureFormatDepth16Unorm:
 		return "depth-16-unorm"
-	case TextureFormat_Depth24Plus:
+	case TextureFormatDepth24Plus:
 		return "depth-24-plus"
-	case TextureFormat_Depth24PlusStencil8:
+	case TextureFormatDepth24PlusStencil8:
 		return "depth-24-plus-stencil-8"
-	case TextureFormat_Depth32Float:
+	case TextureFormatDepth32Float:
 		return "depth-32-float"
-	case TextureFormat_Depth32FloatStencil8:
+	case TextureFormatDepth32FloatStencil8:
 		return "depth-32-float-stencil-8"
-	case TextureFormat_BC1RGBAUnorm:
+	case TextureFormatBC1RGBAUnorm:
 		return "bc-1-rgba-unorm"
-	case TextureFormat_BC1RGBAUnormSrgb:
+	case TextureFormatBC1RGBAUnormSrgb:
 		return "bc-1-rgba-unorm-srgb"
-	case TextureFormat_BC2RGBAUnorm:
+	case TextureFormatBC2RGBAUnorm:
 		return "bc-2-rgba-unorm"
-	case TextureFormat_BC2RGBAUnormSrgb:
+	case TextureFormatBC2RGBAUnormSrgb:
 		return "bc-2-rgba-unorm-srgb"
-	case TextureFormat_BC3RGBAUnorm:
+	case TextureFormatBC3RGBAUnorm:
 		return "bc-3-rgba-unorm"
-	case TextureFormat_BC3RGBAUnormSrgb:
+	case TextureFormatBC3RGBAUnormSrgb:
 		return "bc-3-rgba-unorm-srgb"
-	case TextureFormat_BC4RUnorm:
+	case TextureFormatBC4RUnorm:
 		return "bc-4-r-unorm"
-	case TextureFormat_BC4RSnorm:
+	case TextureFormatBC4RSnorm:
 		return "bc-4-r-snorm"
-	case TextureFormat_BC5RGUnorm:
+	case TextureFormatBC5RGUnorm:
 		return "bc-5-rg-unorm"
-	case TextureFormat_BC5RGSnorm:
+	case TextureFormatBC5RGSnorm:
 		return "bc-5-rg-snorm"
-	case TextureFormat_BC6HRGBUfloat:
+	case TextureFormatBC6HRGBUfloat:
 		return "bc-6-hrgb-ufloat"
-	case TextureFormat_BC6HRGBFloat:
+	case TextureFormatBC6HRGBFloat:
 		return "bc-6-hrgb-float"
-	case TextureFormat_BC7RGBAUnorm:
+	case TextureFormatBC7RGBAUnorm:
 		return "bc-7-rgba-unorm"
-	case TextureFormat_BC7RGBAUnormSrgb:
+	case TextureFormatBC7RGBAUnormSrgb:
 		return "bc-7-rgba-unorm-srgb"
-	case TextureFormat_ETC2RGB8Unorm:
+	case TextureFormatETC2RGB8Unorm:
 		return "etc-2-rgb-8-unorm"
-	case TextureFormat_ETC2RGB8UnormSrgb:
+	case TextureFormatETC2RGB8UnormSrgb:
 		return "etc-2-rgb-8-unorm-srgb"
-	case TextureFormat_ETC2RGB8A1Unorm:
+	case TextureFormatETC2RGB8A1Unorm:
 		return "etc-2-rgb-8-a-1-unorm"
-	case TextureFormat_ETC2RGB8A1UnormSrgb:
+	case TextureFormatETC2RGB8A1UnormSrgb:
 		return "etc-2-rgb-8-a-1-unorm-srgb"
-	case TextureFormat_ETC2RGBA8Unorm:
+	case TextureFormatETC2RGBA8Unorm:
 		return "etc-2-rgba-8-unorm"
-	case TextureFormat_ETC2RGBA8UnormSrgb:
+	case TextureFormatETC2RGBA8UnormSrgb:
 		return "etc-2-rgba-8-unorm-srgb"
-	case TextureFormat_EACR11Unorm:
+	case TextureFormatEACR11Unorm:
 		return "eacr-11-unorm"
-	case TextureFormat_EACR11Snorm:
+	case TextureFormatEACR11Snorm:
 		return "eacr-11-snorm"
-	case TextureFormat_EACRG11Unorm:
+	case TextureFormatEACRG11Unorm:
 		return "eacrg-11-unorm"
-	case TextureFormat_EACRG11Snorm:
+	case TextureFormatEACRG11Snorm:
 		return "eacrg-11-snorm"
-	case TextureFormat_ASTC4x4Unorm:
+	case TextureFormatASTC4x4Unorm:
 		return "astc-4-x-4-unorm"
-	case TextureFormat_ASTC4x4UnormSrgb:
+	case TextureFormatASTC4x4UnormSrgb:
 		return "astc-4-x-4-unorm-srgb"
-	case TextureFormat_ASTC5x4Unorm:
+	case TextureFormatASTC5x4Unorm:
 		return "astc-5-x-4-unorm"
-	case TextureFormat_ASTC5x4UnormSrgb:
+	case TextureFormatASTC5x4UnormSrgb:
 		return "astc-5-x-4-unorm-srgb"
-	case TextureFormat_ASTC5x5Unorm:
+	case TextureFormatASTC5x5Unorm:
 		return "astc-5-x-5-unorm"
-	case TextureFormat_ASTC5x5UnormSrgb:
+	case TextureFormatASTC5x5UnormSrgb:
 		return "astc-5-x-5-unorm-srgb"
-	case TextureFormat_ASTC6x5Unorm:
+	case TextureFormatASTC6x5Unorm:
 		return "astc-6-x-5-unorm"
-	case TextureFormat_ASTC6x5UnormSrgb:
+	case TextureFormatASTC6x5UnormSrgb:
 		return "astc-6-x-5-unorm-srgb"
-	case TextureFormat_ASTC6x6Unorm:
+	case TextureFormatASTC6x6Unorm:
 		return "astc-6-x-6-unorm"
-	case TextureFormat_ASTC6x6UnormSrgb:
+	case TextureFormatASTC6x6UnormSrgb:
 		return "astc-6-x-6-unorm-srgb"
-	case TextureFormat_ASTC8x5Unorm:
+	case TextureFormatASTC8x5Unorm:
 		return "astc-8-x-5-unorm"
-	case TextureFormat_ASTC8x5UnormSrgb:
+	case TextureFormatASTC8x5UnormSrgb:
 		return "astc-8-x-5-unorm-srgb"
-	case TextureFormat_ASTC8x6Unorm:
+	case TextureFormatASTC8x6Unorm:
 		return "astc-8-x-6-unorm"
-	case TextureFormat_ASTC8x6UnormSrgb:
+	case TextureFormatASTC8x6UnormSrgb:
 		return "astc-8-x-6-unorm-srgb"
-	case TextureFormat_ASTC8x8Unorm:
+	case TextureFormatASTC8x8Unorm:
 		return "astc-8-x-8-unorm"
-	case TextureFormat_ASTC8x8UnormSrgb:
+	case TextureFormatASTC8x8UnormSrgb:
 		return "astc-8-x-8-unorm-srgb"
-	case TextureFormat_ASTC10x5Unorm:
+	case TextureFormatASTC10x5Unorm:
 		return "astc-10-x-5-unorm"
-	case TextureFormat_ASTC10x5UnormSrgb:
+	case TextureFormatASTC10x5UnormSrgb:
 		return "astc-10-x-5-unorm-srgb"
-	case TextureFormat_ASTC10x6Unorm:
+	case TextureFormatASTC10x6Unorm:
 		return "astc-10-x-6-unorm"
-	case TextureFormat_ASTC10x6UnormSrgb:
+	case TextureFormatASTC10x6UnormSrgb:
 		return "astc-10-x-6-unorm-srgb"
-	case TextureFormat_ASTC10x8Unorm:
+	case TextureFormatASTC10x8Unorm:
 		return "astc-10-x-8-unorm"
-	case TextureFormat_ASTC10x8UnormSrgb:
+	case TextureFormatASTC10x8UnormSrgb:
 		return "astc-10-x-8-unorm-srgb"
-	case TextureFormat_ASTC10x10Unorm:
+	case TextureFormatASTC10x10Unorm:
 		return "astc-10-x-10-unorm"
-	case TextureFormat_ASTC10x10UnormSrgb:
+	case TextureFormatASTC10x10UnormSrgb:
 		return "astc-10-x-10-unorm-srgb"
-	case TextureFormat_ASTC12x10Unorm:
+	case TextureFormatASTC12x10Unorm:
 		return "astc-12-x-10-unorm"
-	case TextureFormat_ASTC12x10UnormSrgb:
+	case TextureFormatASTC12x10UnormSrgb:
 		return "astc-12-x-10-unorm-srgb"
-	case TextureFormat_ASTC12x12Unorm:
+	case TextureFormatASTC12x12Unorm:
 		return "astc-12-x-12-unorm"
-	case TextureFormat_ASTC12x12UnormSrgb:
+	case TextureFormatASTC12x12UnormSrgb:
 		return "astc-12-x-12-unorm-srgb"
 	default:
 		return ""
@@ -1514,27 +1514,27 @@ func (v TextureFormat) String() string {
 type TextureSampleType uint32
 
 const (
-	TextureSampleType_Undefined         TextureSampleType = 0x00000000
-	TextureSampleType_Float             TextureSampleType = 0x00000001
-	TextureSampleType_UnfilterableFloat TextureSampleType = 0x00000002
-	TextureSampleType_Depth             TextureSampleType = 0x00000003
-	TextureSampleType_Sint              TextureSampleType = 0x00000004
-	TextureSampleType_Uint              TextureSampleType = 0x00000005
+	TextureSampleTypeUndefined         TextureSampleType = 0x00000000
+	TextureSampleTypeFloat             TextureSampleType = 0x00000001
+	TextureSampleTypeUnfilterableFloat TextureSampleType = 0x00000002
+	TextureSampleTypeDepth             TextureSampleType = 0x00000003
+	TextureSampleTypeSint              TextureSampleType = 0x00000004
+	TextureSampleTypeUint              TextureSampleType = 0x00000005
 )
 
 func (v TextureSampleType) String() string {
 	switch v {
-	case TextureSampleType_Undefined:
+	case TextureSampleTypeUndefined:
 		return "undefined"
-	case TextureSampleType_Float:
+	case TextureSampleTypeFloat:
 		return "float"
-	case TextureSampleType_UnfilterableFloat:
+	case TextureSampleTypeUnfilterableFloat:
 		return "unfilterable-float"
-	case TextureSampleType_Depth:
+	case TextureSampleTypeDepth:
 		return "depth"
-	case TextureSampleType_Sint:
+	case TextureSampleTypeSint:
 		return "sint"
-	case TextureSampleType_Uint:
+	case TextureSampleTypeUint:
 		return "uint"
 	default:
 		return ""
@@ -1544,27 +1544,27 @@ func (v TextureSampleType) String() string {
 type TextureUsage uint32
 
 const (
-	TextureUsage_None             TextureUsage = 0x00000000
-	TextureUsage_CopySrc          TextureUsage = 0x00000001
-	TextureUsage_CopyDst          TextureUsage = 0x00000002
-	TextureUsage_TextureBinding   TextureUsage = 0x00000004
-	TextureUsage_StorageBinding   TextureUsage = 0x00000008
-	TextureUsage_RenderAttachment TextureUsage = 0x00000010
+	TextureUsageNone             TextureUsage = 0x00000000
+	TextureUsageCopySrc          TextureUsage = 0x00000001
+	TextureUsageCopyDst          TextureUsage = 0x00000002
+	TextureUsageTextureBinding   TextureUsage = 0x00000004
+	TextureUsageStorageBinding   TextureUsage = 0x00000008
+	TextureUsageRenderAttachment TextureUsage = 0x00000010
 )
 
 func (v TextureUsage) String() string {
 	switch v {
-	case TextureUsage_None:
+	case TextureUsageNone:
 		return "none"
-	case TextureUsage_CopySrc:
+	case TextureUsageCopySrc:
 		return "copy-src"
-	case TextureUsage_CopyDst:
+	case TextureUsageCopyDst:
 		return "copy-dst"
-	case TextureUsage_TextureBinding:
+	case TextureUsageTextureBinding:
 		return "texture-binding"
-	case TextureUsage_StorageBinding:
+	case TextureUsageStorageBinding:
 		return "storage-binding"
-	case TextureUsage_RenderAttachment:
+	case TextureUsageRenderAttachment:
 		return "render-attachment"
 	default:
 		return ""
@@ -1574,30 +1574,30 @@ func (v TextureUsage) String() string {
 type TextureViewDimension uint32
 
 const (
-	TextureViewDimension_Undefined TextureViewDimension = 0x00000000
-	TextureViewDimension_1D        TextureViewDimension = 0x00000001
-	TextureViewDimension_2D        TextureViewDimension = 0x00000002
-	TextureViewDimension_2DArray   TextureViewDimension = 0x00000003
-	TextureViewDimension_Cube      TextureViewDimension = 0x00000004
-	TextureViewDimension_CubeArray TextureViewDimension = 0x00000005
-	TextureViewDimension_3D        TextureViewDimension = 0x00000006
+	TextureViewDimensionUndefined TextureViewDimension = 0x00000000
+	TextureViewDimension1D        TextureViewDimension = 0x00000001
+	TextureViewDimension2D        TextureViewDimension = 0x00000002
+	TextureViewDimension2DArray   TextureViewDimension = 0x00000003
+	TextureViewDimensionCube      TextureViewDimension = 0x00000004
+	TextureViewDimensionCubeArray TextureViewDimension = 0x00000005
+	TextureViewDimension3D        TextureViewDimension = 0x00000006
 )
 
 func (v TextureViewDimension) String() string {
 	switch v {
-	case TextureViewDimension_Undefined:
+	case TextureViewDimensionUndefined:
 		return "undefined"
-	case TextureViewDimension_1D:
+	case TextureViewDimension1D:
 		return "1-d"
-	case TextureViewDimension_2D:
+	case TextureViewDimension2D:
 		return "2-d"
-	case TextureViewDimension_2DArray:
+	case TextureViewDimension2DArray:
 		return "2-d-array"
-	case TextureViewDimension_Cube:
+	case TextureViewDimensionCube:
 		return "cube"
-	case TextureViewDimension_CubeArray:
+	case TextureViewDimensionCubeArray:
 		return "cube-array"
-	case TextureViewDimension_3D:
+	case TextureViewDimension3D:
 		return "3-d"
 	default:
 		return ""
@@ -1607,102 +1607,102 @@ func (v TextureViewDimension) String() string {
 type VertexFormat uint32
 
 const (
-	VertexFormat_Undefined VertexFormat = 0x00000000
-	VertexFormat_Uint8x2   VertexFormat = 0x00000001
-	VertexFormat_Uint8x4   VertexFormat = 0x00000002
-	VertexFormat_Sint8x2   VertexFormat = 0x00000003
-	VertexFormat_Sint8x4   VertexFormat = 0x00000004
-	VertexFormat_Unorm8x2  VertexFormat = 0x00000005
-	VertexFormat_Unorm8x4  VertexFormat = 0x00000006
-	VertexFormat_Snorm8x2  VertexFormat = 0x00000007
-	VertexFormat_Snorm8x4  VertexFormat = 0x00000008
-	VertexFormat_Uint16x2  VertexFormat = 0x00000009
-	VertexFormat_Uint16x4  VertexFormat = 0x0000000A
-	VertexFormat_Sint16x2  VertexFormat = 0x0000000B
-	VertexFormat_Sint16x4  VertexFormat = 0x0000000C
-	VertexFormat_Unorm16x2 VertexFormat = 0x0000000D
-	VertexFormat_Unorm16x4 VertexFormat = 0x0000000E
-	VertexFormat_Snorm16x2 VertexFormat = 0x0000000F
-	VertexFormat_Snorm16x4 VertexFormat = 0x00000010
-	VertexFormat_Float16x2 VertexFormat = 0x00000011
-	VertexFormat_Float16x4 VertexFormat = 0x00000012
-	VertexFormat_Float32   VertexFormat = 0x00000013
-	VertexFormat_Float32x2 VertexFormat = 0x00000014
-	VertexFormat_Float32x3 VertexFormat = 0x00000015
-	VertexFormat_Float32x4 VertexFormat = 0x00000016
-	VertexFormat_Uint32    VertexFormat = 0x00000017
-	VertexFormat_Uint32x2  VertexFormat = 0x00000018
-	VertexFormat_Uint32x3  VertexFormat = 0x00000019
-	VertexFormat_Uint32x4  VertexFormat = 0x0000001A
-	VertexFormat_Sint32    VertexFormat = 0x0000001B
-	VertexFormat_Sint32x2  VertexFormat = 0x0000001C
-	VertexFormat_Sint32x3  VertexFormat = 0x0000001D
-	VertexFormat_Sint32x4  VertexFormat = 0x0000001E
+	VertexFormatUndefined VertexFormat = 0x00000000
+	VertexFormatUint8x2   VertexFormat = 0x00000001
+	VertexFormatUint8x4   VertexFormat = 0x00000002
+	VertexFormatSint8x2   VertexFormat = 0x00000003
+	VertexFormatSint8x4   VertexFormat = 0x00000004
+	VertexFormatUnorm8x2  VertexFormat = 0x00000005
+	VertexFormatUnorm8x4  VertexFormat = 0x00000006
+	VertexFormatSnorm8x2  VertexFormat = 0x00000007
+	VertexFormatSnorm8x4  VertexFormat = 0x00000008
+	VertexFormatUint16x2  VertexFormat = 0x00000009
+	VertexFormatUint16x4  VertexFormat = 0x0000000A
+	VertexFormatSint16x2  VertexFormat = 0x0000000B
+	VertexFormatSint16x4  VertexFormat = 0x0000000C
+	VertexFormatUnorm16x2 VertexFormat = 0x0000000D
+	VertexFormatUnorm16x4 VertexFormat = 0x0000000E
+	VertexFormatSnorm16x2 VertexFormat = 0x0000000F
+	VertexFormatSnorm16x4 VertexFormat = 0x00000010
+	VertexFormatFloat16x2 VertexFormat = 0x00000011
+	VertexFormatFloat16x4 VertexFormat = 0x00000012
+	VertexFormatFloat32   VertexFormat = 0x00000013
+	VertexFormatFloat32x2 VertexFormat = 0x00000014
+	VertexFormatFloat32x3 VertexFormat = 0x00000015
+	VertexFormatFloat32x4 VertexFormat = 0x00000016
+	VertexFormatUint32    VertexFormat = 0x00000017
+	VertexFormatUint32x2  VertexFormat = 0x00000018
+	VertexFormatUint32x3  VertexFormat = 0x00000019
+	VertexFormatUint32x4  VertexFormat = 0x0000001A
+	VertexFormatSint32    VertexFormat = 0x0000001B
+	VertexFormatSint32x2  VertexFormat = 0x0000001C
+	VertexFormatSint32x3  VertexFormat = 0x0000001D
+	VertexFormatSint32x4  VertexFormat = 0x0000001E
 )
 
 func (v VertexFormat) String() string {
 	switch v {
-	case VertexFormat_Undefined:
+	case VertexFormatUndefined:
 		return "undefined"
-	case VertexFormat_Uint8x2:
+	case VertexFormatUint8x2:
 		return "uint-8-x-2"
-	case VertexFormat_Uint8x4:
+	case VertexFormatUint8x4:
 		return "uint-8-x-4"
-	case VertexFormat_Sint8x2:
+	case VertexFormatSint8x2:
 		return "sint-8-x-2"
-	case VertexFormat_Sint8x4:
+	case VertexFormatSint8x4:
 		return "sint-8-x-4"
-	case VertexFormat_Unorm8x2:
+	case VertexFormatUnorm8x2:
 		return "unorm-8-x-2"
-	case VertexFormat_Unorm8x4:
+	case VertexFormatUnorm8x4:
 		return "unorm-8-x-4"
-	case VertexFormat_Snorm8x2:
+	case VertexFormatSnorm8x2:
 		return "snorm-8-x-2"
-	case VertexFormat_Snorm8x4:
+	case VertexFormatSnorm8x4:
 		return "snorm-8-x-4"
-	case VertexFormat_Uint16x2:
+	case VertexFormatUint16x2:
 		return "uint-16-x-2"
-	case VertexFormat_Uint16x4:
+	case VertexFormatUint16x4:
 		return "uint-16-x-4"
-	case VertexFormat_Sint16x2:
+	case VertexFormatSint16x2:
 		return "sint-16-x-2"
-	case VertexFormat_Sint16x4:
+	case VertexFormatSint16x4:
 		return "sint-16-x-4"
-	case VertexFormat_Unorm16x2:
+	case VertexFormatUnorm16x2:
 		return "unorm-16-x-2"
-	case VertexFormat_Unorm16x4:
+	case VertexFormatUnorm16x4:
 		return "unorm-16-x-4"
-	case VertexFormat_Snorm16x2:
+	case VertexFormatSnorm16x2:
 		return "snorm-16-x-2"
-	case VertexFormat_Snorm16x4:
+	case VertexFormatSnorm16x4:
 		return "snorm-16-x-4"
-	case VertexFormat_Float16x2:
+	case VertexFormatFloat16x2:
 		return "float-16-x-2"
-	case VertexFormat_Float16x4:
+	case VertexFormatFloat16x4:
 		return "float-16-x-4"
-	case VertexFormat_Float32:
+	case VertexFormatFloat32:
 		return "float-32"
-	case VertexFormat_Float32x2:
+	case VertexFormatFloat32x2:
 		return "float-32-x-2"
-	case VertexFormat_Float32x3:
+	case VertexFormatFloat32x3:
 		return "float-32-x-3"
-	case VertexFormat_Float32x4:
+	case VertexFormatFloat32x4:
 		return "float-32-x-4"
-	case VertexFormat_Uint32:
+	case VertexFormatUint32:
 		return "uint-32"
-	case VertexFormat_Uint32x2:
+	case VertexFormatUint32x2:
 		return "uint-32-x-2"
-	case VertexFormat_Uint32x3:
+	case VertexFormatUint32x3:
 		return "uint-32-x-3"
-	case VertexFormat_Uint32x4:
+	case VertexFormatUint32x4:
 		return "uint-32-x-4"
-	case VertexFormat_Sint32:
+	case VertexFormatSint32:
 		return "sint-32"
-	case VertexFormat_Sint32x2:
+	case VertexFormatSint32x2:
 		return "sint-32-x-2"
-	case VertexFormat_Sint32x3:
+	case VertexFormatSint32x3:
 		return "sint-32-x-3"
-	case VertexFormat_Sint32x4:
+	case VertexFormatSint32x4:
 		return "sint-32-x-4"
 	default:
 		return ""
@@ -1712,18 +1712,18 @@ func (v VertexFormat) String() string {
 type VertexStepMode uint32
 
 const (
-	VertexStepMode_Vertex              VertexStepMode = 0x00000000
-	VertexStepMode_Instance            VertexStepMode = 0x00000001
-	VertexStepMode_VertexBufferNotUsed VertexStepMode = 0x00000002
+	VertexStepModeVertex              VertexStepMode = 0x00000000
+	VertexStepModeInstance            VertexStepMode = 0x00000001
+	VertexStepModeVertexBufferNotUsed VertexStepMode = 0x00000002
 )
 
 func (v VertexStepMode) String() string {
 	switch v {
-	case VertexStepMode_Vertex:
+	case VertexStepModeVertex:
 		return "vertex"
-	case VertexStepMode_Instance:
+	case VertexStepModeInstance:
 		return "instance"
-	case VertexStepMode_VertexBufferNotUsed:
+	case VertexStepModeVertexBufferNotUsed:
 		return "vertex-buffer-not-used"
 	default:
 		return ""

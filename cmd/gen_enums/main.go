@@ -128,6 +128,7 @@ loop:
 		}
 
 		inTyp, ok := mergeTypes[typ]
+		key = strings.ReplaceAll(key, "_", "")
 		if ok {
 			enums = enums.Add(inTyp, key, value)
 		} else {
@@ -163,7 +164,7 @@ loop:
 		for _, v := range e.Enums {
 			fmt.Fprintf(w, "case %s:\n", v.Enum)
 			// kebab case is consistent with the enum values in js
-			fmt.Fprintf(w, "return \"%s\"\n", strcase.ToKebab(strings.TrimPrefix(v.Enum, e.Name+"_")))
+			fmt.Fprintf(w, "return \"%s\"\n", strcase.ToKebab(strings.TrimPrefix(v.Enum, e.Name)))
 		}
 		if e.Name == "ErrorType" {
 			fmt.Fprintf(w, "default:\n")
