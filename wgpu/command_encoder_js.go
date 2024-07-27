@@ -38,11 +38,60 @@ func (g CommandEncoder) BeginComputePass(descriptor *ComputePassDescriptor) *Com
 	}
 }
 
+// CopyBufferToBuffer as described:
+// https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-copybuffertobuffer
+func (g CommandEncoder) CopyBufferToBuffer(source *Buffer, sourceOffset uint64, destination *Buffer, destinationOffset uint64, size uint64) (err error) {
+	g.jsValue.Call("copyBufferToBuffer", source.ToJS(), sourceOffset, destination.ToJS(), destinationOffset, size)
+	return nil
+}
+
 // CopyBufferToTexture as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-copybuffertotexture
 func (g CommandEncoder) CopyBufferToTexture(source *ImageCopyBuffer, destination *ImageCopyTexture, copySize *Extent3D) (err error) {
 	g.jsValue.Call("copyBufferToTexture", source.ToJS(), destination.ToJS(), copySize.ToJS())
 	return nil
+}
+
+// CopyTextureToBuffer as described:
+// https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-copytexturetobuffer
+func (g CommandEncoder) CopyTextureToBuffer(source *ImageCopyTexture, destination *ImageCopyBuffer, copySize *Extent3D) (err error) {
+	g.jsValue.Call("copyTextureToBuffer", source.ToJS(), destination.ToJS(), copySize.ToJS())
+	return nil
+}
+
+// CopyTextureToTexture as described:
+// https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-copytexturetotexture
+func (g CommandEncoder) CopyTextureToTexture(source *ImageCopyTexture, destination *ImageCopyTexture, copySize *Extent3D) (err error) {
+	g.jsValue.Call("copyTextureToTexture", source.ToJS(), destination.ToJS(), copySize.ToJS())
+	return nil
+}
+
+func (g *ImageCopyBuffer) ToJS() any {
+	return map[string]any{
+		"layout": g.Layout.ToJS(),
+		"buffer": g.Buffer.ToJS(),
+	}
+}
+
+func (g *ImageCopyTexture) ToJS() any {
+	return map[string]any{
+		"texture":  g.Texture.ToJS(),
+		"mipLevel": g.MipLevel,
+		"origin":   g.Origin.ToJS(),
+		"aspect":   g.Aspect.String(),
+	}
+}
+
+func (g *TextureDataLayout) ToJS() any {
+	return map[string]any{
+		"offset":       g.Offset,
+		"bytesPerRow":  g.BytesPerRow,
+		"rowsPerImage": g.RowsPerImage,
+	}
+}
+
+func (g *Origin3D) ToJS() any {
+	return []any{g.X, g.Y, g.Z}
 }
 
 // Finish as described:
