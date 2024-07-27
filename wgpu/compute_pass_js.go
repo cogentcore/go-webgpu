@@ -27,7 +27,7 @@ func (g ComputePassEncoder) toJS() any {
 // SetPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucomputepassencoder-setpipeline
 func (g ComputePassEncoder) SetPipeline(pipeline *ComputePipeline) {
-	g.jsValue.Call("setPipeline", toJS(pipeline))
+	g.jsValue.Call("setPipeline", pointerToJS(pipeline))
 }
 
 // SetBindGroup as described:
@@ -35,7 +35,7 @@ func (g ComputePassEncoder) SetPipeline(pipeline *ComputePipeline) {
 func (g ComputePassEncoder) SetBindGroup(index uint32, bindGroup *BindGroup, dynamicOffsets []uint32) {
 	params := make([]any, 3)
 	params[0] = index
-	params[1] = toJS(bindGroup)
+	params[1] = pointerToJS(bindGroup)
 	params[2] = dynamicOffsets
 	g.jsValue.Call("setBindGroup", params...)
 }

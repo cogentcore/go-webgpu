@@ -33,7 +33,7 @@ func (g RenderPassEncoder) toJS() any {
 // SetPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-setpipeline
 func (g RenderPassEncoder) SetPipeline(pipeline *RenderPipeline) {
-	g.jsValue.Call("setPipeline", toJS(pipeline))
+	g.jsValue.Call("setPipeline", pointerToJS(pipeline))
 }
 
 // SetVertexBuffer as described:
@@ -41,7 +41,7 @@ func (g RenderPassEncoder) SetPipeline(pipeline *RenderPipeline) {
 func (g RenderPassEncoder) SetVertexBuffer(slot uint32, vertexBuffer *Buffer, offset, size uint64) {
 	params := make([]any, 4)
 	params[0] = slot
-	params[1] = toJS(vertexBuffer)
+	params[1] = pointerToJS(vertexBuffer)
 	params[2] = offset
 	params[3] = size
 	g.jsValue.Call("setVertexBuffer", params...)
@@ -52,7 +52,7 @@ func (g RenderPassEncoder) SetVertexBuffer(slot uint32, vertexBuffer *Buffer, of
 func (g RenderPassEncoder) SetBindGroup(index uint32, bindGroup *BindGroup, dynamicOffsets []uint32) {
 	params := make([]any, 3)
 	params[0] = index
-	params[1] = toJS(bindGroup)
+	params[1] = pointerToJS(bindGroup)
 	params[2] = dynamicOffsets
 	g.jsValue.Call("setBindGroup", params...)
 }

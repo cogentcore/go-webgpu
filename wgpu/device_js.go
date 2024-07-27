@@ -36,7 +36,7 @@ func (g Device) GetQueue() *Queue {
 // CreateCommandEncoder as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createcommandencoder
 func (g Device) CreateCommandEncoder(descriptor *CommandEncoderDescriptor) (*CommandEncoder, error) {
-	jsEncoder := g.jsValue.Call("createCommandEncoder", toJS(descriptor))
+	jsEncoder := g.jsValue.Call("createCommandEncoder", pointerToJS(descriptor))
 	return &CommandEncoder{
 		jsValue: jsEncoder,
 	}, nil
@@ -45,7 +45,7 @@ func (g Device) CreateCommandEncoder(descriptor *CommandEncoderDescriptor) (*Com
 // CreateBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbuffer
 func (g Device) CreateBuffer(descriptor *BufferDescriptor) (*Buffer, error) {
-	jsBuffer := g.jsValue.Call("createBuffer", toJS(descriptor))
+	jsBuffer := g.jsValue.Call("createBuffer", pointerToJS(descriptor))
 	return &Buffer{
 		jsValue: jsBuffer,
 	}, nil
@@ -54,7 +54,7 @@ func (g Device) CreateBuffer(descriptor *BufferDescriptor) (*Buffer, error) {
 // CreateShaderModule as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createshadermodule
 func (g Device) CreateShaderModule(desc *ShaderModuleDescriptor) (*ShaderModule, error) {
-	jsShader := g.jsValue.Call("createShaderModule", toJS(desc))
+	jsShader := g.jsValue.Call("createShaderModule", pointerToJS(desc))
 	return &ShaderModule{
 		jsValue: jsShader,
 	}, nil
@@ -63,7 +63,7 @@ func (g Device) CreateShaderModule(desc *ShaderModuleDescriptor) (*ShaderModule,
 // CreateRenderPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createrenderpipeline
 func (g Device) CreateRenderPipeline(descriptor *RenderPipelineDescriptor) (*RenderPipeline, error) {
-	jsPipeline := g.jsValue.Call("createRenderPipeline", toJS(descriptor))
+	jsPipeline := g.jsValue.Call("createRenderPipeline", pointerToJS(descriptor))
 	return &RenderPipeline{
 		jsValue: jsPipeline,
 	}, nil
@@ -72,7 +72,7 @@ func (g Device) CreateRenderPipeline(descriptor *RenderPipelineDescriptor) (*Ren
 // CreateBindGroup as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbindgroup
 func (g Device) CreateBindGroup(descriptor *BindGroupDescriptor) (*BindGroup, error) {
-	jsBindGroup := g.jsValue.Call("createBindGroup", toJS(descriptor))
+	jsBindGroup := g.jsValue.Call("createBindGroup", pointerToJS(descriptor))
 	return &BindGroup{
 		jsValue: jsBindGroup,
 	}, nil
@@ -81,7 +81,7 @@ func (g Device) CreateBindGroup(descriptor *BindGroupDescriptor) (*BindGroup, er
 // CreateBindGroupLayout as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbindgrouplayout
 func (g Device) CreateBindGroupLayout(descriptor *BindGroupLayoutDescriptor) (*BindGroupLayout, error) {
-	jsLayout := g.jsValue.Call("createBindGroupLayout", toJS(descriptor))
+	jsLayout := g.jsValue.Call("createBindGroupLayout", pointerToJS(descriptor))
 	return &BindGroupLayout{
 		jsValue: jsLayout,
 	}, nil
@@ -90,7 +90,7 @@ func (g Device) CreateBindGroupLayout(descriptor *BindGroupLayoutDescriptor) (*B
 // CreatePipelineLayout as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createpipelinelayout
 func (g Device) CreatePipelineLayout(descriptor *PipelineLayoutDescriptor) (*PipelineLayout, error) {
-	jsLayout := g.jsValue.Call("createPipelineLayout", toJS(descriptor))
+	jsLayout := g.jsValue.Call("createPipelineLayout", pointerToJS(descriptor))
 	return &PipelineLayout{
 		jsValue: jsLayout,
 	}, nil
@@ -99,7 +99,7 @@ func (g Device) CreatePipelineLayout(descriptor *PipelineLayoutDescriptor) (*Pip
 // CreateComputePipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createcomputepipeline
 func (g Device) CreateComputePipeline(descriptor *ComputePipelineDescriptor) (*ComputePipeline, error) {
-	jsPipeline := g.jsValue.Call("createComputePipeline", toJS(descriptor))
+	jsPipeline := g.jsValue.Call("createComputePipeline", pointerToJS(descriptor))
 	return &ComputePipeline{
 		jsValue: jsPipeline,
 	}, nil
@@ -108,7 +108,7 @@ func (g Device) CreateComputePipeline(descriptor *ComputePipelineDescriptor) (*C
 // CreateTexture as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createtexture
 func (g Device) CreateTexture(descriptor *TextureDescriptor) (*Texture, error) {
-	jsTexture := g.jsValue.Call("createTexture", toJS(descriptor))
+	jsTexture := g.jsValue.Call("createTexture", pointerToJS(descriptor))
 	return &Texture{
 		jsValue: jsTexture,
 	}, nil

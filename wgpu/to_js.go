@@ -7,25 +7,27 @@ import (
 	"syscall/js"
 )
 
-// toJS converts the given value to a type that can be passed as
-// an argument to JavaScript. It should only be called with pointers
-// and non-bit-flag enums.
-func toJS[T comparable](v T) any {
-	var zero T
-	if v == zero {
+// enumToJS converts the given non-bit-flag enum value to a type that
+// can be passed as an argument to JavaScript. Bit flag enums should be
+// passed as a uint.
+func enumToJS(s fmt.Stringer) any {
+	ss := s.String()
+	if ss == "undefined" {
 		return js.Undefined()
 	}
-	if tj, ok := any(v).(interface{ toJS() any }); ok {
-		return tj.toJS()
+	return ss
+}
+
+// pointerToJS converts the given pointer value to a type that can be
+// passed as an argument to JavaScript. It must implement a toJS method.
+func pointerToJS[T any, P interface {
+	*T
+	toJS() any
+}](v P) any {
+	if v == nil {
+		return js.Undefined()
 	}
-	if s, ok := any(v).(fmt.Stringer); ok {
-		ss := s.String()
-		if ss == "undefined" {
-			return js.Undefined()
-		}
-		return ss
-	}
-	return v
+	return v.toJS()
 }
 
 func (g Color) toJS() any {
@@ -42,7 +44,7 @@ func (g Origin3D) toJS() any {
 
 func (g *RequestAdapterOptions) toJS() any {
 	result := make(map[string]any)
-	result["powerPreference"] = toJS(g.PowerPreference)
+	result["powerPreference"] = enumToJS(g.PowerPreference)
 	result["forceFallbackAdapter"] = g.ForceFallbackAdapter
 	return result
 }
@@ -59,9 +61,9 @@ func (g *TextureDescriptor) toJS() any {
 	return map[string]any{
 		"label":         g.Label,
 		"usage":         uint32(g.Usage),
-		"dimension":     toJS(g.Dimension),
-		"size":          toJS(g.Size),
-		"format":        toJS(g.Format),
+		"dimension":     enumToJS(g.Dimension),
+		"size":          g.Size.toJS(),
+		"format":        enumToJS(g.Format),
 		"mipLevelCount": g.MipLevelCount,
 		"sampleCount":   g.SampleCount,
 	}
@@ -70,13 +72,13 @@ func (g *TextureDescriptor) toJS() any {
 func (g *TextureViewDescriptor) toJS() any {
 	return map[string]any{
 		"label":           g.Label,
-		"format":          toJS(g.Format),
-		"dimension":       toJS(g.Dimension),
+		"format":          enumToJS(g.Format),
+		"dimension":       enumToJS(g.Dimension),
 		"baseMipLevel":    g.BaseMipLevel,
 		"mipLevelCount":   g.MipLevelCount,
 		"baseArrayLayer":  g.BaseArrayLayer,
 		"arrayLayerCount": g.ArrayLayerCount,
-		"aspect":          toJS(g.Aspect),
+		"aspect":          enumToJS(g.Aspect),
 	}
 }
 
@@ -99,16 +101,16 @@ func (g BufferDescriptor) toJS() any {
 func (g *ImageCopyBuffer) toJS() any {
 	return map[string]any{
 		"layout": g.Layout.toJS(),
-		"buffer": toJS(g.Buffer),
+		"buffer": pointerToJS(g.Buffer),
 	}
 }
 
 func (g *ImageCopyTexture) toJS() any {
 	return map[string]any{
-		"texture":  toJS(g.Texture),
+		"texture":  pointerToJS(g.Texture),
 		"mipLevel": g.MipLevel,
 		"origin":   g.Origin.toJS(),
-		"aspect":   toJS(g.Aspect),
+		"aspect":   enumToJS(g.Aspect),
 	}
 }
 
@@ -123,9 +125,9 @@ func (g *TextureDataLayout) toJS() any {
 func (g *RenderPassColorAttachment) toJS() any {
 	result := make(map[string]any)
 	result["view"] = g.View.jsValue
-	result["loadOp"] = toJS(g.LoadOp)
-	result["storeOp"] = toJS(g.StoreOp)
+	result["loadOp"] = enumToJS(g.LoadOp)
+	result["storeOp"] = enumToJS(g.StoreOp)
 	result["clearValue"] = g.ClearValue.toJS()
-	result["resolveTarget"] = toJS(g.ResolveTarget)
+	result["resolveTarget"] = pointerToJS(g.ResolveTarget)
 	return result
 }

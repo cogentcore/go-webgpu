@@ -36,7 +36,7 @@ func (g Texture) GetFormat() TextureFormat {
 // CreateView as described:
 // https://gpuweb.github.io/gpuweb/#dom-gputexture-createview
 func (g Texture) CreateView(descriptor *TextureViewDescriptor) (*TextureView, error) {
-	jsView := g.jsValue.Call("createView", toJS(descriptor))
+	jsView := g.jsValue.Call("createView", pointerToJS(descriptor))
 	return &TextureView{
 		jsValue: jsView,
 	}, nil

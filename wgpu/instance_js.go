@@ -25,7 +25,7 @@ func CreateInstance(descriptor *InstanceDescriptor) *Instance {
 }
 
 func (g Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, error) {
-	adapter := await(g.jsValue.Call("requestAdapter", toJS(options)))
+	adapter := await(g.jsValue.Call("requestAdapter", pointerToJS(options)))
 	if !adapter.Truthy() {
 		return nil, fmt.Errorf("no WebGPU adapter avaliable")
 	}

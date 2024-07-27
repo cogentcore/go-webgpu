@@ -16,7 +16,7 @@ type BufferBindingLayout struct {
 
 func (g BufferBindingLayout) toJS() any {
 	result := make(map[string]any)
-	result["type"] = toJS(g.Type)
+	result["type"] = enumToJS(g.Type)
 	result["hasDynamicOffset"] = g.HasDynamicOffset
 	result["minBindingSize"] = g.MinBindingSize
 	return result
@@ -30,7 +30,7 @@ type SamplerBindingLayout struct {
 
 func (g SamplerBindingLayout) toJS() any {
 	result := make(map[string]any)
-	result["type"] = toJS(g.Type)
+	result["type"] = enumToJS(g.Type)
 	return result
 }
 
@@ -44,8 +44,8 @@ type TextureBindingLayout struct {
 
 func (g TextureBindingLayout) toJS() any {
 	result := make(map[string]any)
-	result["sampleType"] = toJS(g.SampleType)
-	result["viewDimension"] = toJS(g.ViewDimension)
+	result["sampleType"] = enumToJS(g.SampleType)
+	result["viewDimension"] = enumToJS(g.ViewDimension)
 	result["multisampled"] = g.Multisampled
 	return result
 }
@@ -60,9 +60,9 @@ type StorageTextureBindingLayout struct {
 
 func (g StorageTextureBindingLayout) toJS() any {
 	result := make(map[string]any)
-	result["access"] = toJS(g.Access)
-	result["format"] = toJS(g.Format)
-	result["viewDimension"] = toJS(g.ViewDimension)
+	result["access"] = enumToJS(g.Access)
+	result["format"] = enumToJS(g.Format)
+	result["viewDimension"] = enumToJS(g.ViewDimension)
 	return result
 }
 
@@ -90,11 +90,11 @@ type BindGroupLayoutEntry struct {
 func (g BindGroupLayoutEntry) toJS() any {
 	result := make(map[string]any)
 	result["binding"] = g.Binding
-	result["visibility"] = toJS(g.Visibility)
-	result["buffer"] = toJS(g.Buffer)
-	result["sampler"] = toJS(g.Sampler)
-	result["texture"] = toJS(g.Texture)
-	result["storageTexture"] = toJS(g.StorageTexture)
+	result["visibility"] = enumToJS(g.Visibility)
+	result["buffer"] = g.Buffer.toJS()
+	result["sampler"] = g.Sampler.toJS()
+	result["texture"] = g.Texture.toJS()
+	result["storageTexture"] = g.StorageTexture.toJS()
 	result["externalTexture"] = g.ExternalTexture.toJS()
 	return result
 }
@@ -160,22 +160,22 @@ type BindGroupEntry struct {
 func (g BindGroupEntry) toJS() any {
 	return map[string]any{
 		"binding":  g.Binding,
-		"resource": toJS(g.Resource),
+		"resource": g.Resource.toJS(),
 	}
 }
 
 // BindGroupDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpubindgroupdescriptor
 type BindGroupDescriptor struct {
-	Layout  BindGroupLayout
+	Layout  *BindGroupLayout
 	Entries []BindGroupEntry
 }
 
 func (g BindGroupDescriptor) toJS() any {
 	return map[string]any{
-		"layout": g.Layout.toJS(),
+		"layout": pointerToJS(g.Layout),
 		"entries": mapSlice(g.Entries, func(entry BindGroupEntry) any {
-			return toJS(entry)
+			return entry.toJS()
 		}),
 	}
 }

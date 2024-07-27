@@ -20,7 +20,7 @@ func (g Queue) toJS() any {
 // https://gpuweb.github.io/gpuweb/#dom-gpuqueue-submit
 func (g Queue) Submit(commandBuffers ...*CommandBuffer) {
 	jsSequence := mapSlice(commandBuffers, func(buffer *CommandBuffer) any {
-		return toJS(buffer)
+		return pointerToJS(buffer)
 	})
 	g.jsValue.Call("submit", jsSequence)
 }

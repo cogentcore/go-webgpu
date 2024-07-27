@@ -13,7 +13,7 @@ type ProgrammableStage struct {
 
 func (g ProgrammableStage) toJS() any {
 	return map[string]any{
-		"module":     toJS(g.Module),
+		"module":     pointerToJS(g.Module),
 		"entryPoint": g.EntryPoint,
 	}
 }

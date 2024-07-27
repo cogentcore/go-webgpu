@@ -15,7 +15,7 @@ type ComputePipelineDescriptor struct {
 
 func (g ComputePipelineDescriptor) toJS() any {
 	result := make(map[string]any)
-	result["layout"] = toJS(g.Layout)
+	result["layout"] = pointerToJS(g.Layout)
 	result["compute"] = g.Compute.toJS()
 	return result
 }

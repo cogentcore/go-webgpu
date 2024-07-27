@@ -40,7 +40,7 @@ type VertexAttribute struct {
 
 func (g VertexAttribute) toJS() any {
 	return map[string]any{
-		"format":         toJS(g.Format),
+		"format":         enumToJS(g.Format),
 		"offset":         g.Offset,
 		"shaderLocation": g.ShaderLocation,
 	}
@@ -57,9 +57,9 @@ type VertexBufferLayout struct {
 func (g VertexBufferLayout) toJS() any {
 	result := make(map[string]any)
 	result["arrayStride"] = g.ArrayStride
-	result["stepMode"] = toJS(g.StepMode)
+	result["stepMode"] = enumToJS(g.StepMode)
 	result["attributes"] = mapSlice(g.Attributes, func(attrib VertexAttribute) any {
-		return toJS(attrib)
+		return attrib.toJS()
 	})
 	return result
 }
@@ -74,7 +74,7 @@ type VertexState struct {
 
 func (g VertexState) toJS() any {
 	return map[string]any{
-		"module":     toJS(g.Module),
+		"module":     pointerToJS(g.Module),
 		"entryPoint": g.EntryPoint,
 		"buffers": mapSlice(g.Buffers, func(layout VertexBufferLayout) any {
 			return layout.toJS()
@@ -93,10 +93,10 @@ type PrimitiveState struct {
 
 func (g PrimitiveState) toJS() any {
 	result := make(map[string]any)
-	result["topology"] = toJS(g.Topology)
-	result["stripIndexFormat"] = toJS(g.StripIndexFormat)
-	result["frontFace"] = toJS(g.FrontFace)
-	result["cullMode"] = toJS(g.CullMode)
+	result["topology"] = enumToJS(g.Topology)
+	result["stripIndexFormat"] = enumToJS(g.StripIndexFormat)
+	result["frontFace"] = enumToJS(g.FrontFace)
+	result["cullMode"] = enumToJS(g.CullMode)
 	return result
 }
 
@@ -111,10 +111,10 @@ type StencilFaceState struct {
 
 func (g StencilFaceState) toJS() any {
 	result := make(map[string]any)
-	result["compare"] = toJS(g.Compare)
-	result["failOp"] = toJS(g.FailOp)
-	result["depthFailOp"] = toJS(g.DepthFailOp)
-	result["passOp"] = toJS(g.PassOp)
+	result["compare"] = enumToJS(g.Compare)
+	result["failOp"] = enumToJS(g.FailOp)
+	result["depthFailOp"] = enumToJS(g.DepthFailOp)
+	result["passOp"] = enumToJS(g.PassOp)
 	return result
 }
 
@@ -135,11 +135,11 @@ type DepthStencilState struct {
 
 func (g DepthStencilState) toJS() any {
 	result := make(map[string]any)
-	result["format"] = toJS(g.Format)
+	result["format"] = enumToJS(g.Format)
 	result["depthWriteEnabled"] = g.DepthWriteEnabled
-	result["depthCompare"] = toJS(g.DepthCompare)
-	result["stencilFront"] = toJS(g.StencilFront)
-	result["stencilBack"] = toJS(g.StencilBack)
+	result["depthCompare"] = enumToJS(g.DepthCompare)
+	result["stencilFront"] = g.StencilFront.toJS()
+	result["stencilBack"] = g.StencilBack.toJS()
 	result["stencilReadMask"] = g.StencilReadMask
 	result["stencilWriteMask"] = g.StencilWriteMask
 	result["depthBias"] = g.DepthBias
@@ -174,9 +174,9 @@ type BlendComponent struct {
 
 func (g BlendComponent) toJS() any {
 	result := make(map[string]any)
-	result["operation"] = toJS(g.Operation)
-	result["srcFactor"] = toJS(g.SrcFactor)
-	result["dstFactor"] = toJS(g.DstFactor)
+	result["operation"] = enumToJS(g.Operation)
+	result["srcFactor"] = enumToJS(g.SrcFactor)
+	result["dstFactor"] = enumToJS(g.DstFactor)
 	return result
 }
 
@@ -189,8 +189,8 @@ type BlendState struct {
 
 func (g BlendState) toJS() any {
 	return map[string]any{
-		"color": toJS(g.Color),
-		"alpha": toJS(g.Alpha),
+		"color": g.Color.toJS(),
+		"alpha": g.Alpha.toJS(),
 	}
 }
 
@@ -198,15 +198,15 @@ func (g BlendState) toJS() any {
 // https://gpuweb.github.io/gpuweb/#dictdef-gpucolortargetstate
 type ColorTargetState struct {
 	Format    TextureFormat
-	Blend     BlendState
+	Blend     *BlendState
 	WriteMask ColorWriteMask
 }
 
 func (g ColorTargetState) toJS() any {
 	result := make(map[string]any)
-	result["format"] = toJS(g.Format)
-	result["blend"] = toJS(g.Blend)
-	result["writeMask"] = toJS(g.WriteMask)
+	result["format"] = enumToJS(g.Format)
+	result["blend"] = pointerToJS(g.Blend)
+	result["writeMask"] = g.WriteMask
 	return result
 }
 
@@ -220,10 +220,10 @@ type FragmentState struct {
 
 func (g FragmentState) toJS() any {
 	return map[string]any{
-		"module":     toJS(g.Module),
+		"module":     pointerToJS(g.Module),
 		"entryPoint": g.EntryPoint,
 		"targets": mapSlice(g.Targets, func(target ColorTargetState) any {
-			return toJS(target)
+			return target.toJS()
 		}),
 	}
 }
@@ -241,12 +241,12 @@ type RenderPipelineDescriptor struct {
 
 func (g RenderPipelineDescriptor) toJS() any {
 	result := make(map[string]any)
-	result["layout"] = toJS(g.Layout)
+	result["layout"] = pointerToJS(g.Layout)
 	result["vertex"] = g.Vertex.toJS()
-	result["primitive"] = toJS(g.Primitive)
-	result["depthStencil"] = toJS(g.DepthStencil)
-	result["multisample"] = toJS(g.Multisample)
-	result["fragment"] = toJS(g.Fragment)
+	result["primitive"] = g.Primitive.toJS()
+	result["depthStencil"] = pointerToJS(g.DepthStencil)
+	result["multisample"] = g.Multisample.toJS()
+	result["fragment"] = pointerToJS(g.Fragment)
 	return result
 }
 
