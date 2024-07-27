@@ -92,6 +92,8 @@ type InstanceDescriptor struct {
 	DxcPath            string
 }
 
+// RequestAdapterOptions as described:
+// https://gpuweb.github.io/gpuweb/#dictdef-gpurequestadapteroptions
 type RequestAdapterOptions struct {
 	CompatibleSurface    *Surface
 	PowerPreference      PowerPreference

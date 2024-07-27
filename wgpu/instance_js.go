@@ -3,11 +3,14 @@
 package wgpu
 
 import (
+	"fmt"
 	"log"
 	"syscall/js"
 )
 
-// Instance is called GPU in js: https://gpuweb.github.io/gpuweb/#gpu-interface
+// Instance as described:
+// https://gpuweb.github.io/gpuweb/#gpu-interface
+// (Instance is called GPU in js)
 type Instance struct {
 	jsValue js.Value
 }
@@ -30,11 +33,16 @@ func (g Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, erro
 	}))
 	adapter := <-then
 	if !adapter.Truthy() {
-		log.Println("No WebGPU adapter available")
-		return nil
+		return nil, fmt.Errorf("no WebGPU adapter avaliable")
 	}
-	return &Adapter{jsValue: then}
+	return &Adapter{jsValue: adapter}, nil
 }
 
-// no-op
-func (g Instance) Release() {}
+func (g Instance) Release() {} // no-op
+
+func (g RequestAdapterOptions) ToJS() js.Value {
+	result := make(map[string]any)
+	result["powerPreference"] = g.PowerPreference.String()
+	result["forceFallbackAdapter"] = g.ForceFallbackAdapter
+	return js.ValueOf(result)
+}
