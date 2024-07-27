@@ -1110,16 +1110,6 @@ func (p *Device) CreateShaderModule(descriptor *ShaderModuleDescriptor) (*Shader
 	return &ShaderModule{ref}, nil
 }
 
-type SwapChainDescriptor struct {
-	Usage       TextureUsage
-	Format      TextureFormat
-	Width       uint32
-	Height      uint32
-	PresentMode PresentMode
-	AlphaMode   CompositeAlphaMode
-	ViewFormats []TextureFormat
-}
-
 func (p *Device) CreateSwapChain(surface *Surface, descriptor *SwapChainDescriptor) (*SwapChain, error) {
 	var desc C.WGPUSwapChainDescriptor
 

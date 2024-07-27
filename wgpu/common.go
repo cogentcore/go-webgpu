@@ -92,6 +92,16 @@ type InstanceDescriptor struct {
 	DxcPath            string
 }
 
+type SwapChainDescriptor struct {
+	Usage       TextureUsage
+	Format      TextureFormat
+	Width       uint32
+	Height      uint32
+	PresentMode PresentMode
+	AlphaMode   CompositeAlphaMode
+	ViewFormats []TextureFormat
+}
+
 // RequestAdapterOptions as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurequestadapteroptions
 type RequestAdapterOptions struct {

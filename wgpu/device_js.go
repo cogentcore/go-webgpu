@@ -60,6 +60,13 @@ func (g Device) CreateShaderModule(desc *ShaderModuleDescriptor) (*ShaderModule,
 	}, nil
 }
 
+func (g Device) CreateSwapChain(surface *Surface, descriptor *SwapChainDescriptor) (*SwapChain, error) {
+	jsContext := js.Global().Get("document").Call("querySelector", "canvas").Call("getContext", "webgpu")
+	return &SwapChain{
+		jsValue: jsContext,
+	}, nil
+}
+
 // CreateRenderPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createrenderpipeline
 func (g Device) CreateRenderPipeline(descriptor *RenderPipelineDescriptor) (*RenderPipeline, error) {

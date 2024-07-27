@@ -264,7 +264,7 @@ func main() {
 
 		err := s.Render()
 		if err != nil {
-			fmt.Println("error occured while rendering:", err)
+			fmt.Println("error occurred while rendering:", err)
 
 			errstr := err.Error()
 			switch {
