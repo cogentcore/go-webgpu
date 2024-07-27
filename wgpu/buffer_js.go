@@ -43,3 +43,5 @@ func (g Buffer) Unmap() (err error) {
 	g.jsValue.Call("unmap")
 	return
 }
+
+func (g Buffer) Release() {} // no-op

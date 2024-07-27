@@ -33,3 +33,5 @@ func (g Queue) WriteBuffer(buffer Buffer, offset uint64, data []byte) {
 	dataSize := stageBufferData(data)
 	g.jsValue.Call("writeBuffer", buffer.jsValue, offset, uint8Array, uint64(0), dataSize)
 }
+
+func (g Queue) Release() {} // no-op

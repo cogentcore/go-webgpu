@@ -26,7 +26,7 @@ func (g Device) ToJS() any {
 
 // Queue as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-queue
-func (g Device) Queue() Queue {
+func (g Device) GetQueue() Queue {
 	jsQueue := g.jsValue.Get("queue")
 	return Queue{
 		jsValue: jsQueue,
@@ -104,3 +104,5 @@ func (g Device) CreateComputePipeline(descriptor ComputePipelineDescriptor) Comp
 		jsValue: jsPipeline,
 	}
 }
+
+func (g Device) Release() {} // no-op
