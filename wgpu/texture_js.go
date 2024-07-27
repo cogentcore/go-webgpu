@@ -30,9 +30,9 @@ func (g Texture) ToJS() any {
 
 // Format as described:
 // https://gpuweb.github.io/gpuweb/#dom-gputexture-format
-func (g Texture) Format() GPUTextureFormat {
+func (g Texture) Format() TextureFormat {
 	jsFormat := g.jsValue.Get("format")
-	return GPUTextureFormat(jsFormat.String())
+	return TextureFormat(jsFormat.Int()) // TODO: need to set from string
 }
 
 // CreateView as described:

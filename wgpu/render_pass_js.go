@@ -10,8 +10,8 @@ import (
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpasscolorattachment
 type RenderPassColorAttachment struct {
 	View          TextureView
-	ResolveTarget GPUTextureView
-	ClearValue    GPUColor
+	ResolveTarget TextureView
+	ClearValue    Color
 	LoadOp        LoadOp
 	StoreOp       StoreOp
 }
@@ -23,12 +23,8 @@ func (g RenderPassColorAttachment) ToJS() any {
 	result["view"] = g.View.jsValue
 	result["loadOp"] = g.LoadOp.String()
 	result["storeOp"] = g.StoreOp.String()
-	if g.ClearValue.Specified {
-		result["clearValue"] = g.ClearValue.Value.ToJS()
-	}
-	if g.ResolveTarget.Specified {
-		result["resolveTarget"] = g.ResolveTarget.Value.ToJS()
-	}
+	result["clearValue"] = g.ClearValue.ToJS()
+	result["resolveTarget"] = g.ResolveTarget.ToJS()
 	return result
 }
 
@@ -68,20 +64,12 @@ func (g RenderPassEncoder) SetPipeline(pipeline RenderPipeline) {
 
 // SetVertexBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-setvertexbuffer
-func (g RenderPassEncoder) SetVertexBuffer(slot Index32, vertexBuffer Buffer, offset, size GPUSize64) {
+func (g RenderPassEncoder) SetVertexBuffer(slot Index32, vertexBuffer Buffer, offset, size Size64) {
 	params := make([]any, 4)
 	params[0] = slot.ToJS()
 	params[1] = vertexBuffer.ToJS()
-	if offset.Specified {
-		params[2] = offset.Value.ToJS()
-	} else {
-		params[2] = js.Undefined()
-	}
-	if size.Specified {
-		params[3] = size.Value.ToJS()
-	} else {
-		params[3] = js.Undefined()
-	}
+	params[2] = offset.ToJS()
+	params[3] = size.ToJS()
 	g.jsValue.Call("setVertexBuffer", params...)
 }
 
@@ -99,24 +87,12 @@ func (g RenderPassEncoder) SetBindGroup(index Index32, bindGroup BindGroup, dyna
 
 // Draw as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-draw
-func (g RenderPassEncoder) Draw(vertexCount Size32, instanceCount, firstVertex, firstInstance GPUSize32) {
+func (g RenderPassEncoder) Draw(vertexCount Size32, instanceCount, firstVertex, firstInstance Size32) {
 	params := make([]any, 4)
 	params[0] = vertexCount.ToJS()
-	if instanceCount.Specified {
-		params[1] = instanceCount.Value.ToJS()
-	} else {
-		params[1] = js.Undefined()
-	}
-	if firstVertex.Specified {
-		params[2] = firstVertex.Value.ToJS()
-	} else {
-		params[2] = js.Undefined()
-	}
-	if firstInstance.Specified {
-		params[3] = firstInstance.Value.ToJS()
-	} else {
-		params[3] = js.Undefined()
-	}
+	params[1] = instanceCount.ToJS()
+	params[2] = firstVertex.ToJS()
+	params[3] = firstInstance.ToJS()
 	g.jsValue.Call("draw", params...)
 }
 

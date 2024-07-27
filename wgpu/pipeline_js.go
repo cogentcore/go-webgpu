@@ -56,7 +56,7 @@ func (g VertexAttribute) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuvertexbufferlayout
 type VertexBufferLayout struct {
 	ArrayStride Size64
-	StepMode    GPUVertexStepMode
+	StepMode    VertexStepMode
 	Attributes  []VertexAttribute
 }
 
@@ -65,9 +65,7 @@ type VertexBufferLayout struct {
 func (g VertexBufferLayout) ToJS() any {
 	result := make(map[string]any)
 	result["arrayStride"] = g.ArrayStride.ToJS()
-	if g.StepMode.Specified {
-		result["stepMode"] = g.StepMode.Value.ToJS()
-	}
+	result["stepMode"] = g.StepMode.String()
 	result["attributes"] = mapSlice(g.Attributes, func(attrib VertexAttribute) any {
 		return attrib.ToJS()
 	})
@@ -97,56 +95,40 @@ func (g VertexState) ToJS() any {
 // PrimitiveState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuprimitivestate
 type PrimitiveState struct {
-	Topology         GPUPrimitiveTopology
-	StripIndexFormat GPUIndexFormat
-	FrontFace        GPUFrontFace
-	CullMode         GPUCullMode
+	Topology         PrimitiveTopology
+	StripIndexFormat IndexFormat
+	FrontFace        FrontFace
+	CullMode         CullMode
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
 func (g PrimitiveState) ToJS() any {
 	result := make(map[string]any)
-	if g.Topology.Specified {
-		result["topology"] = g.Topology.Value.ToJS()
-	}
-	if g.StripIndexFormat.Specified {
-		result["stripIndexFormat"] = g.StripIndexFormat.Value.ToJS()
-	}
-	if g.FrontFace.Specified {
-		result["frontFace"] = g.FrontFace.Value.ToJS()
-	}
-	if g.CullMode.Specified {
-		result["cullMode"] = g.CullMode.Value.ToJS()
-	}
+	result["topology"] = g.Topology.String()
+	result["stripIndexFormat"] = g.StripIndexFormat.String()
+	result["frontFace"] = g.FrontFace.String()
+	result["cullMode"] = g.CullMode.String()
 	return result
 }
 
 // StencilFaceState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpustencilfacestate
 type StencilFaceState struct {
-	Compare     GPUCompareFunction
-	FailOp      GPUStencilOperation
-	DepthFailOp GPUStencilOperation
-	PassOp      GPUStencilOperation
+	Compare     CompareFunction
+	FailOp      StencilOperation
+	DepthFailOp StencilOperation
+	PassOp      StencilOperation
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
 func (g StencilFaceState) ToJS() any {
 	result := make(map[string]any)
-	if g.Compare.Specified {
-		result["compare"] = g.Compare.Value.ToJS()
-	}
-	if g.FailOp.Specified {
-		result["failOp"] = g.FailOp.Value.ToJS()
-	}
-	if g.DepthFailOp.Specified {
-		result["depthFailOp"] = g.DepthFailOp.Value.ToJS()
-	}
-	if g.PassOp.Specified {
-		result["passOp"] = g.PassOp.Value.ToJS()
-	}
+	result["compare"] = g.Compare.String()
+	result["failOp"] = g.FailOp.String()
+	result["depthFailOp"] = g.DepthFailOp.String()
+	result["passOp"] = g.PassOp.String()
 	return result
 }
 
@@ -156,11 +138,11 @@ type DepthStencilState struct {
 	Format              TextureFormat
 	DepthWriteEnabled   bool
 	DepthCompare        CompareFunction
-	StencilFront        GPUStencilFaceState
-	StencilBack         GPUStencilFaceState
-	StencilReadMask     GPUStencilValue
-	StencilWriteMask    GPUStencilValue
-	DepthBias           GPUDepthBias
+	StencilFront        StencilFaceState
+	StencilBack         StencilFaceState
+	StencilReadMask     StencilValue
+	StencilWriteMask    StencilValue
+	DepthBias           DepthBias
 	DepthBiasSlopeScale float32
 	DepthBiasClamp      float32
 }
@@ -172,35 +154,21 @@ func (g DepthStencilState) ToJS() any {
 	result["format"] = g.Format.String()
 	result["depthWriteEnabled"] = g.DepthWriteEnabled
 	result["depthCompare"] = g.DepthCompare.String()
-	if g.StencilFront.Specified {
-		result["stencilFront"] = g.StencilFront.Value.ToJS()
-	}
-	if g.StencilBack.Specified {
-		result["stencilBack"] = g.StencilBack.Value.ToJS()
-	}
-	if g.StencilReadMask.Specified {
-		result["stencilReadMask"] = g.StencilReadMask.Value.ToJS()
-	}
-	if g.StencilWriteMask.Specified {
-		result["stencilWriteMask"] = g.StencilWriteMask.Value.ToJS()
-	}
-	if g.DepthBias.Specified {
-		result["depthBias"] = g.DepthBias.Value.ToJS()
-	}
-	if g.DepthBiasSlopeScale.Specified {
-		result["depthBiasSlopeScale"] = g.DepthBiasSlopeScale.Value
-	}
-	if g.DepthBiasClamp.Specified {
-		result["depthBiasClamp"] = g.DepthBiasClamp.Value
-	}
+	result["stencilFront"] = g.StencilFront.ToJS()
+	result["stencilBack"] = g.StencilBack.ToJS()
+	result["stencilReadMask"] = g.StencilReadMask.ToJS()
+	result["stencilWriteMask"] = g.StencilWriteMask.ToJS()
+	result["depthBias"] = g.DepthBias.ToJS()
+	result["depthBiasSlopeScale"] = g.DepthBiasSlopeScale
+	result["depthBiasClamp"] = g.DepthBiasClamp
 	return result
 }
 
 // MultisampleState as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpumultisamplestate
 type MultisampleState struct {
-	Count                  GPUSize32
-	Mask                   GPUSampleMask
+	Count                  Size32
+	Mask                   SampleMask
 	AlphaToCoverageEnabled bool
 }
 
@@ -208,39 +176,27 @@ type MultisampleState struct {
 // to JavaScript.
 func (g MultisampleState) ToJS() any {
 	result := make(map[string]any)
-	if g.Count.Specified {
-		result["count"] = g.Count.Value.ToJS()
-	}
-	if g.Mask.Specified {
-		result["mask"] = g.Mask.Value.ToJS()
-	}
-	if g.AlphaToCoverageEnabled.Specified {
-		result["alphaToCoverageEnabled"] = g.AlphaToCoverageEnabled.Value
-	}
+	result["count"] = g.Count.ToJS()
+	result["mask"] = g.Mask.ToJS()
+	result["alphaToCoverageEnabled"] = g.AlphaToCoverageEnabled
 	return result
 }
 
 // BlendComponent as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpublendcomponent
 type BlendComponent struct {
-	Operation GPUBlendOperation
-	SrcFactor GPUBlendFactor
-	DstFactor GPUBlendFactor
+	Operation BlendOperation
+	SrcFactor BlendFactor
+	DstFactor BlendFactor
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
 func (g BlendComponent) ToJS() any {
 	result := make(map[string]any)
-	if g.Operation.Specified {
-		result["operation"] = g.Operation.Value.ToJS()
-	}
-	if g.SrcFactor.Specified {
-		result["srcFactor"] = g.SrcFactor.Value.ToJS()
-	}
-	if g.DstFactor.Specified {
-		result["dstFactor"] = g.DstFactor.Value.ToJS()
-	}
+	result["operation"] = g.Operation.String()
+	result["srcFactor"] = g.SrcFactor.String()
+	result["dstFactor"] = g.DstFactor.String()
 	return result
 }
 
@@ -264,8 +220,8 @@ func (g BlendState) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dictdef-gpucolortargetstate
 type ColorTargetState struct {
 	Format    TextureFormat
-	Blend     GPUBlendState
-	WriteMask GPUColorWriteFlags
+	Blend     BlendState
+	WriteMask ColorWriteMask
 }
 
 // ToJS converts this type to one that can be passed as an argument
@@ -273,12 +229,8 @@ type ColorTargetState struct {
 func (g ColorTargetState) ToJS() any {
 	result := make(map[string]any)
 	result["format"] = g.Format.String()
-	if g.Blend.Specified {
-		result["blend"] = g.Blend.Value.ToJS()
-	}
-	if g.WriteMask.Specified {
-		result["writeMask"] = g.WriteMask.Value.ToJS()
-	}
+	result["blend"] = g.Blend.ToJS()
+	result["writeMask"] = g.WriteMask.String()
 	return result
 }
 
@@ -305,36 +257,24 @@ func (g FragmentState) ToJS() any {
 // RenderPipelineDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpipelinedescriptor
 type RenderPipelineDescriptor struct {
-	Layout       GPUPipelineLayout
+	Layout       PipelineLayout
 	Vertex       VertexState
-	Primitive    GPUPrimitiveState
-	DepthStencil GPUDepthStencilState
-	Multisample  GPUMultisampleState
-	Fragment     GPUFragmentState
+	Primitive    PrimitiveState
+	DepthStencil DepthStencilState
+	Multisample  MultisampleState
+	Fragment     FragmentState
 }
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
 func (g RenderPipelineDescriptor) ToJS() any {
 	result := make(map[string]any)
-	if g.Layout.Specified {
-		result["layout"] = g.Layout.Value.ToJS()
-	} else {
-		result["layout"] = "auto"
-	}
+	result["layout"] = g.Layout.ToJS()
 	result["vertex"] = g.Vertex.ToJS()
-	if g.Primitive.Specified {
-		result["primitive"] = g.Primitive.Value.ToJS()
-	}
-	if g.DepthStencil.Specified {
-		result["depthStencil"] = g.DepthStencil.Value.ToJS()
-	}
-	if g.Multisample.Specified {
-		result["multisample"] = g.Multisample.Value.ToJS()
-	}
-	if g.Fragment.Specified {
-		result["fragment"] = g.Fragment.Value.ToJS()
-	}
+	result["primitive"] = g.Primitive.ToJS()
+	result["depthStencil"] = g.DepthStencil.ToJS()
+	result["multisample"] = g.Multisample.ToJS()
+	result["fragment"] = g.Fragment.ToJS()
 	return result
 }
 

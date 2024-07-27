@@ -29,13 +29,9 @@ func (g CommandEncoder) BeginRenderPass(descriptor RenderPassDescriptor) RenderP
 
 // BeginComputePass as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-begincomputepass
-func (g CommandEncoder) BeginComputePass(descriptor GPUComputePassDescriptor) ComputePassEncoder {
+func (g CommandEncoder) BeginComputePass(descriptor ComputePassDescriptor) ComputePassEncoder {
 	params := make([]any, 1)
-	if descriptor.Specified {
-		params[0] = descriptor.Value.ToJS()
-	} else {
-		params[0] = js.Undefined()
-	}
+	params[0] = descriptor.ToJS()
 	jsComputePass := g.jsValue.Call("beginComputePass", params...)
 	return ComputePassEncoder{
 		jsValue: jsComputePass,
