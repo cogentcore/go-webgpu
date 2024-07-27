@@ -40,8 +40,8 @@ func (g CommandEncoder) BeginComputePass(descriptor *ComputePassDescriptor) *Com
 
 // Finish as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-finish
-func (g CommandEncoder) Finish() (*CommandBuffer, error) {
-	jsBuffer := g.jsValue.Call("finish")
+func (g CommandEncoder) Finish(descriptor *CommandBufferDescriptor) (*CommandBuffer, error) {
+	jsBuffer := g.jsValue.Call("finish", map[string]any{"label": descriptor.Label})
 	return &CommandBuffer{
 		jsValue: jsBuffer,
 	}, nil

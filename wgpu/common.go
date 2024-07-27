@@ -160,3 +160,7 @@ type TextureViewDescriptor struct {
 	ArrayLayerCount uint32
 	Aspect          TextureAspect
 }
+
+type CommandBufferDescriptor struct {
+	Label string
+}

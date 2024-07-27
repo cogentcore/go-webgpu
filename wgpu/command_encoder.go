@@ -425,10 +425,6 @@ func (p *CommandEncoder) CopyTextureToTexture(source *ImageCopyTexture, destinat
 	return
 }
 
-type CommandBufferDescriptor struct {
-	Label string
-}
-
 func (p *CommandEncoder) Finish(descriptor *CommandBufferDescriptor) (*CommandBuffer, error) {
 	var desc *C.WGPUCommandBufferDescriptor
 
