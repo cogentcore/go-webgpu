@@ -12,8 +12,6 @@ type PipelineLayoutDescriptor struct {
 	BindGroupLayouts []BindGroupLayout
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g PipelineLayoutDescriptor) toJS() any {
 	return map[string]any{
 		"bindGroupLayouts": mapSlice(g.BindGroupLayouts, func(layout BindGroupLayout) any {
@@ -28,8 +26,6 @@ type PipelineLayout struct {
 	jsValue js.Value
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g PipelineLayout) toJS() any {
 	return g.jsValue
 }
@@ -42,8 +38,6 @@ type VertexAttribute struct {
 	ShaderLocation uint32
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g VertexAttribute) toJS() any {
 	return map[string]any{
 		"format":         toJS(g.Format),
@@ -60,8 +54,6 @@ type VertexBufferLayout struct {
 	Attributes  []VertexAttribute
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g VertexBufferLayout) toJS() any {
 	result := make(map[string]any)
 	result["arrayStride"] = g.ArrayStride
@@ -80,8 +72,6 @@ type VertexState struct {
 	Buffers    []VertexBufferLayout
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g VertexState) toJS() any {
 	return map[string]any{
 		"module":     g.Module.toJS(),
@@ -101,8 +91,6 @@ type PrimitiveState struct {
 	CullMode         CullMode
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g PrimitiveState) toJS() any {
 	result := make(map[string]any)
 	result["topology"] = toJS(g.Topology)
@@ -121,8 +109,6 @@ type StencilFaceState struct {
 	PassOp      StencilOperation
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g StencilFaceState) toJS() any {
 	result := make(map[string]any)
 	result["compare"] = toJS(g.Compare)
@@ -147,8 +133,6 @@ type DepthStencilState struct {
 	DepthBiasClamp      float32
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g DepthStencilState) toJS() any {
 	result := make(map[string]any)
 	result["format"] = toJS(g.Format)
@@ -172,8 +156,6 @@ type MultisampleState struct {
 	AlphaToCoverageEnabled bool
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g MultisampleState) toJS() any {
 	result := make(map[string]any)
 	result["count"] = g.Count
@@ -190,8 +172,6 @@ type BlendComponent struct {
 	DstFactor BlendFactor
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g BlendComponent) toJS() any {
 	result := make(map[string]any)
 	result["operation"] = toJS(g.Operation)
@@ -207,8 +187,6 @@ type BlendState struct {
 	Alpha BlendComponent
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g BlendState) toJS() any {
 	return map[string]any{
 		"color": g.Color.toJS(),
@@ -224,8 +202,6 @@ type ColorTargetState struct {
 	WriteMask ColorWriteMask
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g ColorTargetState) toJS() any {
 	result := make(map[string]any)
 	result["format"] = toJS(g.Format)
@@ -242,8 +218,6 @@ type FragmentState struct {
 	Targets    []ColorTargetState
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g FragmentState) toJS() any {
 	return map[string]any{
 		"module":     g.Module.toJS(),
@@ -265,8 +239,6 @@ type RenderPipelineDescriptor struct {
 	Fragment     FragmentState
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g RenderPipelineDescriptor) toJS() any {
 	result := make(map[string]any)
 	result["layout"] = g.Layout.toJS()
@@ -293,8 +265,6 @@ func (g RenderPipeline) GetBindGroupLayout(index uint32) BindGroupLayout {
 	}
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g RenderPipeline) toJS() any {
 	return g.jsValue
 }

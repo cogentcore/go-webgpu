@@ -12,8 +12,6 @@ type CommandEncoder struct {
 	jsValue js.Value
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g CommandEncoder) toJS() any {
 	return g.jsValue
 }

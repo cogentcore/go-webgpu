@@ -6,8 +6,6 @@ import (
 	"syscall/js"
 )
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g *RenderPassColorAttachment) toJS() any {
 	result := make(map[string]any)
 	result["view"] = g.View.jsValue
@@ -24,8 +22,6 @@ type RenderPassDescriptor struct {
 	ColorAttachments []RenderPassColorAttachment
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g *RenderPassDescriptor) toJS() any {
 	result := make(map[string]any)
 	result["colorAttachments"] = mapSlice(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {
@@ -40,8 +36,6 @@ type RenderPassEncoder struct {
 	jsValue js.Value
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g RenderPassEncoder) toJS() any {
 	return g.jsValue
 }

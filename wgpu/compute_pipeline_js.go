@@ -13,8 +13,6 @@ type ComputePipelineDescriptor struct {
 	Compute ProgrammableStage
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g ComputePipelineDescriptor) toJS() any {
 	result := make(map[string]any)
 	result["layout"] = g.Layout.toJS()
@@ -28,8 +26,6 @@ type ComputePipeline struct {
 	jsValue js.Value
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g ComputePipeline) toJS() any {
 	return g.jsValue
 }

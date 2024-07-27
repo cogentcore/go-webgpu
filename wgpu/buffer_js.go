@@ -10,8 +10,6 @@ type Buffer struct {
 	jsValue js.Value
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g Buffer) toJS() any {
 	return g.jsValue
 }

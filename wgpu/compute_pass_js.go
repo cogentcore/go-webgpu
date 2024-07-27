@@ -10,8 +10,6 @@ import (
 // https://gpuweb.github.io/gpuweb/#dictdef-gpucomputepassdescriptor
 type ComputePassDescriptor struct{}
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g *ComputePassDescriptor) toJS() any {
 	return map[string]any{}
 }
@@ -22,8 +20,6 @@ type ComputePassEncoder struct {
 	jsValue js.Value
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g ComputePassEncoder) toJS() any {
 	return g.jsValue
 }

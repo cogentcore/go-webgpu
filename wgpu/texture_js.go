@@ -10,8 +10,6 @@ type TextureView struct {
 	jsValue js.Value
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g TextureView) toJS() any {
 	return g.jsValue
 }
@@ -24,8 +22,6 @@ type Texture struct {
 	jsValue js.Value
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g Texture) toJS() any {
 	return g.jsValue
 }

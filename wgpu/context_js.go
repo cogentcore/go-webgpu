@@ -18,8 +18,6 @@ type CanvasContext struct {
 	jsValue js.Value
 }
 
-// toJS converts this type to one that can be passed as an argument
-// to JavaScript.
 func (g CanvasContext) toJS() any {
 	return g.jsValue
 }
