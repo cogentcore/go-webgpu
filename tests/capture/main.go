@@ -162,6 +162,12 @@ func main() {
 
 	data := outputBuffer.GetMappedRange(0, uint(bufferSize))
 
+	// Code to print the image data on JS, which does not support os.Create:
+	// u := js.Global().Get("Uint8Array").New(len(data))
+	// js.CopyBytesToJS(u, data)
+	// js.Global().Get("console").Call("log", u)
+	// return
+
 	// Save png
 	f, err := os.Create("image.png")
 	if err != nil {
