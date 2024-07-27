@@ -164,7 +164,9 @@ loop:
 		for _, v := range e.Enums {
 			fmt.Fprintf(w, "case %s:\n", v.Enum)
 			// kebab case is consistent with the enum values in js
-			fmt.Fprintf(w, "return \"%s\"\n", strcase.ToKebab(strings.TrimPrefix(v.Enum, e.Name)))
+			kebab := strcase.ToKebab(strings.TrimPrefix(v.Enum, e.Name))
+			r := strings.NewReplacer("1-d", "1d", "2-d", "2d", "3-d", "3d", "d-3", "d3", "d-11", "d11", "d-12", "d12")
+			fmt.Fprintf(w, "return \"%s\"\n", r.Replace(kebab))
 		}
 		if e.Name == "ErrorType" {
 			fmt.Fprintf(w, "default:\n")

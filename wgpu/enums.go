@@ -70,9 +70,9 @@ func (v BackendType) String() string {
 	case BackendTypeWebGPU:
 		return "web-gpu"
 	case BackendTypeD3D11:
-		return "d-3-d-11"
+		return "d3-d11"
 	case BackendTypeD3D12:
-		return "d-3-d-12"
+		return "d3-d12"
 	case BackendTypeMetal:
 		return "metal"
 	case BackendTypeVulkan:
@@ -1204,11 +1204,11 @@ const (
 func (v TextureDimension) String() string {
 	switch v {
 	case TextureDimension1D:
-		return "1-d"
+		return "1d"
 	case TextureDimension2D:
-		return "2-d"
+		return "2d"
 	case TextureDimension3D:
-		return "3-d"
+		return "3d"
 	default:
 		return ""
 	}
@@ -1588,17 +1588,17 @@ func (v TextureViewDimension) String() string {
 	case TextureViewDimensionUndefined:
 		return "undefined"
 	case TextureViewDimension1D:
-		return "1-d"
+		return "1d"
 	case TextureViewDimension2D:
-		return "2-d"
+		return "2d"
 	case TextureViewDimension2DArray:
-		return "2-d-array"
+		return "2d-array"
 	case TextureViewDimensionCube:
 		return "cube"
 	case TextureViewDimensionCubeArray:
 		return "cube-array"
 	case TextureViewDimension3D:
-		return "3-d"
+		return "3d"
 	default:
 		return ""
 	}
