@@ -1,15 +1,10 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"os"
 	"runtime"
-	"strings"
 
-	"github.com/go-gl/glfw/v3.3/glfw"
 	"github.com/rajveermalviya/go-webgpu/wgpu"
-	wgpuext_glfw "github.com/rajveermalviya/go-webgpu/wgpuext/glfw"
 
 	_ "embed"
 )
@@ -48,7 +43,7 @@ type State struct {
 	pipeline  *wgpu.RenderPipeline
 }
 
-func InitState(window *glfw.Window) (s *State, err error) {
+func InitState[T interface{ GetSize() (int, int) }](window T, sd *wgpu.SurfaceDescriptor) (s *State, err error) {
 	defer func() {
 		if err != nil {
 			s.Destroy()
@@ -59,7 +54,7 @@ func InitState(window *glfw.Window) (s *State, err error) {
 
 	s.instance = wgpu.CreateInstance(nil)
 
-	s.surface = s.instance.CreateSurface(wgpuext_glfw.GetSurfaceDescriptor(window))
+	s.surface = s.instance.CreateSurface(sd)
 
 	adapter, err := s.instance.RequestAdapter(&wgpu.RequestAdapterOptions{
 		ForceFallbackAdapter: forceFallbackAdapter,
@@ -224,56 +219,5 @@ func (s *State) Destroy() {
 	if s.instance != nil {
 		s.instance.Release()
 		s.instance = nil
-	}
-}
-
-func main() {
-	if err := glfw.Init(); err != nil {
-		panic(err)
-	}
-	defer glfw.Terminate()
-
-	glfw.WindowHint(glfw.ClientAPI, glfw.NoAPI)
-	window, err := glfw.CreateWindow(640, 480, "go-webgpu with glfw", nil, nil)
-	if err != nil {
-		panic(err)
-	}
-	defer window.Destroy()
-
-	s, err := InitState(window)
-	if err != nil {
-		panic(err)
-	}
-	defer s.Destroy()
-
-	window.SetKeyCallback(func(w *glfw.Window, key glfw.Key, scancode int, action glfw.Action, mods glfw.ModifierKey) {
-		// Print resource usage on pressing 'R'
-		if key == glfw.KeyR && (action == glfw.Press || action == glfw.Repeat) {
-			report := s.instance.GenerateReport()
-			buf, _ := json.MarshalIndent(report, "", "  ")
-			fmt.Print(string(buf))
-		}
-	})
-
-	window.SetSizeCallback(func(_ *glfw.Window, width, height int) {
-		s.Resize(width, height)
-	})
-
-	for !window.ShouldClose() {
-		glfw.PollEvents()
-
-		err := s.Render()
-		if err != nil {
-			fmt.Println("error occurred while rendering:", err)
-
-			errstr := err.Error()
-			switch {
-			case strings.Contains(errstr, "Surface timed out"): // do nothing
-			case strings.Contains(errstr, "Surface is outdated"): // do nothing
-			case strings.Contains(errstr, "Surface was lost"): // do nothing
-			default:
-				panic(err)
-			}
-		}
 	}
 }
