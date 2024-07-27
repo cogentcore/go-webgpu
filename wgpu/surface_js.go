@@ -12,9 +12,10 @@ func (g Surface) GetPreferredFormat(adapter *Adapter) TextureFormat {
 }
 
 func (g Surface) GetCapabilities(adapter *Adapter) (ret SurfaceCapabilities) {
-	// TODO(kai): get capabilities
-	ret.Formats = []TextureFormat{TextureFormatRGBA8UnormSrgb}
-	ret.AlphaModes = []CompositeAlphaMode{CompositeAlphaModeAuto}
+	// Based on https://developer.mozilla.org/en-US/docs/Web/API/GPUCanvasContext/configure
+	ret.Formats = []TextureFormat{TextureFormatBGRA8Unorm, TextureFormatRGBA8Unorm, TextureFormatRGBA16Float}
+	ret.AlphaModes = []CompositeAlphaMode{CompositeAlphaModeOpaque, CompositeAlphaModePreMultiplied}
+	ret.PresentModes = []PresentMode{PresentModeImmediate}
 	return
 }
 

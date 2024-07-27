@@ -424,7 +424,7 @@ func (v CompositeAlphaMode) String() string {
 	case CompositeAlphaModeOpaque:
 		return "opaque"
 	case CompositeAlphaModePreMultiplied:
-		return "pre-multiplied"
+		return "premultiplied"
 	case CompositeAlphaModePostMultiplied:
 		return "post-multiplied"
 	case CompositeAlphaModeInherit:

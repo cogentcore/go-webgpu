@@ -70,6 +70,11 @@ func (e Enums) Add(t string, enum string, value int64) Enums {
 	return e
 }
 
+// customEnumStrings consistent with JS.
+var customEnumStrings = map[string]string{
+	"pre-multiplied": "premultiplied",
+}
+
 func main() {
 	flag.Parse()
 
@@ -168,10 +173,10 @@ loop:
 		for _, v := range e.Enums {
 			fmt.Fprintf(w, "case %s:\n", v.Enum)
 			// Kebab case is consistent with the enum values in JS.
-			kebab := strcase.ToKebab(strings.TrimPrefix(v.Enum, e.Name))
+			str := strcase.ToKebab(strings.TrimPrefix(v.Enum, e.Name))
 			// Remove any hyphens connected to a digit, as JS does not include them.
 			b := strings.Builder{}
-			rs := []rune(kebab)
+			rs := []rune(str)
 			for i, r := range rs {
 				if r == '-' {
 					if i > 0 && unicode.IsDigit(rs[i-1]) {
@@ -183,7 +188,11 @@ loop:
 				}
 				b.WriteRune(r)
 			}
-			fmt.Fprintf(w, "return \"%s\"\n", b.String())
+			str = b.String()
+			if c, ok := customEnumStrings[str]; ok {
+				str = c
+			}
+			fmt.Fprintf(w, "return \"%s\"\n", str)
 		}
 		if e.Name == "ErrorType" {
 			fmt.Fprintf(w, "default:\n")
