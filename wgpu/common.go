@@ -101,6 +101,20 @@ type RequestAdapterOptions struct {
 	BackendType          BackendType
 }
 
+type RequiredLimits struct {
+	Limits Limits
+}
+
+type DeviceDescriptor struct {
+	Label              string
+	RequiredFeatures   []FeatureName
+	RequiredLimits     *RequiredLimits
+	DeviceLostCallback DeviceLostCallback
+	TracePath          string
+}
+
+type DeviceLostCallback func(reason DeviceLostReason, message string)
+
 // BufferDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#gpubufferdescriptor
 type BufferDescriptor struct {

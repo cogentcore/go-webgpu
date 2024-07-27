@@ -145,18 +145,6 @@ func gowebgpu_device_lost_callback_go(reason C.WGPUDeviceLostReason, message *C.
 	}
 }
 
-type RequiredLimits struct {
-	Limits Limits
-}
-
-type DeviceDescriptor struct {
-	Label              string
-	RequiredFeatures   []FeatureName
-	RequiredLimits     *RequiredLimits
-	DeviceLostCallback DeviceLostCallback
-	TracePath          string
-}
-
 func (p *Adapter) RequestDevice(descriptor *DeviceDescriptor) (*Device, error) {
 	var desc *C.WGPUDeviceDescriptor = nil
 

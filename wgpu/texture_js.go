@@ -32,7 +32,7 @@ func (g Texture) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dom-gputexture-format
 func (g Texture) Format() TextureFormat {
 	jsFormat := g.jsValue.Get("format")
-	return TextureFormat(jsFormat.Int()) // TODO: need to set from string
+	return TextureFormat(jsFormat.Int()) // TODO(kai): need to set from string
 }
 
 // CreateView as described:

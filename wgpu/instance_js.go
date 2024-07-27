@@ -25,24 +25,18 @@ func CreateInstance(descriptor *InstanceDescriptor) *Instance {
 }
 
 func (g Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, error) {
-	promise := g.jsValue.Call("requestAdapter", options.ToJS())
-	then := make(chan js.Value)
-	promise.Call("then", js.FuncOf(func(this js.Value, args []js.Value) any {
-		then <- args[0]
-		return nil
-	}))
-	adapter := <-then
+	adapter := await(g.jsValue.Call("requestAdapter", options.ToJS()))
 	if !adapter.Truthy() {
 		return nil, fmt.Errorf("no WebGPU adapter avaliable")
 	}
 	return &Adapter{jsValue: adapter}, nil
 }
 
-func (g Instance) Release() {} // no-op
-
-func (g RequestAdapterOptions) ToJS() js.Value {
+func (g *RequestAdapterOptions) ToJS() js.Value {
 	result := make(map[string]any)
 	result["powerPreference"] = g.PowerPreference.String()
 	result["forceFallbackAdapter"] = g.ForceFallbackAdapter
 	return js.ValueOf(result)
 }
+
+func (g Instance) Release() {} // no-op
