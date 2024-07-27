@@ -67,7 +67,7 @@ func (g CommandEncoder) CopyTextureToTexture(source *ImageCopyTexture, destinati
 // Finish as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-finish
 func (g CommandEncoder) Finish(descriptor *CommandBufferDescriptor) (*CommandBuffer, error) {
-	jsBuffer := g.jsValue.Call("finish", map[string]any{"label": descriptor.Label})
+	jsBuffer := g.jsValue.Call("finish", toJS(descriptor))
 	return &CommandBuffer{
 		jsValue: jsBuffer,
 	}, nil

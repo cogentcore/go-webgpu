@@ -15,7 +15,7 @@ type RenderPassDescriptor struct {
 func (g *RenderPassDescriptor) toJS() any {
 	result := make(map[string]any)
 	result["colorAttachments"] = mapSlice(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {
-		return toJS(attachment)
+		return attachment.toJS()
 	})
 	return result
 }

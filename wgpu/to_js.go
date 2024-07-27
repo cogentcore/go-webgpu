@@ -84,6 +84,10 @@ func (g *CommandEncoderDescriptor) toJS() any {
 	return map[string]any{"label": g.Label}
 }
 
+func (g *CommandBufferDescriptor) toJS() any {
+	return map[string]any{"label": g.Label}
+}
+
 func (g BufferDescriptor) toJS() any {
 	return map[string]any{
 		"size":             g.Size,
@@ -94,7 +98,7 @@ func (g BufferDescriptor) toJS() any {
 
 func (g *ImageCopyBuffer) toJS() any {
 	return map[string]any{
-		"layout": toJS(g.Layout),
+		"layout": g.Layout.toJS(),
 		"buffer": toJS(g.Buffer),
 	}
 }
@@ -103,7 +107,7 @@ func (g *ImageCopyTexture) toJS() any {
 	return map[string]any{
 		"texture":  toJS(g.Texture),
 		"mipLevel": g.MipLevel,
-		"origin":   toJS(g.Origin),
+		"origin":   g.Origin.toJS(),
 		"aspect":   toJS(g.Aspect),
 	}
 }
@@ -121,7 +125,7 @@ func (g *RenderPassColorAttachment) toJS() any {
 	result["view"] = g.View.jsValue
 	result["loadOp"] = toJS(g.LoadOp)
 	result["storeOp"] = toJS(g.StoreOp)
-	result["clearValue"] = toJS(g.ClearValue)
+	result["clearValue"] = g.ClearValue.toJS()
 	result["resolveTarget"] = toJS(g.ResolveTarget)
 	return result
 }
