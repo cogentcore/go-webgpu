@@ -57,8 +57,6 @@ func (p *Buffer) GetUsage() BufferUsage {
 	return BufferUsage(C.wgpuBufferGetUsage(p.ref))
 }
 
-type BufferMapCallback func(BufferMapAsyncStatus)
-
 //export gowebgpu_buffer_map_callback_go
 func gowebgpu_buffer_map_callback_go(status C.WGPUBufferMapAsyncStatus, userdata unsafe.Pointer) {
 	handle := *(*cgo.Handle)(userdata)

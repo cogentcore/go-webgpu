@@ -136,6 +136,8 @@ type BufferDescriptor struct {
 	MappedAtCreation bool
 }
 
+type BufferMapCallback func(BufferMapAsyncStatus)
+
 // RenderPassColorAttachment as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpasscolorattachment
 type RenderPassColorAttachment struct {

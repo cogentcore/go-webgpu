@@ -29,6 +29,11 @@ func (g Buffer) GetMappedRange(offset, size uint) []byte {
 	return dst
 }
 
+func (g Buffer) MapAsync(mode MapMode, offset uint64, size uint64, callback BufferMapCallback) (err error) {
+	// TODO(kai): implement MapAsync
+	return
+}
+
 func (g Buffer) Unmap() (err error) {
 	g.jsValue.Call("unmap")
 	return
