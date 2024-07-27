@@ -20,29 +20,29 @@ func (g CommandEncoder) ToJS() any {
 
 // BeginRenderPass as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-beginrenderpass
-func (g CommandEncoder) BeginRenderPass(descriptor RenderPassDescriptor) RenderPassEncoder {
+func (g CommandEncoder) BeginRenderPass(descriptor *RenderPassDescriptor) *RenderPassEncoder {
 	jsRenderPass := g.jsValue.Call("beginRenderPass", descriptor.ToJS())
-	return RenderPassEncoder{
+	return &RenderPassEncoder{
 		jsValue: jsRenderPass,
 	}
 }
 
 // BeginComputePass as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-begincomputepass
-func (g CommandEncoder) BeginComputePass(descriptor ComputePassDescriptor) ComputePassEncoder {
+func (g CommandEncoder) BeginComputePass(descriptor *ComputePassDescriptor) *ComputePassEncoder {
 	params := make([]any, 1)
 	params[0] = descriptor.ToJS()
 	jsComputePass := g.jsValue.Call("beginComputePass", params...)
-	return ComputePassEncoder{
+	return &ComputePassEncoder{
 		jsValue: jsComputePass,
 	}
 }
 
 // Finish as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-finish
-func (g CommandEncoder) Finish() CommandBuffer {
+func (g CommandEncoder) Finish() (*CommandBuffer, error) {
 	jsBuffer := g.jsValue.Call("finish")
-	return CommandBuffer{
+	return &CommandBuffer{
 		jsValue: jsBuffer,
-	}
+	}, nil
 }

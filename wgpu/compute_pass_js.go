@@ -12,7 +12,7 @@ type ComputePassDescriptor struct{}
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g ComputePassDescriptor) ToJS() any {
+func (g *ComputePassDescriptor) ToJS() any {
 	return map[string]any{}
 }
 

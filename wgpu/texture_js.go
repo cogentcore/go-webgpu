@@ -28,20 +28,20 @@ func (g Texture) ToJS() any {
 	return g.jsValue
 }
 
-// Format as described:
+// GetFormat as described:
 // https://gpuweb.github.io/gpuweb/#dom-gputexture-format
-func (g Texture) Format() TextureFormat {
+func (g Texture) GetFormat() TextureFormat {
 	jsFormat := g.jsValue.Get("format")
 	return TextureFormat(jsFormat.Int()) // TODO(kai): need to set from string
 }
 
 // CreateView as described:
 // https://gpuweb.github.io/gpuweb/#dom-gputexture-createview
-func (g Texture) CreateView() TextureView {
+func (g Texture) CreateView() (*TextureView, error) {
 	jsView := g.jsValue.Call("createView")
-	return TextureView{
+	return &TextureView{
 		jsValue: jsView,
-	}
+	}, nil
 }
 
 func (g Texture) Release() {} // no-op

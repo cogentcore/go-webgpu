@@ -36,7 +36,7 @@ type RenderPassDescriptor struct {
 
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g RenderPassDescriptor) ToJS() any {
+func (g *RenderPassDescriptor) ToJS() any {
 	result := make(map[string]any)
 	result["colorAttachments"] = mapSlice(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {
 		return attachment.ToJS()
