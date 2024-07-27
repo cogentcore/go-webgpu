@@ -44,11 +44,11 @@ func (g Device) CreateCommandEncoder() CommandEncoder {
 
 // CreateBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbuffer
-func (g Device) CreateBuffer(descriptor BufferDescriptor) Buffer {
+func (g Device) CreateBuffer(descriptor *BufferDescriptor) (*Buffer, error) {
 	jsBuffer := g.jsValue.Call("createBuffer", descriptor.ToJS())
-	return Buffer{
+	return &Buffer{
 		jsValue: jsBuffer,
-	}
+	}, nil
 }
 
 // CreateShaderModule as described:

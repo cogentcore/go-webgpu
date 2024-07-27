@@ -84,3 +84,12 @@ type Extent3D struct {
 	Height             uint32
 	DepthOrArrayLayers uint32
 }
+
+// BufferDescriptor as described:
+// https://gpuweb.github.io/gpuweb/#gpubufferdescriptor
+type BufferDescriptor struct {
+	Label            string
+	Usage            BufferUsage
+	Size             uint64
+	MappedAtCreation bool
+}

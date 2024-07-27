@@ -313,13 +313,6 @@ func (p *Device) CreateBindGroupLayout(descriptor *BindGroupLayoutDescriptor) (*
 	return &BindGroupLayout{ref}, nil
 }
 
-type BufferDescriptor struct {
-	Label            string
-	Usage            BufferUsage
-	Size             uint64
-	MappedAtCreation bool
-}
-
 func (p *Device) CreateBuffer(descriptor *BufferDescriptor) (*Buffer, error) {
 	var desc C.WGPUBufferDescriptor
 

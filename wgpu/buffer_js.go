@@ -4,19 +4,13 @@ package wgpu
 
 import "syscall/js"
 
-// BufferDescriptor as described:
-// https://gpuweb.github.io/gpuweb/#gpubufferdescriptor
-type BufferDescriptor struct {
-	Size  uint64
-	Usage BufferUsage
-}
-
 // ToJS converts this type to one that can be passed as an argument
 // to JavaScript.
 func (g BufferDescriptor) ToJS() any {
 	return map[string]any{
-		"size":  g.Size,
-		"usage": g.Usage.String(),
+		"size":             g.Size,
+		"usage":            g.Usage.String(),
+		"mappedAtCreation": g.MappedAtCreation,
 	}
 }
 
@@ -36,4 +30,16 @@ func (g Buffer) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dom-gpubuffer-destroy
 func (g Buffer) Destroy() {
 	g.jsValue.Call("destroy")
+}
+
+func (g Buffer) GetMappedRange(offset, size uint) []byte {
+	src := g.jsValue.Call("getMappedRange", offset, size)
+	dst := make([]byte, src.Length())
+	js.CopyBytesToGo(dst, src)
+	return dst
+}
+
+func (g Buffer) Unmap() (err error) {
+	g.jsValue.Call("unmap")
+	return
 }
