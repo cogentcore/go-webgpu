@@ -257,3 +257,5 @@ func (g RenderPipeline) GetBindGroupLayout(index uint32) BindGroupLayout {
 func (g RenderPipeline) toJS() any {
 	return g.jsValue
 }
+
+func (g RenderPipeline) Release() {} // no-op

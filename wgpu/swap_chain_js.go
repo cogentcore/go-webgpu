@@ -10,3 +10,12 @@ import "syscall/js"
 type SwapChain struct {
 	jsValue js.Value
 }
+
+func (g SwapChain) GetCurrentTextureView() (*TextureView, error) {
+	texture := &Texture{jsValue: g.jsValue.Call("getCurrentTexture")}
+	return texture.CreateView(&TextureViewDescriptor{}) // TODO(kai): set attributes
+}
+
+func (g SwapChain) Present() {} // no-op
+
+func (g SwapChain) Release() {} // no-op

@@ -15,3 +15,5 @@ func (g Surface) GetCapabilities(adapter *Adapter) (ret SurfaceCapabilities) {
 	// TODO(kai): get capabilities
 	return
 }
+
+func (g Surface) Release() {} // no-op

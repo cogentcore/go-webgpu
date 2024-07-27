@@ -32,8 +32,10 @@ func (g Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, erro
 	return &Adapter{jsValue: adapter}, nil
 }
 
-func (g Instance) Release() {} // no-op
-
 func (g Instance) CreateSurface(any) *Surface {
 	return &Surface{}
 }
+
+func (g Instance) GenerateReport() any { return nil } // no-op
+
+func (g Instance) Release() {} // no-op

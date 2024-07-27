@@ -61,7 +61,7 @@ func (g Device) CreateShaderModule(desc *ShaderModuleDescriptor) (*ShaderModule,
 }
 
 func (g Device) CreateSwapChain(surface *Surface, descriptor *SwapChainDescriptor) (*SwapChain, error) {
-	jsContext := js.Global().Get("document").Call("querySelector", "canvas").Call("getContext", "webgpu")
+	jsContext := js.Global().Get("document").Call("querySelector", "canvas").Call("getContext", "webgpu") // TODO(kai): configure
 	return &SwapChain{
 		jsValue: jsContext,
 	}, nil
