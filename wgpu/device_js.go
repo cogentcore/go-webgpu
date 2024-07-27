@@ -114,16 +114,16 @@ func (g Device) CreateTexture(descriptor *TextureDescriptor) (*Texture, error) {
 	}, nil
 }
 
-func (g *TextureDescriptor) ToJS() js.Value {
-	result := make(map[string]any)
-	result["label"] = g.Label
-	result["usage"] = g.Usage.String()
-	result["dimension"] = g.Dimension.String()
-	result["size"] = g.Size.ToJS()
-	result["format"] = g.Format.String()
-	result["mipLevelCount"] = g.MipLevelCount
-	result["sampleCount"] = g.SampleCount
-	return js.ValueOf(result)
+func (g *TextureDescriptor) ToJS() any {
+	return map[string]any{
+		"label":         g.Label,
+		"usage":         g.Usage.String(),
+		"dimension":     g.Dimension.String(),
+		"size":          g.Size.ToJS(),
+		"format":        g.Format.String(),
+		"mipLevelCount": g.MipLevelCount,
+		"sampleCount":   g.SampleCount,
+	}
 }
 
 func (g Device) Poll(wait bool, wrappedSubmissionIndex *WrappedSubmissionIndex) (queueEmpty bool) {

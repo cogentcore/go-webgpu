@@ -2,10 +2,20 @@
 
 package wgpu
 
-import "syscall/js"
+import (
+	"fmt"
+	"syscall/js"
+)
 
-// ToJS converts a type to one that can be passed as an argument
-// to JavaScript.
+// ToJS converts the given [fmt.Stringer] to a type that can be passed as
+// an argument to JavaScript.
+func ToJS(s fmt.Stringer) any {
+	ss := s.String()
+	if ss == "undefined" {
+		return js.Undefined()
+	}
+	return ss
+}
 
 func (g Color) ToJS() any {
 	return []any{g.R, g.G, g.B, g.A}
@@ -15,23 +25,23 @@ func (g *Extent3D) ToJS() any {
 	return []any{g.Width, g.Height, g.DepthOrArrayLayers}
 }
 
-func (g *RequestAdapterOptions) ToJS() js.Value {
+func (g *RequestAdapterOptions) ToJS() any {
 	result := make(map[string]any)
 	result["powerPreference"] = g.PowerPreference.String()
 	result["forceFallbackAdapter"] = g.ForceFallbackAdapter
-	return js.ValueOf(result)
+	return result
 }
 
-func (g *DeviceDescriptor) ToJS() js.Value {
+func (g *DeviceDescriptor) ToJS() any {
 	result := make(map[string]any)
 	result["label"] = g.Label
 	result["requiredFeatures"] = mapSlice(g.RequiredFeatures, func(f FeatureName) any { return f })
 	// result["requiredLimits"] = // TODO(kai): convert requiredLimits to JS
-	return js.ValueOf(result)
+	return result
 }
 
-func (g *TextureViewDescriptor) ToJS() js.Value {
-	return js.ValueOf(map[string]any{
+func (g *TextureViewDescriptor) ToJS() any {
+	return map[string]any{
 		"label":           g.Label,
 		"format":          g.Format.String(),
 		"dimension":       g.Dimension.String(),
@@ -40,7 +50,7 @@ func (g *TextureViewDescriptor) ToJS() js.Value {
 		"baseArrayLayer":  g.BaseArrayLayer,
 		"arrayLayerCount": g.ArrayLayerCount,
 		"aspect":          g.Aspect.String(),
-	})
+	}
 
 }
 
