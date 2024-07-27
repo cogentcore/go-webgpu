@@ -20,3 +20,7 @@ func mapSlice[S, T any](slice []S, fn func(S) T) []T {
 func (g Color) ToJS() any {
 	return []any{g.R, g.G, g.B, g.A}
 }
+
+// no-ops
+func SetLogLevel(level LogLevel) {}
+func GetVersion() Version        { return 0 }
