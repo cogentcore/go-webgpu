@@ -1181,16 +1181,6 @@ func (p *Device) CreateSwapChain(surface *Surface, descriptor *SwapChainDescript
 	return &SwapChain{deviceRef: p.ref, ref: ref}, nil
 }
 
-type TextureDescriptor struct {
-	Label         string
-	Usage         TextureUsage
-	Dimension     TextureDimension
-	Size          Extent3D
-	Format        TextureFormat
-	MipLevelCount uint32
-	SampleCount   uint32
-}
-
 func (p *Device) CreateTexture(descriptor *TextureDescriptor) (*Texture, error) {
 	var desc C.WGPUTextureDescriptor
 

@@ -105,4 +105,25 @@ func (g Device) CreateComputePipeline(descriptor ComputePipelineDescriptor) Comp
 	}
 }
 
+// CreateTexture as described:
+// https://gpuweb.github.io/gpuweb/#dom-gpudevice-createtexture
+func (g Device) CreateTexture(descriptor *TextureDescriptor) (*Texture, error) {
+	jsTexture := g.jsValue.Call("createTexture", descriptor.ToJS())
+	return &Texture{
+		jsValue: jsTexture,
+	}, nil
+}
+
+func (g *TextureDescriptor) ToJS() js.Value {
+	result := make(map[string]any)
+	result["label"] = g.Label
+	result["usage"] = g.Usage.String()
+	result["dimension"] = g.Dimension.String()
+	result["size"] = []any{g.Size.Width, g.Size.Height, g.Size.DepthOrArrayLayers}
+	result["format"] = g.Format.String()
+	result["mipLevelCount"] = g.MipLevelCount
+	result["sampleCount"] = g.SampleCount
+	return js.ValueOf(result)
+}
+
 func (g Device) Release() {} // no-op

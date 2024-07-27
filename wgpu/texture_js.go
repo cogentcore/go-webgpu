@@ -43,3 +43,5 @@ func (g Texture) CreateView() TextureView {
 		jsValue: jsView,
 	}
 }
+
+func (g Texture) Release() {} // no-op

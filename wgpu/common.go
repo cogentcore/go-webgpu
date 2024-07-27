@@ -115,6 +115,18 @@ type DeviceDescriptor struct {
 
 type DeviceLostCallback func(reason DeviceLostReason, message string)
 
+// TextureDescriptor as described:
+// https://gpuweb.github.io/gpuweb/#gputexturedescriptor
+type TextureDescriptor struct {
+	Label         string
+	Usage         TextureUsage
+	Dimension     TextureDimension
+	Size          Extent3D
+	Format        TextureFormat
+	MipLevelCount uint32
+	SampleCount   uint32
+}
+
 // BufferDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#gpubufferdescriptor
 type BufferDescriptor struct {
