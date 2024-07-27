@@ -21,7 +21,8 @@ func (g Buffer) Destroy() {
 }
 
 func (g Buffer) GetMappedRange(offset, size uint) []byte {
-	src := g.jsValue.Call("getMappedRange", offset, size)
+	buf := g.jsValue.Call("getMappedRange", offset, size)
+	src := js.Global().Get("Uint8ClampedArray").New(buf)
 	dst := make([]byte, src.Length())
 	js.CopyBytesToGo(dst, src)
 	return dst
