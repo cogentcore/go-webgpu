@@ -10,9 +10,9 @@ type TextureView struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g TextureView) ToJS() any {
+func (g TextureView) toJS() any {
 	return g.jsValue
 }
 
@@ -24,9 +24,9 @@ type Texture struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g Texture) ToJS() any {
+func (g Texture) toJS() any {
 	return g.jsValue
 }
 
@@ -40,7 +40,7 @@ func (g Texture) GetFormat() TextureFormat {
 // CreateView as described:
 // https://gpuweb.github.io/gpuweb/#dom-gputexture-createview
 func (g Texture) CreateView(descriptor *TextureViewDescriptor) (*TextureView, error) {
-	jsView := g.jsValue.Call("createView", descriptor.ToJS())
+	jsView := g.jsValue.Call("createView", descriptor.toJS())
 	return &TextureView{
 		jsValue: jsView,
 	}, nil

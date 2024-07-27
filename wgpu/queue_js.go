@@ -12,9 +12,9 @@ type Queue struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g Queue) ToJS() any {
+func (g Queue) toJS() any {
 	return g.jsValue
 }
 
@@ -22,7 +22,7 @@ func (g Queue) ToJS() any {
 // https://gpuweb.github.io/gpuweb/#dom-gpuqueue-submit
 func (g Queue) Submit(commandBuffers ...*CommandBuffer) {
 	jsSequence := mapSlice(commandBuffers, func(buffer *CommandBuffer) any {
-		return buffer.ToJS()
+		return buffer.toJS()
 	})
 	g.jsValue.Call("submit", jsSequence)
 }

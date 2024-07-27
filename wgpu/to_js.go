@@ -7,9 +7,9 @@ import (
 	"syscall/js"
 )
 
-// ToJS converts the given [fmt.Stringer] to a type that can be passed as
+// toJS converts the given [fmt.Stringer] to a type that can be passed as
 // an argument to JavaScript.
-func ToJS(s fmt.Stringer) any {
+func toJS(s fmt.Stringer) any {
 	ss := s.String()
 	if ss == "undefined" {
 		return js.Undefined()
@@ -17,22 +17,22 @@ func ToJS(s fmt.Stringer) any {
 	return ss
 }
 
-func (g Color) ToJS() any {
+func (g Color) toJS() any {
 	return []any{g.R, g.G, g.B, g.A}
 }
 
-func (g *Extent3D) ToJS() any {
+func (g *Extent3D) toJS() any {
 	return []any{g.Width, g.Height, g.DepthOrArrayLayers}
 }
 
-func (g *RequestAdapterOptions) ToJS() any {
+func (g *RequestAdapterOptions) toJS() any {
 	result := make(map[string]any)
-	result["powerPreference"] = ToJS(g.PowerPreference)
+	result["powerPreference"] = toJS(g.PowerPreference)
 	result["forceFallbackAdapter"] = g.ForceFallbackAdapter
 	return result
 }
 
-func (g *DeviceDescriptor) ToJS() any {
+func (g *DeviceDescriptor) toJS() any {
 	result := make(map[string]any)
 	result["label"] = g.Label
 	result["requiredFeatures"] = mapSlice(g.RequiredFeatures, func(f FeatureName) any { return f })
@@ -40,45 +40,45 @@ func (g *DeviceDescriptor) ToJS() any {
 	return result
 }
 
-func (g *TextureViewDescriptor) ToJS() any {
+func (g *TextureViewDescriptor) toJS() any {
 	return map[string]any{
 		"label":           g.Label,
-		"format":          ToJS(g.Format),
-		"dimension":       ToJS(g.Dimension),
+		"format":          toJS(g.Format),
+		"dimension":       toJS(g.Dimension),
 		"baseMipLevel":    g.BaseMipLevel,
 		"mipLevelCount":   g.MipLevelCount,
 		"baseArrayLayer":  g.BaseArrayLayer,
 		"arrayLayerCount": g.ArrayLayerCount,
-		"aspect":          ToJS(g.Aspect),
+		"aspect":          toJS(g.Aspect),
 	}
 
 }
 
-func (g BufferDescriptor) ToJS() any {
+func (g BufferDescriptor) toJS() any {
 	return map[string]any{
 		"size":             g.Size,
-		"usage":            ToJS(g.Usage),
+		"usage":            toJS(g.Usage),
 		"mappedAtCreation": g.MappedAtCreation,
 	}
 }
 
-func (g *ImageCopyBuffer) ToJS() any {
+func (g *ImageCopyBuffer) toJS() any {
 	return map[string]any{
-		"layout": g.Layout.ToJS(),
-		"buffer": g.Buffer.ToJS(),
+		"layout": g.Layout.toJS(),
+		"buffer": g.Buffer.toJS(),
 	}
 }
 
-func (g *ImageCopyTexture) ToJS() any {
+func (g *ImageCopyTexture) toJS() any {
 	return map[string]any{
-		"texture":  g.Texture.ToJS(),
+		"texture":  g.Texture.toJS(),
 		"mipLevel": g.MipLevel,
-		"origin":   g.Origin.ToJS(),
-		"aspect":   ToJS(g.Aspect),
+		"origin":   g.Origin.toJS(),
+		"aspect":   toJS(g.Aspect),
 	}
 }
 
-func (g *TextureDataLayout) ToJS() any {
+func (g *TextureDataLayout) toJS() any {
 	return map[string]any{
 		"offset":       g.Offset,
 		"bytesPerRow":  g.BytesPerRow,
@@ -86,6 +86,6 @@ func (g *TextureDataLayout) ToJS() any {
 	}
 }
 
-func (g *Origin3D) ToJS() any {
+func (g *Origin3D) toJS() any {
 	return []any{g.X, g.Y, g.Z}
 }

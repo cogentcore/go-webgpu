@@ -11,11 +11,11 @@ type ProgrammableStage struct {
 	EntryPoint string
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g ProgrammableStage) ToJS() any {
+func (g ProgrammableStage) toJS() any {
 	return map[string]any{
-		"module":     g.Module.ToJS(),
+		"module":     g.Module.toJS(),
 		"entryPoint": g.EntryPoint,
 	}
 }
@@ -26,9 +26,9 @@ type ShaderModuleDescriptor struct {
 	Code string
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g ShaderModuleDescriptor) ToJS() any {
+func (g ShaderModuleDescriptor) toJS() any {
 	return map[string]any{
 		"code": g.Code,
 	}
@@ -40,8 +40,8 @@ type ShaderModule struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g ShaderModule) ToJS() any {
+func (g ShaderModule) toJS() any {
 	return g.jsValue
 }

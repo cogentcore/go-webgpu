@@ -6,15 +6,15 @@ import (
 	"syscall/js"
 )
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g *RenderPassColorAttachment) ToJS() any {
+func (g *RenderPassColorAttachment) toJS() any {
 	result := make(map[string]any)
 	result["view"] = g.View.jsValue
-	result["loadOp"] = ToJS(g.LoadOp)
-	result["storeOp"] = ToJS(g.StoreOp)
-	result["clearValue"] = g.ClearValue.ToJS()
-	result["resolveTarget"] = g.ResolveTarget.ToJS()
+	result["loadOp"] = toJS(g.LoadOp)
+	result["storeOp"] = toJS(g.StoreOp)
+	result["clearValue"] = g.ClearValue.toJS()
+	result["resolveTarget"] = g.ResolveTarget.toJS()
 	return result
 }
 
@@ -24,12 +24,12 @@ type RenderPassDescriptor struct {
 	ColorAttachments []RenderPassColorAttachment
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g *RenderPassDescriptor) ToJS() any {
+func (g *RenderPassDescriptor) toJS() any {
 	result := make(map[string]any)
 	result["colorAttachments"] = mapSlice(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {
-		return attachment.ToJS()
+		return attachment.toJS()
 	})
 	return result
 }
@@ -40,16 +40,16 @@ type RenderPassEncoder struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g RenderPassEncoder) ToJS() any {
+func (g RenderPassEncoder) toJS() any {
 	return g.jsValue
 }
 
 // SetPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-setpipeline
 func (g RenderPassEncoder) SetPipeline(pipeline RenderPipeline) {
-	g.jsValue.Call("setPipeline", pipeline.ToJS())
+	g.jsValue.Call("setPipeline", pipeline.toJS())
 }
 
 // SetVertexBuffer as described:
@@ -57,7 +57,7 @@ func (g RenderPassEncoder) SetPipeline(pipeline RenderPipeline) {
 func (g RenderPassEncoder) SetVertexBuffer(slot uint32, vertexBuffer Buffer, offset, size uint64) {
 	params := make([]any, 4)
 	params[0] = slot
-	params[1] = vertexBuffer.ToJS()
+	params[1] = vertexBuffer.toJS()
 	params[2] = offset
 	params[3] = size
 	g.jsValue.Call("setVertexBuffer", params...)
@@ -68,7 +68,7 @@ func (g RenderPassEncoder) SetVertexBuffer(slot uint32, vertexBuffer Buffer, off
 func (g RenderPassEncoder) SetBindGroup(index uint32, bindGroup BindGroup, dynamicOffsets []uint32) {
 	params := make([]any, 3)
 	params[0] = index
-	params[1] = bindGroup.ToJS()
+	params[1] = bindGroup.toJS()
 	params[2] = dynamicOffsets
 	g.jsValue.Call("setBindGroup", params...)
 }

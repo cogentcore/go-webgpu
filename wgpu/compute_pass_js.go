@@ -10,9 +10,9 @@ import (
 // https://gpuweb.github.io/gpuweb/#dictdef-gpucomputepassdescriptor
 type ComputePassDescriptor struct{}
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g *ComputePassDescriptor) ToJS() any {
+func (g *ComputePassDescriptor) toJS() any {
 	return map[string]any{}
 }
 
@@ -22,16 +22,16 @@ type ComputePassEncoder struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g ComputePassEncoder) ToJS() any {
+func (g ComputePassEncoder) toJS() any {
 	return g.jsValue
 }
 
 // SetPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpucomputepassencoder-setpipeline
 func (g ComputePassEncoder) SetPipeline(pipeline ComputePipeline) {
-	g.jsValue.Call("setPipeline", pipeline.ToJS())
+	g.jsValue.Call("setPipeline", pipeline.toJS())
 }
 
 // SetBindGroup as described:
@@ -39,7 +39,7 @@ func (g ComputePassEncoder) SetPipeline(pipeline ComputePipeline) {
 func (g ComputePassEncoder) SetBindGroup(index uint32, bindGroup BindGroup, dynamicOffsets []uint32) {
 	params := make([]any, 3)
 	params[0] = index
-	params[1] = bindGroup.ToJS()
+	params[1] = bindGroup.toJS()
 	params[2] = dynamicOffsets
 	g.jsValue.Call("setBindGroup", params...)
 }

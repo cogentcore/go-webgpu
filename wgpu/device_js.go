@@ -18,9 +18,9 @@ type Device struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g Device) ToJS() any {
+func (g Device) toJS() any {
 	return g.jsValue
 }
 
@@ -45,7 +45,7 @@ func (g Device) CreateCommandEncoder(descriptor *CommandEncoderDescriptor) (*Com
 // CreateBuffer as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbuffer
 func (g Device) CreateBuffer(descriptor *BufferDescriptor) (*Buffer, error) {
-	jsBuffer := g.jsValue.Call("createBuffer", descriptor.ToJS())
+	jsBuffer := g.jsValue.Call("createBuffer", descriptor.toJS())
 	return &Buffer{
 		jsValue: jsBuffer,
 	}, nil
@@ -54,7 +54,7 @@ func (g Device) CreateBuffer(descriptor *BufferDescriptor) (*Buffer, error) {
 // CreateShaderModule as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createshadermodule
 func (g Device) CreateShaderModule(desc *ShaderModuleDescriptor) (*ShaderModule, error) {
-	jsShader := g.jsValue.Call("createShaderModule", desc.ToJS())
+	jsShader := g.jsValue.Call("createShaderModule", desc.toJS())
 	return &ShaderModule{
 		jsValue: jsShader,
 	}, nil
@@ -63,7 +63,7 @@ func (g Device) CreateShaderModule(desc *ShaderModuleDescriptor) (*ShaderModule,
 // CreateRenderPipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createrenderpipeline
 func (g Device) CreateRenderPipeline(descriptor *RenderPipelineDescriptor) (*RenderPipeline, error) {
-	jsPipeline := g.jsValue.Call("createRenderPipeline", descriptor.ToJS())
+	jsPipeline := g.jsValue.Call("createRenderPipeline", descriptor.toJS())
 	return &RenderPipeline{
 		jsValue: jsPipeline,
 	}, nil
@@ -72,7 +72,7 @@ func (g Device) CreateRenderPipeline(descriptor *RenderPipelineDescriptor) (*Ren
 // CreateBindGroup as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbindgroup
 func (g Device) CreateBindGroup(descriptor *BindGroupDescriptor) (*BindGroup, error) {
-	jsBindGroup := g.jsValue.Call("createBindGroup", descriptor.ToJS())
+	jsBindGroup := g.jsValue.Call("createBindGroup", descriptor.toJS())
 	return &BindGroup{
 		jsValue: jsBindGroup,
 	}, nil
@@ -81,7 +81,7 @@ func (g Device) CreateBindGroup(descriptor *BindGroupDescriptor) (*BindGroup, er
 // CreateBindGroupLayout as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createbindgrouplayout
 func (g Device) CreateBindGroupLayout(descriptor *BindGroupLayoutDescriptor) (*BindGroupLayout, error) {
-	jsLayout := g.jsValue.Call("createBindGroupLayout", descriptor.ToJS())
+	jsLayout := g.jsValue.Call("createBindGroupLayout", descriptor.toJS())
 	return &BindGroupLayout{
 		jsValue: jsLayout,
 	}, nil
@@ -90,7 +90,7 @@ func (g Device) CreateBindGroupLayout(descriptor *BindGroupLayoutDescriptor) (*B
 // CreatePipelineLayout as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createpipelinelayout
 func (g Device) CreatePipelineLayout(descriptor *PipelineLayoutDescriptor) (*PipelineLayout, error) {
-	jsLayout := g.jsValue.Call("createPipelineLayout", descriptor.ToJS())
+	jsLayout := g.jsValue.Call("createPipelineLayout", descriptor.toJS())
 	return &PipelineLayout{
 		jsValue: jsLayout,
 	}, nil
@@ -99,7 +99,7 @@ func (g Device) CreatePipelineLayout(descriptor *PipelineLayoutDescriptor) (*Pip
 // CreateComputePipeline as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createcomputepipeline
 func (g Device) CreateComputePipeline(descriptor *ComputePipelineDescriptor) (*ComputePipeline, error) {
-	jsPipeline := g.jsValue.Call("createComputePipeline", descriptor.ToJS())
+	jsPipeline := g.jsValue.Call("createComputePipeline", descriptor.toJS())
 	return &ComputePipeline{
 		jsValue: jsPipeline,
 	}, nil
@@ -108,19 +108,19 @@ func (g Device) CreateComputePipeline(descriptor *ComputePipelineDescriptor) (*C
 // CreateTexture as described:
 // https://gpuweb.github.io/gpuweb/#dom-gpudevice-createtexture
 func (g Device) CreateTexture(descriptor *TextureDescriptor) (*Texture, error) {
-	jsTexture := g.jsValue.Call("createTexture", descriptor.ToJS())
+	jsTexture := g.jsValue.Call("createTexture", descriptor.toJS())
 	return &Texture{
 		jsValue: jsTexture,
 	}, nil
 }
 
-func (g *TextureDescriptor) ToJS() any {
+func (g *TextureDescriptor) toJS() any {
 	return map[string]any{
 		"label":         g.Label,
-		"usage":         ToJS(g.Usage),
-		"dimension":     ToJS(g.Dimension),
-		"size":          g.Size.ToJS(),
-		"format":        ToJS(g.Format),
+		"usage":         toJS(g.Usage),
+		"dimension":     toJS(g.Dimension),
+		"size":          g.Size.toJS(),
+		"format":        toJS(g.Format),
 		"mipLevelCount": g.MipLevelCount,
 		"sampleCount":   g.SampleCount,
 	}

@@ -12,12 +12,12 @@ type PipelineLayoutDescriptor struct {
 	BindGroupLayouts []BindGroupLayout
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g PipelineLayoutDescriptor) ToJS() any {
+func (g PipelineLayoutDescriptor) toJS() any {
 	return map[string]any{
 		"bindGroupLayouts": mapSlice(g.BindGroupLayouts, func(layout BindGroupLayout) any {
-			return layout.ToJS()
+			return layout.toJS()
 		}),
 	}
 }
@@ -28,9 +28,9 @@ type PipelineLayout struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g PipelineLayout) ToJS() any {
+func (g PipelineLayout) toJS() any {
 	return g.jsValue
 }
 
@@ -42,11 +42,11 @@ type VertexAttribute struct {
 	ShaderLocation uint32
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g VertexAttribute) ToJS() any {
+func (g VertexAttribute) toJS() any {
 	return map[string]any{
-		"format":         ToJS(g.Format),
+		"format":         toJS(g.Format),
 		"offset":         g.Offset,
 		"shaderLocation": g.ShaderLocation,
 	}
@@ -60,14 +60,14 @@ type VertexBufferLayout struct {
 	Attributes  []VertexAttribute
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g VertexBufferLayout) ToJS() any {
+func (g VertexBufferLayout) toJS() any {
 	result := make(map[string]any)
 	result["arrayStride"] = g.ArrayStride
-	result["stepMode"] = ToJS(g.StepMode)
+	result["stepMode"] = toJS(g.StepMode)
 	result["attributes"] = mapSlice(g.Attributes, func(attrib VertexAttribute) any {
-		return attrib.ToJS()
+		return attrib.toJS()
 	})
 	return result
 }
@@ -80,14 +80,14 @@ type VertexState struct {
 	Buffers    []VertexBufferLayout
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g VertexState) ToJS() any {
+func (g VertexState) toJS() any {
 	return map[string]any{
-		"module":     g.Module.ToJS(),
+		"module":     g.Module.toJS(),
 		"entryPoint": g.EntryPoint,
 		"buffers": mapSlice(g.Buffers, func(layout VertexBufferLayout) any {
-			return layout.ToJS()
+			return layout.toJS()
 		}),
 	}
 }
@@ -101,14 +101,14 @@ type PrimitiveState struct {
 	CullMode         CullMode
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g PrimitiveState) ToJS() any {
+func (g PrimitiveState) toJS() any {
 	result := make(map[string]any)
-	result["topology"] = ToJS(g.Topology)
-	result["stripIndexFormat"] = ToJS(g.StripIndexFormat)
-	result["frontFace"] = ToJS(g.FrontFace)
-	result["cullMode"] = ToJS(g.CullMode)
+	result["topology"] = toJS(g.Topology)
+	result["stripIndexFormat"] = toJS(g.StripIndexFormat)
+	result["frontFace"] = toJS(g.FrontFace)
+	result["cullMode"] = toJS(g.CullMode)
 	return result
 }
 
@@ -121,14 +121,14 @@ type StencilFaceState struct {
 	PassOp      StencilOperation
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g StencilFaceState) ToJS() any {
+func (g StencilFaceState) toJS() any {
 	result := make(map[string]any)
-	result["compare"] = ToJS(g.Compare)
-	result["failOp"] = ToJS(g.FailOp)
-	result["depthFailOp"] = ToJS(g.DepthFailOp)
-	result["passOp"] = ToJS(g.PassOp)
+	result["compare"] = toJS(g.Compare)
+	result["failOp"] = toJS(g.FailOp)
+	result["depthFailOp"] = toJS(g.DepthFailOp)
+	result["passOp"] = toJS(g.PassOp)
 	return result
 }
 
@@ -147,15 +147,15 @@ type DepthStencilState struct {
 	DepthBiasClamp      float32
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g DepthStencilState) ToJS() any {
+func (g DepthStencilState) toJS() any {
 	result := make(map[string]any)
-	result["format"] = ToJS(g.Format)
+	result["format"] = toJS(g.Format)
 	result["depthWriteEnabled"] = g.DepthWriteEnabled
-	result["depthCompare"] = ToJS(g.DepthCompare)
-	result["stencilFront"] = g.StencilFront.ToJS()
-	result["stencilBack"] = g.StencilBack.ToJS()
+	result["depthCompare"] = toJS(g.DepthCompare)
+	result["stencilFront"] = g.StencilFront.toJS()
+	result["stencilBack"] = g.StencilBack.toJS()
 	result["stencilReadMask"] = g.StencilReadMask
 	result["stencilWriteMask"] = g.StencilWriteMask
 	result["depthBias"] = g.DepthBias
@@ -172,9 +172,9 @@ type MultisampleState struct {
 	AlphaToCoverageEnabled bool
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g MultisampleState) ToJS() any {
+func (g MultisampleState) toJS() any {
 	result := make(map[string]any)
 	result["count"] = g.Count
 	result["mask"] = g.Mask
@@ -190,13 +190,13 @@ type BlendComponent struct {
 	DstFactor BlendFactor
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g BlendComponent) ToJS() any {
+func (g BlendComponent) toJS() any {
 	result := make(map[string]any)
-	result["operation"] = ToJS(g.Operation)
-	result["srcFactor"] = ToJS(g.SrcFactor)
-	result["dstFactor"] = ToJS(g.DstFactor)
+	result["operation"] = toJS(g.Operation)
+	result["srcFactor"] = toJS(g.SrcFactor)
+	result["dstFactor"] = toJS(g.DstFactor)
 	return result
 }
 
@@ -207,12 +207,12 @@ type BlendState struct {
 	Alpha BlendComponent
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g BlendState) ToJS() any {
+func (g BlendState) toJS() any {
 	return map[string]any{
-		"color": g.Color.ToJS(),
-		"alpha": g.Alpha.ToJS(),
+		"color": g.Color.toJS(),
+		"alpha": g.Alpha.toJS(),
 	}
 }
 
@@ -224,13 +224,13 @@ type ColorTargetState struct {
 	WriteMask ColorWriteMask
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g ColorTargetState) ToJS() any {
+func (g ColorTargetState) toJS() any {
 	result := make(map[string]any)
-	result["format"] = ToJS(g.Format)
-	result["blend"] = g.Blend.ToJS()
-	result["writeMask"] = ToJS(g.WriteMask)
+	result["format"] = toJS(g.Format)
+	result["blend"] = g.Blend.toJS()
+	result["writeMask"] = toJS(g.WriteMask)
 	return result
 }
 
@@ -242,14 +242,14 @@ type FragmentState struct {
 	Targets    []ColorTargetState
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g FragmentState) ToJS() any {
+func (g FragmentState) toJS() any {
 	return map[string]any{
-		"module":     g.Module.ToJS(),
+		"module":     g.Module.toJS(),
 		"entryPoint": g.EntryPoint,
 		"targets": mapSlice(g.Targets, func(target ColorTargetState) any {
-			return target.ToJS()
+			return target.toJS()
 		}),
 	}
 }
@@ -265,16 +265,16 @@ type RenderPipelineDescriptor struct {
 	Fragment     FragmentState
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g RenderPipelineDescriptor) ToJS() any {
+func (g RenderPipelineDescriptor) toJS() any {
 	result := make(map[string]any)
-	result["layout"] = g.Layout.ToJS()
-	result["vertex"] = g.Vertex.ToJS()
-	result["primitive"] = g.Primitive.ToJS()
-	result["depthStencil"] = g.DepthStencil.ToJS()
-	result["multisample"] = g.Multisample.ToJS()
-	result["fragment"] = g.Fragment.ToJS()
+	result["layout"] = g.Layout.toJS()
+	result["vertex"] = g.Vertex.toJS()
+	result["primitive"] = g.Primitive.toJS()
+	result["depthStencil"] = g.DepthStencil.toJS()
+	result["multisample"] = g.Multisample.toJS()
+	result["fragment"] = g.Fragment.toJS()
 	return result
 }
 
@@ -293,8 +293,8 @@ func (g RenderPipeline) GetBindGroupLayout(index uint32) BindGroupLayout {
 	}
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g RenderPipeline) ToJS() any {
+func (g RenderPipeline) toJS() any {
 	return g.jsValue
 }

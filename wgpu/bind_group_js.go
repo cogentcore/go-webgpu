@@ -14,11 +14,11 @@ type BufferBindingLayout struct {
 	MinBindingSize   uint64
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g BufferBindingLayout) ToJS() any {
+func (g BufferBindingLayout) toJS() any {
 	result := make(map[string]any)
-	result["type"] = ToJS(g.Type)
+	result["type"] = toJS(g.Type)
 	result["hasDynamicOffset"] = g.HasDynamicOffset
 	result["minBindingSize"] = g.MinBindingSize
 	return result
@@ -30,11 +30,11 @@ type SamplerBindingLayout struct {
 	Type SamplerBindingType
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g SamplerBindingLayout) ToJS() any {
+func (g SamplerBindingLayout) toJS() any {
 	result := make(map[string]any)
-	result["type"] = ToJS(g.Type)
+	result["type"] = toJS(g.Type)
 	return result
 }
 
@@ -46,12 +46,12 @@ type TextureBindingLayout struct {
 	Multisampled  bool
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g TextureBindingLayout) ToJS() any {
+func (g TextureBindingLayout) toJS() any {
 	result := make(map[string]any)
-	result["sampleType"] = ToJS(g.SampleType)
-	result["viewDimension"] = ToJS(g.ViewDimension)
+	result["sampleType"] = toJS(g.SampleType)
+	result["viewDimension"] = toJS(g.ViewDimension)
 	result["multisampled"] = g.Multisampled
 	return result
 }
@@ -64,13 +64,13 @@ type StorageTextureBindingLayout struct {
 	ViewDimension TextureViewDimension
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g StorageTextureBindingLayout) ToJS() any {
+func (g StorageTextureBindingLayout) toJS() any {
 	result := make(map[string]any)
-	result["access"] = ToJS(g.Access)
-	result["format"] = ToJS(g.Format)
-	result["viewDimension"] = ToJS(g.ViewDimension)
+	result["access"] = toJS(g.Access)
+	result["format"] = toJS(g.Format)
+	result["viewDimension"] = toJS(g.ViewDimension)
 	return result
 }
 
@@ -79,9 +79,9 @@ type ExternalTextureBindingLayout struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g ExternalTextureBindingLayout) ToJS() any {
+func (g ExternalTextureBindingLayout) toJS() any {
 	return g.jsValue
 }
 
@@ -97,17 +97,17 @@ type BindGroupLayoutEntry struct {
 	ExternalTexture ExternalTextureBindingLayout
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g BindGroupLayoutEntry) ToJS() any {
+func (g BindGroupLayoutEntry) toJS() any {
 	result := make(map[string]any)
 	result["binding"] = g.Binding
-	result["visibility"] = ToJS(g.Visibility)
-	result["buffer"] = g.Buffer.ToJS()
-	result["sampler"] = g.Sampler.ToJS()
-	result["texture"] = g.Texture.ToJS()
-	result["storageTexture"] = g.StorageTexture.ToJS()
-	result["externalTexture"] = g.ExternalTexture.ToJS()
+	result["visibility"] = toJS(g.Visibility)
+	result["buffer"] = g.Buffer.toJS()
+	result["sampler"] = g.Sampler.toJS()
+	result["texture"] = g.Texture.toJS()
+	result["storageTexture"] = g.StorageTexture.toJS()
+	result["externalTexture"] = g.ExternalTexture.toJS()
 	return result
 }
 
@@ -117,12 +117,12 @@ type BindGroupLayoutDescriptor struct {
 	Entries []BindGroupLayoutEntry
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g BindGroupLayoutDescriptor) ToJS() any {
+func (g BindGroupLayoutDescriptor) toJS() any {
 	return map[string]any{
 		"entries": mapSlice(g.Entries, func(entry BindGroupLayoutEntry) any {
-			return entry.ToJS()
+			return entry.toJS()
 		}),
 	}
 }
@@ -133,9 +133,9 @@ type BindGroupLayout struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g BindGroupLayout) ToJS() any {
+func (g BindGroupLayout) toJS() any {
 	return g.jsValue
 }
 
@@ -149,11 +149,11 @@ type BufferBinding struct {
 
 var _ BindingResource = BufferBinding{}
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g BufferBinding) ToJS() any {
+func (g BufferBinding) toJS() any {
 	result := make(map[string]any)
-	result["buffer"] = g.Buffer.ToJS()
+	result["buffer"] = g.Buffer.toJS()
 	result["offset"] = g.Offset
 	result["size"] = g.Size
 	return result
@@ -165,7 +165,7 @@ func (g BufferBinding) _isBindingResource() {}
 // https://gpuweb.github.io/gpuweb/#typedefdef-gpubindingresource
 type BindingResource interface {
 	_isBindingResource()
-	ToJS() any
+	toJS() any
 }
 
 // BindGroupEntry as described:
@@ -175,12 +175,12 @@ type BindGroupEntry struct {
 	Resource BindingResource
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g BindGroupEntry) ToJS() any {
+func (g BindGroupEntry) toJS() any {
 	return map[string]any{
 		"binding":  g.Binding,
-		"resource": g.Resource.ToJS(),
+		"resource": g.Resource.toJS(),
 	}
 }
 
@@ -191,13 +191,13 @@ type BindGroupDescriptor struct {
 	Entries []BindGroupEntry
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g BindGroupDescriptor) ToJS() any {
+func (g BindGroupDescriptor) toJS() any {
 	return map[string]any{
-		"layout": g.Layout.ToJS(),
+		"layout": g.Layout.toJS(),
 		"entries": mapSlice(g.Entries, func(entry BindGroupEntry) any {
-			return entry.ToJS()
+			return entry.toJS()
 		}),
 	}
 }
@@ -208,8 +208,8 @@ type BindGroup struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g BindGroup) ToJS() any {
+func (g BindGroup) toJS() any {
 	return g.jsValue
 }

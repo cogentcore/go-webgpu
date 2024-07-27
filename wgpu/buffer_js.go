@@ -10,9 +10,9 @@ type Buffer struct {
 	jsValue js.Value
 }
 
-// ToJS converts this type to one that can be passed as an argument
+// toJS converts this type to one that can be passed as an argument
 // to JavaScript.
-func (g Buffer) ToJS() any {
+func (g Buffer) toJS() any {
 	return g.jsValue
 }
 
@@ -30,7 +30,7 @@ func (g Buffer) GetMappedRange(offset, size uint) []byte {
 }
 
 func (g Buffer) MapAsync(mode MapMode, offset uint64, size uint64, callback BufferMapCallback) (err error) {
-	await(g.jsValue.Call("mapAsync", ToJS(mode), offset, size))
+	await(g.jsValue.Call("mapAsync", toJS(mode), offset, size))
 	callback(BufferMapAsyncStatusSuccess) // TODO(kai): is this the right thing to do?
 	return
 }
