@@ -21,13 +21,6 @@ type Instance struct {
 	ref C.WGPUInstance
 }
 
-type InstanceDescriptor struct {
-	Backends           InstanceBackend
-	Dx12ShaderCompiler Dx12Compiler
-	DxilPath           string
-	DxcPath            string
-}
-
 func CreateInstance(descriptor *InstanceDescriptor) *Instance {
 	var desc C.WGPUInstanceDescriptor
 
@@ -202,13 +195,6 @@ func gowebgpu_request_adapter_callback_go(status C.WGPURequestAdapterStatus, ada
 	if ok {
 		cb(RequestAdapterStatus(status), &Adapter{ref: adapter}, C.GoString(message))
 	}
-}
-
-type RequestAdapterOptions struct {
-	CompatibleSurface    *Surface
-	PowerPreference      PowerPreference
-	ForceFallbackAdapter bool
-	BackendType          BackendType
 }
 
 func (p *Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, error) {

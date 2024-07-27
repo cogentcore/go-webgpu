@@ -85,6 +85,20 @@ type Extent3D struct {
 	DepthOrArrayLayers uint32
 }
 
+type InstanceDescriptor struct {
+	Backends           InstanceBackend
+	Dx12ShaderCompiler Dx12Compiler
+	DxilPath           string
+	DxcPath            string
+}
+
+type RequestAdapterOptions struct {
+	CompatibleSurface    *Surface
+	PowerPreference      PowerPreference
+	ForceFallbackAdapter bool
+	BackendType          BackendType
+}
+
 // BufferDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#gpubufferdescriptor
 type BufferDescriptor struct {
