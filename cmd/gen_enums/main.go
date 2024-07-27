@@ -1,5 +1,8 @@
 package main
 
+//go:generate go build
+//go:generate ./gen_enums -i ../../wgpu/lib/wgpu.h -o ../../wgpu/enums.go -pkg wgpu
+
 import (
 	"bytes"
 	"flag"
