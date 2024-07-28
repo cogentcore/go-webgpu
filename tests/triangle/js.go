@@ -3,6 +3,7 @@
 package main
 
 import (
+	"syscall/js"
 	"time"
 
 	"github.com/rajveermalviya/go-webgpu/wgpu"
@@ -10,7 +11,10 @@ import (
 
 type window struct{}
 
-func (w window) GetSize() (int, int) { return 512, 512 }
+func (w window) GetSize() (int, int) {
+	vv := js.Global().Get("visualViewport")
+	return vv.Get("width").Int(), vv.Get("height").Int()
+}
 
 func main() {
 	s, err := InitState(&window{}, &wgpu.SurfaceDescriptor{})
@@ -18,7 +22,7 @@ func main() {
 		panic(err)
 	}
 	defer s.Destroy()
-	ticker := time.NewTicker(time.Second / 60)
+	ticker := time.NewTicker(time.Second / 30)
 	for range ticker.C {
 		s.Render()
 	}
