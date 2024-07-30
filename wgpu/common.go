@@ -158,6 +158,8 @@ type BufferDescriptor struct {
 
 type BufferMapCallback func(BufferMapAsyncStatus)
 
+type QueueWorkDoneCallback func(QueueWorkDoneStatus)
+
 // RenderPassColorAttachment as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpasscolorattachment
 type RenderPassColorAttachment struct {

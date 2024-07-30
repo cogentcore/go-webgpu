@@ -32,4 +32,11 @@ func (g Queue) WriteBuffer(buffer Buffer, offset uint64, data []byte) {
 	g.jsValue.Call("writeBuffer", buffer.jsValue, offset, uint8Array, uint64(0), dataSize)
 }
 
+// OnSubmittedWorkDone as described:
+// https://gpuweb.github.io/gpuweb/#dom-gpuqueue-onsubmittedworkdone
+func (g Queue) OnSubmittedWorkDone(callback QueueWorkDoneCallback) {
+	await(g.jsValue.Call("onSubmittedWorkDone")) // TODO(kai): is this correct?
+	callback(QueueWorkDoneStatusSuccess)
+}
+
 func (g Queue) Release() {} // no-op

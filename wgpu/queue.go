@@ -40,8 +40,6 @@ type Queue struct {
 	ref       C.WGPUQueue
 }
 
-type QueueWorkDoneCallback func(QueueWorkDoneStatus)
-
 //export gowebgpu_queue_work_done_callback_go
 func gowebgpu_queue_work_done_callback_go(status C.WGPUQueueWorkDoneStatus, userdata unsafe.Pointer) {
 	handle := *(*cgo.Handle)(userdata)
