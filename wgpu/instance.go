@@ -227,10 +227,6 @@ func (p *Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, err
 	return adapter, nil
 }
 
-type InstanceEnumerateAdapterOptons struct {
-	Backends InstanceBackend
-}
-
 func (p *Instance) EnumerateAdapters(options *InstanceEnumerateAdapterOptons) []*Adapter {
 	var opts *C.WGPUInstanceEnumerateAdapterOptions
 	if options != nil {

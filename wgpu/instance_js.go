@@ -32,6 +32,15 @@ func (g Instance) RequestAdapter(options *RequestAdapterOptions) (*Adapter, erro
 	return &Adapter{jsValue: adapter}, nil
 }
 
+func (g Instance) EnumerateAdapters(options *InstanceEnumerateAdapterOptons) []*Adapter {
+	a, err := g.RequestAdapter(&RequestAdapterOptions{})
+	if err != nil {
+		log.Println(err)
+		return nil
+	}
+	return []*Adapter{a}
+}
+
 type SurfaceDescriptor struct {
 	Label string
 }

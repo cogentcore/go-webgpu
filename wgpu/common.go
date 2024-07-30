@@ -92,6 +92,10 @@ type InstanceDescriptor struct {
 	DxcPath            string
 }
 
+type InstanceEnumerateAdapterOptons struct {
+	Backends InstanceBackend
+}
+
 type SwapChainDescriptor struct {
 	Usage       TextureUsage
 	Format      TextureFormat
