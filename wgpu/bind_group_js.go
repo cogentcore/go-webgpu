@@ -91,15 +91,16 @@ func (g BindGroupLayoutEntry) toJS() any {
 	result := make(map[string]any)
 	result["binding"] = g.Binding
 	result["visibility"] = uint32(g.Visibility)
-	if g.Buffer != (BufferBindingLayout{}) {
+	switch {
+	case g.Buffer != BufferBindingLayout{}:
 		result["buffer"] = g.Buffer.toJS()
-	} else if g.Sampler != (SamplerBindingLayout{}) {
+	case g.Sampler != SamplerBindingLayout{}:
 		result["sampler"] = g.Sampler.toJS()
-	} else if g.Texture != (TextureBindingLayout{}) {
+	case g.Texture != TextureBindingLayout{}:
 		result["texture"] = g.Texture.toJS()
-	} else if g.StorageTexture != (StorageTextureBindingLayout{}) {
+	case g.StorageTexture != StorageTextureBindingLayout{}:
 		result["storageTexture"] = g.StorageTexture.toJS()
-	} else if !g.ExternalTexture.jsValue.IsUndefined() {
+	case !g.ExternalTexture.jsValue.IsUndefined():
 		result["externalTexture"] = g.ExternalTexture.toJS()
 	}
 	return result
@@ -128,11 +129,12 @@ func (g BindGroupLayout) Release() {} // no-op
 func (g BindGroupEntry) toJS() any {
 	result := make(map[string]any)
 	result["binding"] = g.Binding
-	if g.Sampler != nil {
+	switch {
+	case g.Sampler != nil:
 		result["resource"] = pointerToJS(g.Sampler)
-	} else if g.TextureView != nil {
+	case g.TextureView != nil:
 		result["resource"] = pointerToJS(g.TextureView)
-	} else {
+	default:
 		size := any(g.Size)
 		if g.Size == LimitU64Undefined {
 			size = js.Undefined()
