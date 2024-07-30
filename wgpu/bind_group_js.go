@@ -90,12 +90,18 @@ type BindGroupLayoutEntry struct {
 func (g BindGroupLayoutEntry) toJS() any {
 	result := make(map[string]any)
 	result["binding"] = g.Binding
-	result["visibility"] = enumToJS(g.Visibility)
-	result["buffer"] = g.Buffer.toJS()
-	result["sampler"] = g.Sampler.toJS()
-	result["texture"] = g.Texture.toJS()
-	result["storageTexture"] = g.StorageTexture.toJS()
-	result["externalTexture"] = g.ExternalTexture.toJS()
+	result["visibility"] = uint32(g.Visibility)
+	if g.Buffer != (BufferBindingLayout{}) {
+		result["buffer"] = g.Buffer.toJS()
+	} else if g.Sampler != (SamplerBindingLayout{}) {
+		result["sampler"] = g.Sampler.toJS()
+	} else if g.Texture != (TextureBindingLayout{}) {
+		result["texture"] = g.Texture.toJS()
+	} else if g.StorageTexture != (StorageTextureBindingLayout{}) {
+		result["storageTexture"] = g.StorageTexture.toJS()
+	} else if !g.ExternalTexture.jsValue.IsUndefined() {
+		result["externalTexture"] = g.ExternalTexture.toJS()
+	}
 	return result
 }
 
