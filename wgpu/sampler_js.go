@@ -9,3 +9,9 @@ import "syscall/js"
 type Sampler struct {
 	jsValue js.Value
 }
+
+func (g Sampler) toJS() any {
+	return g.jsValue
+}
+
+func (g Sampler) Release() {} // no-op

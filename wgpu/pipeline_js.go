@@ -9,13 +9,14 @@ import (
 // PipelineLayoutDescriptor as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpupipelinelayoutdescriptor
 type PipelineLayoutDescriptor struct {
-	BindGroupLayouts []BindGroupLayout
+	Label            string
+	BindGroupLayouts []*BindGroupLayout
 }
 
 func (g PipelineLayoutDescriptor) toJS() any {
 	return map[string]any{
-		"bindGroupLayouts": mapSlice(g.BindGroupLayouts, func(layout BindGroupLayout) any {
-			return layout.toJS()
+		"bindGroupLayouts": mapSlice(g.BindGroupLayouts, func(layout *BindGroupLayout) any {
+			return pointerToJS(layout)
 		}),
 	}
 }
@@ -29,6 +30,8 @@ type PipelineLayout struct {
 func (g PipelineLayout) toJS() any {
 	return g.jsValue
 }
+
+func (g PipelineLayout) Release() {} // no-op
 
 // VertexAttribute as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpuvertexattribute

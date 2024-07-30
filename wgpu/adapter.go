@@ -86,17 +86,6 @@ func (p *Adapter) GetLimits() SupportedLimits {
 	}
 }
 
-type AdapterProperties struct {
-	VendorId          uint32
-	VendorName        string
-	Architecture      string
-	DeviceId          uint32
-	Name              string
-	DriverDescription string
-	AdapterType       AdapterType
-	BackendType       BackendType
-}
-
 func (p *Adapter) GetProperties() AdapterProperties {
 	var props C.WGPUAdapterProperties
 

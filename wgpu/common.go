@@ -212,3 +212,14 @@ type ImageCopyBuffer struct {
 	Layout TextureDataLayout
 	Buffer *Buffer
 }
+
+type AdapterProperties struct {
+	VendorId          uint32
+	VendorName        string
+	Architecture      string
+	DeviceId          uint32
+	Name              string
+	DriverDescription string
+	AdapterType       AdapterType
+	BackendType       BackendType
+}

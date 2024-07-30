@@ -21,4 +21,8 @@ func (g Adapter) RequestDevice(descriptor *DeviceDescriptor) (*Device, error) {
 	return &Device{jsValue: device}, nil
 }
 
+func (g Adapter) GetProperties() AdapterProperties {
+	return AdapterProperties{} // TODO(kai): implement?
+}
+
 func (g Adapter) Release() {} // no-op
