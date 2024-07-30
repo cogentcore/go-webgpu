@@ -223,3 +223,17 @@ type AdapterProperties struct {
 	AdapterType       AdapterType
 	BackendType       BackendType
 }
+
+type SamplerDescriptor struct {
+	Label         string
+	AddressModeU  AddressMode
+	AddressModeV  AddressMode
+	AddressModeW  AddressMode
+	MagFilter     FilterMode
+	MinFilter     FilterMode
+	MipmapFilter  MipmapFilterMode
+	LodMinClamp   float32
+	LodMaxClamp   float32
+	Compare       CompareFunction
+	MaxAnisotropy uint16
+}

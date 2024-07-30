@@ -155,3 +155,18 @@ func (g *RenderPipelineDescriptor) toJS() any {
 	result["fragment"] = pointerToJS(g.Fragment)
 	return result
 }
+
+func (g *SamplerDescriptor) toJS() any {
+	result := make(map[string]any)
+	result["addressModeU"] = enumToJS(g.AddressModeU)
+	result["addressModeV"] = enumToJS(g.AddressModeV)
+	result["addressModeW"] = enumToJS(g.AddressModeW)
+	result["magFilter"] = enumToJS(g.MagFilter)
+	result["minFilter"] = enumToJS(g.MinFilter)
+	result["mipmapFilter"] = enumToJS(g.MipmapFilter)
+	result["lodMinClamp"] = g.LodMinClamp
+	result["lodMaxClamp"] = g.LodMaxClamp
+	result["compare"] = enumToJS(g.Compare)
+	result["maxAnisotropy"] = g.MaxAnisotropy
+	return result
+}

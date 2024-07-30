@@ -47,6 +47,17 @@ func (g RenderPassEncoder) SetVertexBuffer(slot uint32, vertexBuffer *Buffer, of
 	g.jsValue.Call("setVertexBuffer", params...)
 }
 
+// SetIndexBuffer as described:
+// https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-setindexbuffer
+func (g RenderPassEncoder) SetIndexBuffer(indexBuffer *Buffer, format IndexFormat, offset, size uint64) {
+	params := make([]any, 4)
+	params[0] = pointerToJS(indexBuffer)
+	params[1] = enumToJS(format)
+	params[2] = offset
+	params[3] = size
+	g.jsValue.Call("setIndexBuffer", params...)
+}
+
 // SetBindGroup as described:
 // https://gpuweb.github.io/gpuweb/#gpubindingcommandsmixin-setbindgroup
 func (g RenderPassEncoder) SetBindGroup(index uint32, bindGroup *BindGroup, dynamicOffsets []uint32) {
@@ -66,6 +77,18 @@ func (g RenderPassEncoder) Draw(vertexCount uint32, instanceCount, firstVertex, 
 	params[2] = firstVertex
 	params[3] = firstInstance
 	g.jsValue.Call("draw", params...)
+}
+
+// DrawIndexed as described:
+// https://gpuweb.github.io/gpuweb/#dom-gpurendercommandsmixin-drawindexed
+func (g RenderPassEncoder) DrawIndexed(indexCount uint32, instanceCount uint32, firstIndex uint32, baseVertex int32, firstInstance uint32) {
+	params := make([]any, 5)
+	params[0] = indexCount
+	params[1] = instanceCount
+	params[2] = firstIndex
+	params[3] = baseVertex
+	params[4] = firstInstance
+	g.jsValue.Call("drawIndexed", params...)
 }
 
 // End as described:

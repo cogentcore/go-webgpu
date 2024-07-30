@@ -914,20 +914,6 @@ func (p *Device) CreateRenderPipeline(descriptor *RenderPipelineDescriptor) (*Re
 	return &RenderPipeline{ref}, nil
 }
 
-type SamplerDescriptor struct {
-	Label          string
-	AddressModeU   AddressMode
-	AddressModeV   AddressMode
-	AddressModeW   AddressMode
-	MagFilter      FilterMode
-	MinFilter      FilterMode
-	MipmapFilter   MipmapFilterMode
-	LodMinClamp    float32
-	LodMaxClamp    float32
-	Compare        CompareFunction
-	MaxAnisotrophy uint16
-}
-
 func (p *Device) CreateSampler(descriptor *SamplerDescriptor) (*Sampler, error) {
 	var desc *C.WGPUSamplerDescriptor
 
@@ -942,7 +928,7 @@ func (p *Device) CreateSampler(descriptor *SamplerDescriptor) (*Sampler, error) 
 			lodMinClamp:   C.float(descriptor.LodMinClamp),
 			lodMaxClamp:   C.float(descriptor.LodMaxClamp),
 			compare:       C.WGPUCompareFunction(descriptor.Compare),
-			maxAnisotropy: C.uint16_t(descriptor.MaxAnisotrophy),
+			maxAnisotropy: C.uint16_t(descriptor.MaxAnisotropy),
 		}
 
 		if descriptor.Label != "" {

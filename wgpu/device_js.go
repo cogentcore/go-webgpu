@@ -124,6 +124,15 @@ func (g Device) CreateTexture(descriptor *TextureDescriptor) (*Texture, error) {
 	}, nil
 }
 
+// CreateSampler as described:
+// https://gpuweb.github.io/gpuweb/#dom-gpudevice-createsampler
+func (g Device) CreateSampler(descriptor *SamplerDescriptor) (*Sampler, error) {
+	jsSampler := g.jsValue.Call("createSampler", pointerToJS(descriptor))
+	return &Sampler{
+		jsValue: jsSampler,
+	}, nil
+}
+
 func (g Device) Poll(wait bool, wrappedSubmissionIndex *WrappedSubmissionIndex) (queueEmpty bool) {
 	return false // no-op
 }
