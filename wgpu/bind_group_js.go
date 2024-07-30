@@ -119,45 +119,21 @@ func (g BindGroupLayout) toJS() any {
 
 func (g BindGroupLayout) Release() {} // no-op
 
-// BufferBinding as described:
-// https://gpuweb.github.io/gpuweb/#dictdef-gpubufferbinding
-type BufferBinding struct {
-	Buffer Buffer
-	Offset uint64
-	Size   uint64
-}
-
-var _ BindingResource = BufferBinding{}
-
-func (g BufferBinding) toJS() any {
-	result := make(map[string]any)
-	result["buffer"] = g.Buffer.toJS()
-	result["offset"] = g.Offset
-	result["size"] = g.Size
-	return result
-}
-
-func (g BufferBinding) _isBindingResource() {}
-
-// BindingResource as described:
-// https://gpuweb.github.io/gpuweb/#typedefdef-gpubindingresource
-type BindingResource interface {
-	_isBindingResource()
-	toJS() any
-}
-
-// BindGroupEntry as described:
-// https://gpuweb.github.io/gpuweb/#dictdef-gpubindgroupentry
-type BindGroupEntry struct {
-	Binding  uint32
-	Resource BindingResource
-}
-
 func (g BindGroupEntry) toJS() any {
-	return map[string]any{
-		"binding":  g.Binding,
-		"resource": g.Resource.toJS(),
+	result := make(map[string]any)
+	result["binding"] = g.Binding
+	if g.Sampler != nil {
+		result["resource"] = pointerToJS(g.Sampler)
+	} else if g.TextureView != nil {
+		result["resource"] = pointerToJS(g.TextureView)
+	} else {
+		result["resource"] = map[string]any{
+			"buffer": pointerToJS(g.Buffer),
+			"offset": g.Offset,
+			"size":   g.Size,
+		}
 	}
+	return result
 }
 
 func (g BindGroupDescriptor) toJS() any {

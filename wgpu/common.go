@@ -252,3 +252,14 @@ type BindGroupDescriptor struct {
 	Layout  *BindGroupLayout
 	Entries []BindGroupEntry
 }
+
+// BindGroupEntry as described:
+// https://gpuweb.github.io/gpuweb/#dictdef-gpubindgroupentry
+type BindGroupEntry struct {
+	Binding     uint32
+	Buffer      *Buffer
+	Offset      uint64
+	Size        uint64
+	Sampler     *Sampler
+	TextureView *TextureView
+}

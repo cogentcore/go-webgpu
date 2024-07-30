@@ -122,15 +122,6 @@ func gowebgpu_error_callback_go(_type C.WGPUErrorType, message *C.char, userdata
 
 func (p *Device) Release() { C.wgpuDeviceRelease(p.ref) }
 
-type BindGroupEntry struct {
-	Binding     uint32
-	Buffer      *Buffer
-	Offset      uint64
-	Size        uint64
-	Sampler     *Sampler
-	TextureView *TextureView
-}
-
 func (p *Device) CreateBindGroup(descriptor *BindGroupDescriptor) (*BindGroup, error) {
 	var desc C.WGPUBindGroupDescriptor
 
