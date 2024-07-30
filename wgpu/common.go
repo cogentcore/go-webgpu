@@ -237,3 +237,18 @@ type SamplerDescriptor struct {
 	Compare       CompareFunction
 	MaxAnisotropy uint16
 }
+
+// BindGroupLayoutDescriptor as described:
+// https://gpuweb.github.io/gpuweb/#dictdef-gpubindgrouplayoutdescriptor
+type BindGroupLayoutDescriptor struct {
+	Label   string
+	Entries []BindGroupLayoutEntry
+}
+
+// BindGroupDescriptor as described:
+// https://gpuweb.github.io/gpuweb/#dictdef-gpubindgroupdescriptor
+type BindGroupDescriptor struct {
+	Label   string
+	Layout  *BindGroupLayout
+	Entries []BindGroupEntry
+}

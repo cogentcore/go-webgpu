@@ -131,12 +131,6 @@ type BindGroupEntry struct {
 	TextureView *TextureView
 }
 
-type BindGroupDescriptor struct {
-	Label   string
-	Layout  *BindGroupLayout
-	Entries []BindGroupEntry
-}
-
 func (p *Device) CreateBindGroup(descriptor *BindGroupDescriptor) (*BindGroup, error) {
 	var desc C.WGPUBindGroupDescriptor
 
@@ -233,11 +227,6 @@ type BindGroupLayoutEntry struct {
 	Sampler        SamplerBindingLayout
 	Texture        TextureBindingLayout
 	StorageTexture StorageTextureBindingLayout
-}
-
-type BindGroupLayoutDescriptor struct {
-	Label   string
-	Entries []BindGroupLayoutEntry
 }
 
 func (p *Device) CreateBindGroupLayout(descriptor *BindGroupLayoutDescriptor) (*BindGroupLayout, error) {
