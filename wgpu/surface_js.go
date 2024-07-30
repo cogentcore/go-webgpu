@@ -2,13 +2,12 @@
 
 package wgpu
 
-import "syscall/js"
-
 type Surface struct{} // no JS equivalent
 
 func (g Surface) GetPreferredFormat(adapter *Adapter) TextureFormat {
+	return TextureFormatBGRA8Unorm
 	// TODO(kai): need to set enum from string
-	return TextureFormat(js.Global().Get("navigator").Get("gpu").Call("getPreferredCanvasFormat").Int())
+	// return TextureFormat(js.Global().Get("navigator").Get("gpu").Call("getPreferredCanvasFormat").Int())
 }
 
 func (g Surface) GetCapabilities(adapter *Adapter) (ret SurfaceCapabilities) {
