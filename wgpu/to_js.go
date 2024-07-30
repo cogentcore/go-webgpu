@@ -131,6 +131,14 @@ func (g *ImageCopyTexture) toJS() any {
 	}
 }
 
+func (g *TextureDataLayout) toJS() any {
+	return map[string]any{
+		"offset":       g.Offset,
+		"bytesPerRow":  g.BytesPerRow,
+		"rowsPerImage": g.RowsPerImage,
+	}
+}
+
 func (g *RenderPassColorAttachment) toJS() any {
 	result := make(map[string]any)
 	result["view"] = g.View.jsValue
