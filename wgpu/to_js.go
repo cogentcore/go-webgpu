@@ -30,6 +30,24 @@ func pointerToJS[T any, P interface {
 	return v.toJS()
 }
 
+// uint32ToJS converts the given uint32 value to a type that can be
+// passed as an argument to JavaScript.
+func uint32ToJS(v uint32) any {
+	if v == LimitU32Undefined {
+		return js.Undefined()
+	}
+	return v
+}
+
+// uint64ToJS converts the given uint64 value to a type that can be
+// passed as an argument to JavaScript.
+func uint64ToJS(v uint64) any {
+	if v == LimitU64Undefined {
+		return js.Undefined()
+	}
+	return v
+}
+
 func (g Color) toJS() any {
 	return []any{g.R, g.G, g.B, g.A}
 }
@@ -110,15 +128,11 @@ func (g BufferDescriptor) toJS() any {
 }
 
 func (g *ImageCopyBuffer) toJS() any {
-	rpi := any(g.Layout.RowsPerImage)
-	if g.Layout.RowsPerImage == CopyStrideUndefined {
-		rpi = js.Undefined()
-	}
 	return map[string]any{
 		"buffer":       pointerToJS(g.Buffer),
 		"offset":       g.Layout.Offset,
 		"bytesPerRow":  g.Layout.BytesPerRow,
-		"rowsPerImage": rpi,
+		"rowsPerImage": uint32ToJS(g.Layout.RowsPerImage),
 	}
 }
 

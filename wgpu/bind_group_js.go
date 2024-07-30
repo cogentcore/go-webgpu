@@ -135,14 +135,10 @@ func (g BindGroupEntry) toJS() any {
 	case g.TextureView != nil:
 		result["resource"] = pointerToJS(g.TextureView)
 	default:
-		size := any(g.Size)
-		if g.Size == LimitU64Undefined {
-			size = js.Undefined()
-		}
 		result["resource"] = map[string]any{
 			"buffer": pointerToJS(g.Buffer),
 			"offset": g.Offset,
-			"size":   size,
+			"size":   uint64ToJS(g.Size),
 		}
 	}
 	return result

@@ -43,7 +43,7 @@ func (g RenderPassEncoder) SetVertexBuffer(slot uint32, vertexBuffer *Buffer, of
 	params[0] = slot
 	params[1] = pointerToJS(vertexBuffer)
 	params[2] = offset
-	params[3] = size
+	params[3] = uint64ToJS(size)
 	g.jsValue.Call("setVertexBuffer", params...)
 }
 
@@ -54,7 +54,7 @@ func (g RenderPassEncoder) SetIndexBuffer(indexBuffer *Buffer, format IndexForma
 	params[0] = pointerToJS(indexBuffer)
 	params[1] = enumToJS(format)
 	params[2] = offset
-	params[3] = size
+	params[3] = uint64ToJS(size)
 	g.jsValue.Call("setIndexBuffer", params...)
 }
 
@@ -64,7 +64,9 @@ func (g RenderPassEncoder) SetBindGroup(index uint32, bindGroup *BindGroup, dyna
 	params := make([]any, 3)
 	params[0] = index
 	params[1] = pointerToJS(bindGroup)
-	params[2] = dynamicOffsets
+	params[2] = mapSlice(dynamicOffsets, func(offset uint32) any {
+		return offset
+	})
 	g.jsValue.Call("setBindGroup", params...)
 }
 
