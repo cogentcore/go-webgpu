@@ -33,10 +33,6 @@ func (p *Adapter) EnumerateFeatures() []FeatureName {
 	return features
 }
 
-type SupportedLimits struct {
-	Limits Limits
-}
-
 func (p *Adapter) GetLimits() SupportedLimits {
 	var supportedLimits C.WGPUSupportedLimits
 

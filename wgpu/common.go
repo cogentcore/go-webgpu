@@ -56,6 +56,10 @@ type Limits struct {
 	MaxPushConstantSize uint32
 }
 
+type SupportedLimits struct {
+	Limits Limits
+}
+
 // Color as described:
 // https://gpuweb.github.io/gpuweb/#typedefdef-gpucolor
 type Color struct {

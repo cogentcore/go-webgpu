@@ -25,4 +25,8 @@ func (g Adapter) GetProperties() AdapterProperties {
 	return AdapterProperties{} // TODO(kai): implement?
 }
 
+func (g Adapter) GetLimits() SupportedLimits {
+	return SupportedLimits{DefaultLimits()} // TODO(kai): implement
+}
+
 func (g Adapter) Release() {} // no-op

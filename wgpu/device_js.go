@@ -133,6 +133,10 @@ func (g Device) CreateSampler(descriptor *SamplerDescriptor) (*Sampler, error) {
 	}, nil
 }
 
+func (g Device) GetLimits() SupportedLimits {
+	return SupportedLimits{DefaultLimits()} // TODO(kai): implement
+}
+
 func (g Device) Poll(wait bool, wrappedSubmissionIndex *WrappedSubmissionIndex) (queueEmpty bool) {
 	return false // no-op
 }
