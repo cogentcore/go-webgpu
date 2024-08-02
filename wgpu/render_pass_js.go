@@ -6,12 +6,6 @@ import (
 	"syscall/js"
 )
 
-// RenderPassDescriptor as described:
-// https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpassdescriptor
-type RenderPassDescriptor struct {
-	ColorAttachments []RenderPassColorAttachment
-}
-
 func (g *RenderPassDescriptor) toJS() any {
 	result := make(map[string]any)
 	result["colorAttachments"] = mapSlice(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {

@@ -123,28 +123,6 @@ func (p *CommandEncoder) BeginComputePass(descriptor *ComputePassDescriptor) *Co
 	return &ComputePassEncoder{deviceRef: p.deviceRef, ref: ref}
 }
 
-type RenderPassDepthStencilAttachment struct {
-	View              *TextureView
-	DepthLoadOp       LoadOp
-	DepthStoreOp      StoreOp
-	DepthClearValue   float32
-	DepthReadOnly     bool
-	StencilLoadOp     LoadOp
-	StencilStoreOp    StoreOp
-	StencilClearValue uint32
-	StencilReadOnly   bool
-}
-
-type RenderPassDescriptor struct {
-	Label                  string
-	ColorAttachments       []RenderPassColorAttachment
-	DepthStencilAttachment *RenderPassDepthStencilAttachment
-
-	// unused in wgpu
-	// 	OcclusionQuerySet      QuerySet
-	// 	TimestampWrites        []RenderPassTimestampWrite
-}
-
 func (p *CommandEncoder) BeginRenderPass(descriptor *RenderPassDescriptor) *RenderPassEncoder {
 	var desc C.WGPURenderPassDescriptor
 

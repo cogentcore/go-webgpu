@@ -168,6 +168,30 @@ type BufferMapCallback func(BufferMapAsyncStatus)
 
 type QueueWorkDoneCallback func(QueueWorkDoneStatus)
 
+// RenderPassDescriptor as described:
+// https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpassdescriptor
+type RenderPassDescriptor struct {
+	Label                  string
+	ColorAttachments       []RenderPassColorAttachment
+	DepthStencilAttachment *RenderPassDepthStencilAttachment
+
+	// unused in wgpu
+	// 	OcclusionQuerySet      QuerySet
+	// 	TimestampWrites        []RenderPassTimestampWrite
+}
+
+type RenderPassDepthStencilAttachment struct {
+	View              *TextureView
+	DepthLoadOp       LoadOp
+	DepthStoreOp      StoreOp
+	DepthClearValue   float32
+	DepthReadOnly     bool
+	StencilLoadOp     LoadOp
+	StencilStoreOp    StoreOp
+	StencilClearValue uint32
+	StencilReadOnly   bool
+}
+
 // RenderPassColorAttachment as described:
 // https://gpuweb.github.io/gpuweb/#dictdef-gpurenderpasscolorattachment
 type RenderPassColorAttachment struct {
