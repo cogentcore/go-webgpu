@@ -192,3 +192,39 @@ func (g *SamplerDescriptor) toJS() any {
 	result["maxAnisotropy"] = g.MaxAnisotropy
 	return result
 }
+
+func limitsFromJS(j js.Value) Limits {
+	return Limits{
+		MaxTextureDimension1D:                     uint32(j.Get("maxTextureDimension1D").Int()),
+		MaxTextureDimension2D:                     uint32(j.Get("maxTextureDimension2D").Int()),
+		MaxTextureDimension3D:                     uint32(j.Get("maxTextureDimension3D").Int()),
+		MaxTextureArrayLayers:                     uint32(j.Get("maxTextureArrayLayers").Int()),
+		MaxBindGroups:                             uint32(j.Get("maxBindGroups").Int()),
+		MaxDynamicUniformBuffersPerPipelineLayout: uint32(j.Get("maxDynamicUniformBuffersPerPipelineLayout").Int()),
+		MaxDynamicStorageBuffersPerPipelineLayout: uint32(j.Get("maxDynamicStorageBuffersPerPipelineLayout").Int()),
+		MaxSampledTexturesPerShaderStage:          uint32(j.Get("maxSampledTexturesPerShaderStage").Int()),
+		MaxSamplersPerShaderStage:                 uint32(j.Get("maxSamplersPerShaderStage").Int()),
+		MaxStorageBuffersPerShaderStage:           uint32(j.Get("maxStorageBuffersPerShaderStage").Int()),
+		MaxStorageTexturesPerShaderStage:          uint32(j.Get("maxStorageTexturesPerShaderStage").Int()),
+		MaxUniformBuffersPerShaderStage:           uint32(j.Get("maxUniformBuffersPerShaderStage").Int()),
+		MaxUniformBufferBindingSize:               uint64(j.Get("maxUniformBufferBindingSize").Int()),
+		MaxStorageBufferBindingSize:               uint64(j.Get("maxStorageBufferBindingSize").Int()),
+		MinUniformBufferOffsetAlignment:           uint32(j.Get("minUniformBufferOffsetAlignment").Int()),
+		MinStorageBufferOffsetAlignment:           uint32(j.Get("minStorageBufferOffsetAlignment").Int()),
+		MaxVertexBuffers:                          uint32(j.Get("maxVertexBuffers").Int()),
+		MaxBufferSize:                             uint64(j.Get("maxBufferSize").Int()),
+		MaxVertexAttributes:                       uint32(j.Get("maxVertexAttributes").Int()),
+		MaxVertexBufferArrayStride:                uint32(j.Get("maxVertexBufferArrayStride").Int()),
+		MaxInterStageShaderComponents:             uint32(j.Get("maxInterStageShaderComponents").Int()),
+		MaxInterStageShaderVariables:              uint32(j.Get("maxInterStageShaderVariables").Int()),
+		MaxColorAttachments:                       uint32(j.Get("maxColorAttachments").Int()),
+		MaxColorAttachmentBytesPerSample:          uint32(j.Get("maxColorAttachmentBytesPerSample").Int()),
+		MaxComputeWorkgroupStorageSize:            uint32(j.Get("maxComputeWorkgroupStorageSize").Int()),
+		MaxComputeInvocationsPerWorkgroup:         uint32(j.Get("maxComputeInvocationsPerWorkgroup").Int()),
+		MaxComputeWorkgroupSizeX:                  uint32(j.Get("maxComputeWorkgroupSizeX").Int()),
+		MaxComputeWorkgroupSizeY:                  uint32(j.Get("maxComputeWorkgroupSizeY").Int()),
+		MaxComputeWorkgroupSizeZ:                  uint32(j.Get("maxComputeWorkgroupSizeZ").Int()),
+		MaxComputeWorkgroupsPerDimension:          uint32(j.Get("maxComputeWorkgroupsPerDimension").Int()),
+		MaxPushConstantSize:                       128,
+	}
+}

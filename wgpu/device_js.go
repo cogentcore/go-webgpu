@@ -134,7 +134,7 @@ func (g Device) CreateSampler(descriptor *SamplerDescriptor) (*Sampler, error) {
 }
 
 func (g Device) GetLimits() SupportedLimits {
-	return SupportedLimits{DefaultLimits()} // TODO(kai): implement
+	return SupportedLimits{limitsFromJS(g.jsValue.Get("limits"))}
 }
 
 func (g Device) Poll(wait bool, wrappedSubmissionIndex *WrappedSubmissionIndex) (queueEmpty bool) {

@@ -26,7 +26,7 @@ func (g Adapter) GetProperties() AdapterProperties {
 }
 
 func (g Adapter) GetLimits() SupportedLimits {
-	return SupportedLimits{DefaultLimits()} // TODO(kai): implement
+	return SupportedLimits{limitsFromJS(g.jsValue.Get("limits"))}
 }
 
 func (g Adapter) Release() {} // no-op
