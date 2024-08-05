@@ -14,7 +14,8 @@ type SwapChain struct {
 func (g SwapChain) GetCurrentTextureView() (*TextureView, error) {
 	texture := g.jsValue.Call("getCurrentTexture")
 	// We can just use the properties of the texture as the descriptor.
-	return &TextureView{jsValue: texture.Call("createView", texture)}, nil
+	desc := TextureViewDescriptor{Format: TextureFormatBGRA8UnormSrgb, Dimension: TextureViewDimension2D, Aspect: TextureAspectAll}
+	return &TextureView{jsValue: texture.Call("createView", texture, desc.toJS())}, nil
 }
 
 func (g SwapChain) Present() {} // no-op
