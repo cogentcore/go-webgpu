@@ -39,10 +39,3 @@ func (p *Device) CreateBufferInit(descriptor *BufferInitDescriptor) (*Buffer, er
 
 	return buffer, nil
 }
-
-func max(x, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
