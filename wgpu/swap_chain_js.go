@@ -2,7 +2,10 @@
 
 package wgpu
 
-import "syscall/js"
+import (
+	"strings"
+	"syscall/js"
+)
 
 // SwapChain as described:
 // https://gpuweb.github.io/gpuweb/#gpucanvascontext
@@ -14,7 +17,19 @@ type SwapChain struct {
 func (g SwapChain) GetCurrentTextureView() (*TextureView, error) {
 	texture := g.jsValue.Call("getCurrentTexture")
 	// We can just use the properties of the texture as the descriptor.
-	return &TextureView{jsValue: texture.Call("createView", texture)}, nil
+	descriptor := map[string]any{
+		"dimension":       texture.Get("dimension"),
+		"mipLevelCount":   texture.Get("mipLevelCount"),
+		"arrayLayerCount": texture.Get("depthOrArrayLayers"),
+	}
+	// We ensure the format is srgb, which must be done here
+	// (see https://gpuweb.github.io/gpuweb/#canvas-configuration).
+	format := texture.Get("format").String()
+	if !strings.HasSuffix(format, "-srgb") {
+		format += "-srgb"
+	}
+	descriptor["format"] = format
+	return &TextureView{jsValue: texture.Call("createView", descriptor)}, nil
 }
 
 func (g SwapChain) Present() {} // no-op
