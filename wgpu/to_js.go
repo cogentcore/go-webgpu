@@ -121,6 +121,7 @@ func (g *CommandBufferDescriptor) toJS() any {
 
 func (g BufferDescriptor) toJS() any {
 	return map[string]any{
+		"label":            g.Label,
 		"size":             g.Size,
 		"usage":            uint32(g.Usage),
 		"mappedAtCreation": g.MappedAtCreation,
