@@ -6,14 +6,6 @@ import (
 	"syscall/js"
 )
 
-func (g *RenderPassDescriptor) toJS() any {
-	result := make(map[string]any)
-	result["colorAttachments"] = mapSlice(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {
-		return attachment.toJS()
-	})
-	return result
-}
-
 // RenderPassEncoder as described:
 // https://gpuweb.github.io/gpuweb/#gpurenderpassencoder
 type RenderPassEncoder struct {

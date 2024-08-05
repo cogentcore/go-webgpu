@@ -154,6 +154,15 @@ func (g *TextureDataLayout) toJS() any {
 	}
 }
 
+func (g *RenderPassDescriptor) toJS() any {
+	result := make(map[string]any)
+	result["colorAttachments"] = mapSlice(g.ColorAttachments, func(attachment RenderPassColorAttachment) any {
+		return attachment.toJS()
+	})
+	result["depthStencilAttachment"] = pointerToJS(g.DepthStencilAttachment)
+	return result
+}
+
 func (g *RenderPassColorAttachment) toJS() any {
 	result := make(map[string]any)
 	result["view"] = g.View.jsValue
@@ -162,6 +171,20 @@ func (g *RenderPassColorAttachment) toJS() any {
 	result["clearValue"] = g.ClearValue.toJS()
 	result["resolveTarget"] = pointerToJS(g.ResolveTarget)
 	return result
+}
+
+func (g *RenderPassDepthStencilAttachment) toJS() any {
+	return map[string]any{
+		"view":              pointerToJS(g.View),
+		"depthLoadOp":       enumToJS(g.DepthLoadOp),
+		"depthStoreOp":      enumToJS(g.DepthStoreOp),
+		"depthClearValue":   g.DepthClearValue,
+		"depthReadOnly":     g.DepthReadOnly,
+		"stencilLoadOp":     enumToJS(g.StencilLoadOp),
+		"stencilStoreOp":    enumToJS(g.StencilStoreOp),
+		"stencilClearValue": g.StencilClearValue,
+		"stencilReadOnly":   g.StencilReadOnly,
+	}
 }
 
 func (g *RenderPipelineDescriptor) toJS() any {
