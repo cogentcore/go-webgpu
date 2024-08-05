@@ -175,13 +175,14 @@ func (g *RenderPassColorAttachment) toJS() any {
 
 func (g *RenderPassDepthStencilAttachment) toJS() any {
 	return map[string]any{
-		"view":              pointerToJS(g.View),
-		"depthLoadOp":       enumToJS(g.DepthLoadOp),
-		"depthStoreOp":      enumToJS(g.DepthStoreOp),
-		"depthClearValue":   g.DepthClearValue,
-		"depthReadOnly":     g.DepthReadOnly,
-		"stencilLoadOp":     enumToJS(g.StencilLoadOp),
-		"stencilStoreOp":    enumToJS(g.StencilStoreOp),
+		"view":            pointerToJS(g.View),
+		"depthLoadOp":     enumToJS(g.DepthLoadOp),
+		"depthStoreOp":    enumToJS(g.DepthStoreOp),
+		"depthClearValue": g.DepthClearValue,
+		"depthReadOnly":   g.DepthReadOnly,
+		// TODO(kai): these cause errors if passed
+		// "stencilLoadOp":     enumToJS(g.StencilLoadOp),
+		// "stencilStoreOp":    enumToJS(g.StencilStoreOp),
 		"stencilClearValue": g.StencilClearValue,
 		"stencilReadOnly":   g.StencilReadOnly,
 	}
