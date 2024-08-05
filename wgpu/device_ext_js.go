@@ -1,7 +1,11 @@
-//go:build !js
+//go:build js
 
 package wgpu
 
+import "syscall/js"
+
+// TODO(kai): this only needs to be separate for js because
+// [Buffer.GetMappedRange] does not work correctly without GopherJS.
 func (p *Device) CreateBufferInit(descriptor *BufferInitDescriptor) (*Buffer, error) {
 	if descriptor == nil {
 		panic("got nil descriptor")
@@ -29,8 +33,10 @@ func (p *Device) CreateBufferInit(descriptor *BufferInitDescriptor) (*Buffer, er
 	if err != nil {
 		return nil, err
 	}
-	buf := buffer.GetMappedRange(0, uint(paddedSize))
-	copy(buf, descriptor.Contents)
+	// TODO(kai): this is a temporary workaround as per the method comment.
+	buf := buffer.jsValue.Call("getMappedRange", 0, uint(paddedSize))
+	array := js.Global().Get("Uint8ClampedArray").New(buf)
+	js.CopyBytesToJS(array, descriptor.Contents)
 	buffer.Unmap()
 
 	return buffer, nil

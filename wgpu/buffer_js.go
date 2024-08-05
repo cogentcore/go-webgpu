@@ -21,6 +21,9 @@ func (g Buffer) Destroy() {
 }
 
 func (g Buffer) GetMappedRange(offset, size uint) []byte {
+	// TODO(kai): this does not work because it does not get
+	// the actual pointer to the byte data; this is only really
+	// possible with GopherJS.
 	buf := g.jsValue.Call("getMappedRange", offset, size)
 	src := js.Global().Get("Uint8ClampedArray").New(buf)
 	dst := make([]byte, src.Length())

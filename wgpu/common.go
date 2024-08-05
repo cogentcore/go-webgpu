@@ -164,6 +164,12 @@ type BufferDescriptor struct {
 	MappedAtCreation bool
 }
 
+type BufferInitDescriptor struct {
+	Label    string
+	Contents []byte
+	Usage    BufferUsage
+}
+
 type BufferMapCallback func(BufferMapAsyncStatus)
 
 type QueueWorkDoneCallback func(QueueWorkDoneStatus)
