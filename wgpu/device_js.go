@@ -62,8 +62,8 @@ func (g Device) CreateShaderModule(desc *ShaderModuleDescriptor) (*ShaderModule,
 
 func (g Device) CreateSwapChain(surface *Surface, descriptor *SwapChainDescriptor) (*SwapChain, error) {
 	jsContext := js.Global().Get("document").Call("querySelector", "canvas").Call("getContext", "webgpu")
-	config := pointerToJS(descriptor)
-	config.(map[string]any)["device"] = g.toJS()
+	config := pointerToJS(descriptor).(map[string]any)
+	config["device"] = g.toJS()
 	jsContext.Call("configure", config)
 	return &SwapChain{
 		jsValue: jsContext,
